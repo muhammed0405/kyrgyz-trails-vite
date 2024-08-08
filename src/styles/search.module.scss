@@ -1,0 +1,36 @@
+@import "animations";
+
+.searchBar {
+	display: flex;
+	max-width: 600px;
+	width: 100%;
+
+	input {
+		flex-grow: 1;
+		padding: 1rem;
+		border: none;
+		background-color: rgba(255, 255, 255, 0.1);
+		color: #fff;
+		border-radius: 4px 0 0 4px;
+
+		&::placeholder {
+			color: rgba(255, 255, 255, 0.5);
+		}
+	}
+
+	button {
+		padding: 1rem 2rem;
+		background-color: #fff;
+		color: #000;
+		border: none;
+		border-radius: 0 4px 4px 0;
+		cursor: pointer;
+		transition: all 0.3s ease;
+
+		&:hover {
+			background-color: #000;
+			color: #fff;
+			animation: glow 1.5s infinite;
+		}
+	}
+}

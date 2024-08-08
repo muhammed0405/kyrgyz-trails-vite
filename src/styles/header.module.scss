@@ -1,0 +1,90 @@
+/** @format */
+@import "animations";
+
+.header {
+	padding: 1rem 0;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	height: 50px;
+}
+
+.nav {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+	transition: text-shadow 0.3s ease;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+
+	&:hover {
+		text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+	}
+}
+
+.navLinks,
+.authLinks {
+	display: flex;
+	gap: 1rem;
+
+	a {
+		color: #fff;
+		text-decoration: none;
+		transition: text-shadow 0.3s ease;
+
+		&:hover {
+			text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+		}
+	}
+}
+.burgerBtn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	display: none;
+}
+
+.loginBtn,
+.registerBtn {
+	padding: 0.5rem 1rem;
+	border: 1px solid #fff;
+	border-radius: 4px;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background-color: #fff;
+		color: #000;
+		animation: glow 1.5s infinite;
+	}
+}
+
+@media (max-width: 900px) {
+	.nav {
+		display: flex;
+		.logo {
+			order: -2;
+		}
+
+		.navLinks {
+			display: none;
+		}
+
+		.burgerBtn {
+			display: block;
+			order: 1;
+		}
+
+		.authLinks {
+			order: -1;
+		}
+	}
+}
