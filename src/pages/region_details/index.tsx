@@ -21,10 +21,6 @@ export default function RegionDetails() {
 		}
 	}, [])
 
-	if (!items) {
-		return <div>Loading...</div>
-	}
-
 	const filteredRegion = items.find(r => r.id === params.id)
 	const filteredTours = tours.items?.filter(
 		t => t.location === filteredRegion.title
@@ -38,36 +34,43 @@ export default function RegionDetails() {
 	console.log("tours", tours)
 	return (
 		<div className={styles.container}>
-			<div className="region">
-				<div key={filteredRegion.id}>
-					<h1>{filteredRegion.title}</h1>
-					<img
-						src={`http://127.0.0.1:8090/api/files/29nabdum39hq6n2/${filteredRegion.id}/${filteredRegion.image}?token=`}
-						alt={filteredRegion.name}
-						width={500}
-						height={500}
+			<div className={styles.region}>
+				<div key={filteredRegion.id} className={styles.regionCard}>
+					<div className={styles.regionImageTitle}>
+						<h1 className={styles.title}>{filteredRegion.title}</h1>
+						<img
+							src={`https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${filteredRegion.id}/${filteredRegion.image}?token=`}
+							alt={filteredRegion.name}
+							width={500}
+							height={500}
+						/>
+					</div>
+					<p
+						className={styles.tourDescription}
+						dangerouslySetInnerHTML={{ __html: filteredRegion.description }}
 					/>
-					<p>{filteredRegion.description}</p>
 				</div>
 
 				<div>
 					<p>Все туры в регионе</p>
-					{filteredTours?.map(t => (
-						<div className={styles.toursCard} key={t.id}>
-							<Link to={`/tour_details/${t.id}`}>
-								<img
-									className={styles.image}
-									src={`http://127.0.0.1:8090/api/files/tours/${t.id}/${t.images}`}
-									alt={"it is a tour"}
-									width={500}
-									height={500}
-								/>
-							</Link>
-							<p>{t.title}</p>
-							<p>{t.guide_id}</p>
-							<p>{t.price}</p>
-						</div>
-					))}
+					<div className={styles.toursGrid}>
+						{filteredTours?.map(t => (
+							<div className={styles.toursCard} key={t.id}>
+								<Link to={`/tour_details/${t.id}`}>
+									<img
+										className={styles.image}
+										src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${t.id}/${t.images}`}
+										alt={"it is a tour"}
+										width={500}
+										height={500}
+									/>
+								</Link>
+								<p>{t.title}</p>
+								<p>{t.guide_id}</p>
+								<p>{t.price}</p>
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>

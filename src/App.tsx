@@ -14,6 +14,7 @@ import Login from "./auth/login_user"
 import RegionDetails from "./pages/region_details"
 import Auth from "./auth/authentication/Auth"
 import TourDetails from "./pages/tour_details"
+import AuthSecond from "./auth/authentication/SecondAuth"
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 				<Route path="/region_details/:id" element={<RegionDetails />} />
 				<Route path="/tour_details/:id" element={<TourDetails />} />
 				<Route path="/auth" element={<Auth />} />
+				<Route path="/auth_second" element={<AuthSecond />} />
 			</Routes>
 		</div>
 	)

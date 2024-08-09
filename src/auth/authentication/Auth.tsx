@@ -1,44 +1,60 @@
 /** @format */
-// import { useEffect } from "react"
-import { useState } from "react"
-import { pb } from "../../assets/lib/pocketbase"
-import { useForm } from "react-hook-form"
+
+import { useEffect, useState } from "react"
+import pb from "../../assets/lib/pocketbase"
+// import { useForm } from "react-hook-form"
+
+interface Tours {
+	id: string
+	title: string
+	description: string
+	price: number
+	image: string
+}
 export default function Auth() {
 	const [isLoading, setIsLoading] = useState(false)
-	const { register, handleSubmit } = useForm()
-	console.log(register("email"))
+	const [tours, setTours] = useState([])
+	// const { register, handleSubmit } = useForm()
 
-	async function login(data) {
-		setIsLoading(true)
-
-		try {
-			const authData = await pb
-				.collection("users")
-				.authWithPassword(data.username, data.password)
-
-			console.log("pb.authStore.isValid", pb.authStore.isValid)
-			console.log("pb.authStore.token", pb.authStore.token)
-			console.log("pb.authStore.model.id", pb.authStore.model.id)
-			setIsLoading(false)
-		} catch (error) {
-			console.log("error", error)
+	useEffect(() => {
+		const getTours = async () => {
+			setIsLoading(true)
+			try {
+				const records = await pb.collection("tours").getFullList({
+					sort: "-created",
+				})
+				setTours(records.data.items)
+				console.log("records", records)
+			} catch (error) {
+				console.error("Error fetching tours:", error)
+			} finally {
+				setIsLoading(false)
+			}
 		}
-		console.log("data", data)
-	}
 
-	// // "logout" the last authenticated model
-	// pb.authStore.clear()
+		getTours()
+	}, [])
+
 	return (
 		<div>
-			<h1>Logged in: {pb.authStore.isValid.toString()}</h1>
-			{isLoading && <p>Loading...</p>}
-			<form onSubmit={handleSubmit(login)}>
-				<input type="text" id="username" {...register("username")} />
-				<input type="password" id="password" {...register("password")} />
-				<button type="submit" disabled={isLoading}>
-					{isLoading ? "Loading..." : "Login"}
-				</button>
-			</form>
+			<h1>Auth</h1>
+			{isLoading ? (
+				<p>Loading...</p>
+			) : (
+				<ul>
+					{tours.map((tour: Tours) => (
+						<div key={tour.id}>
+							<li key={tour.id}>{tour.title}</li>
+							<li>{tour.description}</li>
+							<li>{tour.price}</li>
+							<img
+								src={`https://kyrgyz-tra.pockethost.io/api/files/6jd9gs9h9etivmp/${tour.id}/${tour.image}?token=`}
+								alt="this image of tour"
+							/>
+						</div>
+					))}
+				</ul>
+			)}
 		</div>
 	)
 }

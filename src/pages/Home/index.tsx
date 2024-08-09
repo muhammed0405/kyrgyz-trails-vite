@@ -47,7 +47,7 @@ export default function Home() {
 							<div
 								className={styles.regionCard}
 								style={{
-									backgroundImage: `url(http://127.0.0.1:8090/api/files/29nabdum39hq6n2/${el.id}/${el.image}?token=)`,
+									backgroundImage: `url(https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${el.id}/${el.image}?token=)`,
 									backgroundRepeat: "no-repeat",
 									backgroundPosition: "center center",
 									backgroundSize: "cover",

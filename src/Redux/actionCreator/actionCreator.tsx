@@ -4,7 +4,8 @@ import { Dispatch } from "redux"
 import { userActionsTypes } from "../actionTypes/actionTypes"
 
 export const getRegions = () => async (dispatch: Dispatch) => {
-	const regionUrl = "http://127.0.0.1:8090/api/collections/locations/records"
+	const regionUrl =
+		"https://kyrgyz-tra.pockethost.io/api/collections/locations/records"
 	try {
 		const response = await axios.get(regionUrl)
 		dispatch({
@@ -23,7 +24,7 @@ export const getRegions = () => async (dispatch: Dispatch) => {
 
 export const getTours = (): Promise<void> => async (dispatch: Dispatch) => {
 	try {
-		const url = "http://127.0.0.1:8090/api/collections/tours/records"
+		const url = "https://kyrgyz-tra.pockethost.io/api/collections/tours/records"
 		const response = await axios.get(url)
 		dispatch({
 			type: userActionsTypes.GET_USER_TOURS_SUCCESS,
