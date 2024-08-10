@@ -1,6 +1,6 @@
 /** @format */
 
-import pb from "../../assets/lib/pocketbase"
+import pb from "../../lib/pocketbase"
 import { useForm } from "react-hook-form"
 import useLogout from "../hooks/useLogout"
 import useLogin from "../hooks/useLogin"

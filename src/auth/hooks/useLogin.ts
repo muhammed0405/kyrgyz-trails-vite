@@ -1,6 +1,6 @@
 /** @format */
 import { useMutation } from "react-query"
-import pb from "../../assets/lib/pocketbase"
+import pb from "../../lib/pocketbase"
 
 interface loginData {
 	email: string

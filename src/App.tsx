@@ -15,6 +15,7 @@ import RegionDetails from "./pages/region_details"
 import Auth from "./auth/authentication/Auth"
 import TourDetails from "./pages/tour_details"
 import AuthSecond from "./auth/authentication/SecondAuth"
+import AddTour from "./pages/add_tour"
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 				<Route path="/tour_details/:id" element={<TourDetails />} />
 				<Route path="/auth" element={<Auth />} />
 				<Route path="/auth_second" element={<AuthSecond />} />
+				<Route path="/add_tour" element={<AddTour />} />
 			</Routes>
 		</div>
 	)

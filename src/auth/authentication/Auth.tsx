@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect, useState } from "react"
-import pb from "../../assets/lib/pocketbase"
+import pb from "../../lib/pocketbase"
 // import { useForm } from "react-hook-form"
 
 interface Tours {

@@ -21,7 +21,7 @@ export default function RegionDetails() {
 		}
 	}, [])
 
-	const filteredRegion = items.find(r => r.id === params.id)
+	const filteredRegion = items?.find(r => r.id === params.id)
 	const filteredTours = tours.items?.filter(
 		t => t.location === filteredRegion.title
 	)

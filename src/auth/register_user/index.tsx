@@ -1,33 +1,69 @@
 /** @format */
 
-import React from "react"
-import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form" // Import useForm
+import { Link, useNavigate } from "react-router-dom"
 import styles from "../../styles/formStyles.module.scss"
 
+function getCookie(name: string): string | null {
+	const value = `; ${document.cookie}`
+	const parts = value.split(`; ${name}=`)
+	if (parts.length === 2) return parts.pop()?.split(";").shift() ?? null
+	return null
+}
+
 type FormInputs = {
-	username: string
 	email: string
-	password: string
-	passwordConfirm: string
+	username: string
+	password1: string
+	password2: string
+	csrfmiddlewaretoken: string // Make sure this is included if necessary
 }
 
 const RegisterPage: React.FC = () => {
+	const [csrfToken, setCsrfToken] = useState<string | null>(null)
+	const [registrationError, setRegistrationError] = useState<string | null>(
+		null
+	)
+	const navigate = useNavigate()
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
 	} = useForm<FormInputs>()
-	const navigate = useNavigate()
+
+	useEffect(() => {
+		const fetchCsrfToken = async () => {
+			try {
+				await axios.get("http://127.0.0.1:8000/accounts/signup/", {
+					withCredentials: true,
+				})
+				const token = getCookie("csrftoken")
+				if (token) {
+					setCsrfToken(token)
+				} else {
+					console.error("CSRF token not found in cookies")
+				}
+			} catch (error) {
+				console.error("Error fetching CSRF token:", error)
+			}
+		}
+
+		fetchCsrfToken()
+	}, [])
 
 	const onSubmit = async (data: FormInputs) => {
 		try {
 			const response = await axios.post(
-				"https://travel-t7k4.onrender.com/accounts/signup/",
+				"http://127.0.0.1:8000/accounts/signup/",
 				data,
 				{
+					headers: {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"X-CSRFToken": csrfToken || "",
+					},
 					withCredentials: true,
 				}
 			)
@@ -35,32 +71,28 @@ const RegisterPage: React.FC = () => {
 			navigate("/auth/login_user")
 		} catch (error) {
 			console.error("Error registering user:", error)
+			setRegistrationError("Registration failed. Please try again.")
 		}
 	}
+
+	const password = watch("password1")
+
 	return (
 		<div className={styles.container}>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+			<form
+				className={styles.form}
+				onSubmit={handleSubmit(onSubmit)} // Use handleSubmit
+			>
+				<input type="hidden" {...register("csrfmiddlewaretoken")} />
 				<h2 className={styles.title}>Registration</h2>
+				{registrationError && (
+					<div className={styles.error}>{registrationError}</div>
+				)}
 				<div className={styles.inputGroup}>
-					<input
-						type="text"
-						id="username"
-						className={styles.input}
-						{...register("username", { required: "Username is required" })}
-						placeholder=" "
-					/>
-					<label htmlFor="username" className={styles.label}>
-						Username
-					</label>
-					{errors.username && (
-						<span className={styles.error}>{errors.username.message}</span>
-					)}
-				</div>
-				<div className={styles.inputGroup}>
+					<label htmlFor="id_email">E-mail:</label>
 					<input
 						type="email"
-						id="email"
-						className={styles.input}
+						id="id_email"
 						{...register("email", {
 							required: "Email is required",
 							pattern: {
@@ -68,58 +100,80 @@ const RegisterPage: React.FC = () => {
 								message: "Invalid email format",
 							},
 						})}
-						placeholder=" "
+						placeholder="Email Address"
+						autoComplete="email"
+						maxLength={320}
 					/>
-					<label htmlFor="email" className={styles.label}>
-						Email
-					</label>
 					{errors.email && (
 						<span className={styles.error}>{errors.email.message}</span>
 					)}
 				</div>
 				<div className={styles.inputGroup}>
+					<label htmlFor="id_username">Username:</label>
+					<input
+						type="text"
+						id="id_username"
+						{...register("username", { required: "Username is required" })}
+						placeholder="Username"
+						autoComplete="username"
+						minLength={1}
+						maxLength={150}
+					/>
+					{errors.username && (
+						<span className={styles.error}>{errors.username.message}</span>
+					)}
+				</div>
+				<div className={styles.inputGroup}>
+					<label htmlFor="id_password1">Password:</label>
 					<input
 						type="password"
-						id="password"
-						className={styles.input}
-						{...register("password", {
+						id="id_password1"
+						{...register("password1", {
 							required: "Password is required",
 							minLength: {
 								value: 8,
 								message: "Password must be at least 8 characters",
 							},
+							validate: value => {
+								const hasUpperCase = /[A-Z]/.test(value)
+								const hasLowerCase = /[a-z]/.test(value)
+								const hasNumber = /\d/.test(value)
+								const hasSpecialChar =
+									/[!@#$%^&*()_+\-=$$$${};':"\\|,.<>/?]+/.test(value)
+
+								if (!hasUpperCase)
+									return "Password must contain at least one uppercase letter"
+								if (!hasLowerCase)
+									return "Password must contain at least one lowercase letter"
+								if (!hasNumber)
+									return "Password must contain at least one number"
+								if (!hasSpecialChar)
+									return "Password must contain at least one special character"
+								return true
+							},
 						})}
-						placeholder=" "
+						placeholder="Password"
+						autoComplete="new-password"
 					/>
-					<label htmlFor="password" className={styles.label}>
-						Password
-					</label>
-					{errors.password && (
-						<span className={styles.error}>{errors.password.message}</span>
+					{errors.password1 && (
+						<span className={styles.error}>{errors.password1.message}</span>
 					)}
 				</div>
 				<div className={styles.inputGroup}>
+					<label htmlFor="id_password2">Confirm Password:</label>
 					<input
 						type="password"
-						id="passwordConfirm"
-						className={styles.input}
-						{...register("passwordConfirm", {
+						id="id_password2"
+						{...register("password2", {
 							required: "Password confirmation is required",
-							validate: (val: string) => {
-								if (watch("password") !== val) {
-									return "Passwords do not match"
-								}
-							},
+							validate: (val: string) =>
+								val === password || "Passwords do not match",
 						})}
-						placeholder=" "
+						placeholder="Confirm Password"
+						autoComplete="new-password"
 					/>
-					<label htmlFor="passwordConfirm" className={styles.label}>
-						Confirm Password
-					</label>
-					{errors.passwordConfirm && (
-						<span className={styles.error}>
-							{errors.passwordConfirm.message}
-						</span>
+					{errors.password2 && (
+						<span className={styles.error}>{errors.password2.message}</span>
 					)}
 				</div>
 
