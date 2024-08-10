@@ -36,19 +36,22 @@ export default function RegionDetails() {
 		<div className={styles.container}>
 			<div className={styles.region}>
 				<div key={filteredRegion.id} className={styles.regionCard}>
+					
 					<div className={styles.regionImageTitle}>
-						<h1 className={styles.title}>{filteredRegion.title}</h1>
+					
 						<img
 							src={`https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${filteredRegion.id}/${filteredRegion.image}?token=`}
 							alt={filteredRegion.name}
 							width={500}
 							height={500}
 						/>
-					</div>
+					<h1 className={styles.title}>{filteredRegion.title}</h1>
+					
 					<p
 						className={styles.tourDescription}
 						dangerouslySetInnerHTML={{ __html: filteredRegion.description }}
 					/>
+						</div>
 				</div>
 
 				<div>
