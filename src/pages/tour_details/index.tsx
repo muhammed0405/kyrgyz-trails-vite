@@ -80,7 +80,7 @@ export default function RegionDetails() {
 				<form onSubmit={handleBooking} className={styles.bookingForm}>
 					<label>
 						Username:
-						<input
+						<input className='input'
 							type="text"
 							value={username}
 							onChange={e => setUsername(e.target.value)}
