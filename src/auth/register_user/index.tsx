@@ -1,185 +1,98 @@
 /** @format */
 
-import axios from "axios"
-import { useState, useEffect } from "react"
-import { useForm } from "react-hook-form"
-import { Link, useNavigate } from "react-router-dom"
-import styles from "../../styles/formStyles.module.scss"
+import { useState } from "react";
+import PocketBase from "pocketbase";
 
-function getCookie(name: string): string | null {
-	const value = `; ${document.cookie}`
-	const parts = value.split(`; ${name}=`)
-	if (parts.length === 2) return parts.pop()?.split(";").shift() ?? null
-	return null
+export default function RegisterPages() {
+  const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
+  const [error, setError] = useState<string | null>(null);
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    emailVisibility: true,
+    password: "",
+    passwordConfirm: "",
+    role: "user", // Default role
+    verified: false,
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // Create a new user
+      const record = await pb.collection("users").create(formData);
+
+      if (formData.emailVisibility && !formData.verified) {
+        console.log("Email verification is required.Please check your email");
+      }
+
+      // Request email verification
+      await pb.collection("users").requestVerification(formData.email);
+
+      console.log(
+        "User created successfully. Please check your email for verification."
+      );
+      setError(null); // Clear any previous errors
+    } catch (error) {
+      console.error("Error creating user:", error);
+      setError("Failed to create user. Please try again.");
+    }
+  };
+
+  return (
+    <div>
+      <h1>Auth</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="username"
+          value={formData.username}
+          onChange={(e) =>
+            setFormData({ ...formData, username: e.target.value })
+          }
+          required
+        />
+        <input
+          type="email"
+          placeholder="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          required
+        />
+        <input
+          type="password"
+          placeholder="password"
+          value={formData.password}
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
+          required
+        />
+        <input
+          type="password"
+          placeholder="confirm password"
+          value={formData.passwordConfirm}
+          onChange={(e) =>
+            setFormData({ ...formData, passwordConfirm: e.target.value })
+          }
+          required
+        />
+        <select
+          name="role"
+          id="role"
+          value={formData.role}
+          onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+        >
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+          <option value="guide">Guide</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 }
-
-type FormInputs = {
-	email: string
-	username: string
-	password1: string
-	password2: string
-}
-
-const RegisterPage: React.FC = () => {
-	const [csrfToken, setCsrfToken] = useState<string | null>(null)
-	const [registrationError, setRegistrationError] = useState<string | null>(
-		null
-	)
-	const navigate = useNavigate()
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm<FormInputs>()
-
-	useEffect(() => {
-		const fetchCsrfToken = async () => {
-			try {
-				await axios.get("http://127.0.0.1:8000/users/csrf_token/", {
-					withCredentials: true,
-				})
-				const token = getCookie("csrftoken")
-				if (token) {
-					setCsrfToken(token)
-				} else {
-					console.error("CSRF token not found in cookies")
-				}
-			} catch (error) {
-				console.error("Error fetching CSRF token:", error)
-			}
-		}
-
-		fetchCsrfToken()
-	}, [])
-
-	const onSubmit = async (data: FormInputs) => {
-		try {
-			const response = await axios.post(
-				"http://127.0.0.1:8000/users/signup/",
-				data,
-				{
-					headers: {
-						"Content-Type": "application/json",
-						"X-CSRFToken": csrfToken || "",
-					},
-					withCredentials: true,
-				}
-			)
-			console.log("Registration successful:", response.data)
-			navigate("/auth/login_user")
-		} catch (error) {
-			console.error("Error registering user:", error)
-			setRegistrationError("Registration failed. Please try again.")
-		}
-	}
-
-	const password = watch("password1")
-
-	return (
-		<div className={styles.container}>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-				<h2 className={styles.title}>Registration</h2>
-				{registrationError && (
-					<div className={styles.error}>{registrationError}</div>
-				)}
-				<div className={styles.inputGroup}>
-					<label htmlFor="id_email">E-mail (optional):</label>
-					<input
-						type="email"
-						id="id_email"
-						{...register("email", {
-							pattern: {
-								value: /\S+@\S+\.\S+/,
-								message: "Invalid email format",
-							},
-						})}
-						placeholder="Email Address"
-						autoComplete="email"
-						maxLength={320}
-					/>
-					{errors.email && (
-						<span className={styles.error}>{errors.email.message}</span>
-					)}
-				</div>
-				<div className={styles.inputGroup}>
-					<label htmlFor="id_username">Username:</label>
-					<input
-						type="text"
-						id="id_username"
-						{...register("username", { required: "Username is required" })}
-						placeholder="Username"
-						autoComplete="username"
-						minLength={1}
-						maxLength={150}
-					/>
-					{errors.username && (
-						<span className={styles.error}>{errors.username.message}</span>
-					)}
-				</div>
-				<div className={styles.inputGroup}>
-					<label htmlFor="id_password1">Password:</label>
-					<input
-						type="password"
-						id="id_password1"
-						{...register("password1", {
-							required: "Password is required",
-							minLength: {
-								value: 8,
-								message: "Password must be at least 8 characters",
-							},
-							validate: value => {
-								const hasUpperCase = /[A-Z]/.test(value)
-								const hasLowerCase = /[a-z]/.test(value)
-								const hasNumber = /\d/.test(value)
-								const hasSpecialChar =
-									/[!@#$%^&*()_+\-=$$$${};':"\\|,.<>/?]+/.test(value)
-
-								if (!hasUpperCase)
-									return "Password must contain at least one uppercase letter"
-								if (!hasLowerCase)
-									return "Password must contain at least one lowercase letter"
-								if (!hasNumber)
-									return "Password must contain at least one number"
-								if (!hasSpecialChar)
-									return "Password must contain at least one special character"
-								return true
-							},
-						})}
-						placeholder="Password"
-						autoComplete="new-password"
-					/>
-					{errors.password1 && (
-						<span className={styles.error}>{errors.password1.message}</span>
-					)}
-				</div>
-				<div className={styles.inputGroup}>
-					<label htmlFor="id_password2">Confirm Password:</label>
-					<input
-						type="password"
-						id="id_password2"
-						{...register("password2", {
-							required: "Password confirmation is required",
-							validate: (val: string) =>
-								val === password || "Passwords do not match",
-						})}
-						placeholder="Confirm Password"
-						autoComplete="new-password"
-					/>
-					{errors.password2 && (
-						<span className={styles.error}>{errors.password2.message}</span>
-					)}
-				</div>
-
-				<button type="submit" className={styles.submitButton}>
-					Register
-				</button>
-				<Link to="/auth/login" className={styles.switchLink}>
-					Already have an account? Login
-				</Link>
-			</form>
-		</div>
-	)
-}
-
-export default RegisterPage
