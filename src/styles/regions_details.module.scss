@@ -1,5 +1,5 @@
 /** @format */
-
+// this is for the regions page
 .container {
 	max-width: 1800px;
 	margin: 0 auto;
@@ -103,7 +103,7 @@
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	&:hover {
-		background-color: #e6e6e6;
+		background-color: red;
 	}
 }
 
@@ -118,9 +118,6 @@ input {
 	letter-spacing: 1px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
-	&:hover {
-		background-color: #e6e6e6;
-	}
 }
 button {
 	padding: 10px 20px;

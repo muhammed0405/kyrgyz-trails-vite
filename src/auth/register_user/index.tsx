@@ -2,7 +2,7 @@
 
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useForm } from "react-hook-form" // Import useForm
+import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import styles from "../../styles/formStyles.module.scss"
 
@@ -18,7 +18,6 @@ type FormInputs = {
 	username: string
 	password1: string
 	password2: string
-	csrfmiddlewaretoken: string // Make sure this is included if necessary
 }
 
 const RegisterPage: React.FC = () => {
@@ -37,7 +36,7 @@ const RegisterPage: React.FC = () => {
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
 			try {
-				await axios.get("http://127.0.0.1:8000/accounts/signup/", {
+				await axios.get("http://127.0.0.1:8000/users/csrf_token/", {
 					withCredentials: true,
 				})
 				const token = getCookie("csrftoken")
@@ -57,11 +56,11 @@ const RegisterPage: React.FC = () => {
 	const onSubmit = async (data: FormInputs) => {
 		try {
 			const response = await axios.post(
-				"http://127.0.0.1:8000/accounts/signup/",
+				"http://127.0.0.1:8000/users/signup/",
 				data,
 				{
 					headers: {
-						"Content-Type": "application/x-www-form-urlencoded",
+						"Content-Type": "application/json",
 						"X-CSRFToken": csrfToken || "",
 					},
 					withCredentials: true,
@@ -79,22 +78,17 @@ const RegisterPage: React.FC = () => {
 
 	return (
 		<div className={styles.container}>
-			<form
-				className={styles.form}
-				onSubmit={handleSubmit(onSubmit)} // Use handleSubmit
-			>
-				<input type="hidden" {...register("csrfmiddlewaretoken")} />
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<h2 className={styles.title}>Registration</h2>
 				{registrationError && (
 					<div className={styles.error}>{registrationError}</div>
 				)}
 				<div className={styles.inputGroup}>
-					<label htmlFor="id_email">E-mail:</label>
+					<label htmlFor="id_email">E-mail (optional):</label>
 					<input
 						type="email"
 						id="id_email"
 						{...register("email", {
-							required: "Email is required",
 							pattern: {
 								value: /\S+@\S+\.\S+/,
 								message: "Invalid email format",

@@ -1,13 +1,17 @@
 /** @format */
 
 import React, { useState, useEffect, useRef } from "react"
-import axios from "axios"
+import PocketBase from "pocketbase"
 import styles from "../../styles/formStyles.module.scss"
+
+const pb = new PocketBase("https://kyrgyz-tra.pockethost.io")
 
 export default function AddTour() {
 	const [title, setTitle] = useState("")
 	const [description, setDescription] = useState("")
-	const [image, setImage] = useState<File | null>(null)
+	const [location, setLocation] = useState("")
+	const [price, setPrice] = useState("")
+	const [images, setImages] = useState<File[]>([])
 	const [error, setError] = useState("")
 	const editorRef = useRef<HTMLDivElement>(null)
 
@@ -23,8 +27,6 @@ export default function AddTour() {
 				)
 				.join("")
 		})
-
-		// Включаем возможность редактирования для div
 		if (editorRef.current) {
 			editorRef.current.contentEditable = "true"
 		}
@@ -34,53 +36,74 @@ export default function AddTour() {
 		e.preventDefault()
 		setError("")
 
+		if (images.length === 0) {
+			setError("Please select at least one image")
+			return
+		}
+
 		try {
 			const formData = new FormData()
 			formData.append("title", title)
 			formData.append("description", editorRef.current?.innerHTML || "")
-			if (image) {
-				formData.append("image", image)
+			formData.append("location", location)
+			formData.append("price", price)
+
+			// Append each image to the FormData
+			images.forEach(image => {
+				formData.append(`images`, image, image.name)
+			})
+
+			// Log all form data
+			for (let [key, value] of formData.entries()) {
+				console.log(`${key}:`, value)
 			}
 
-			const response = await axios.post(
-				"https://kyrgyz-tra.pockethost.io/api/collections/locations/records",
-				formData,
-				{
-					headers: {
-						"Content-Type": "multipart/form-data",
-					},
-				}
-			)
+			const record = await pb.collection("tours").create(formData)
 
-			console.log("Data sent successfully:", response.data)
-			// Reset form or redirect user as needed
+			console.log("Tour created successfully:", record)
+			console.log("Created record ID:", record.id)
+
+			// Verify if the images were uploaded
+			if (record.images && record.images.length > 0) {
+				record.images.forEach((image: string, index: number) => {
+					console.log(`Image ${index + 1} URL:`, pb.getFileUrl(record, image))
+				})
+			} else {
+				console.log("No images were saved with the record")
+			}
+
+			// Reset form
 			setTitle("")
+			setLocation("")
+			setPrice("")
+			setImages([])
 			if (editorRef.current) {
 				editorRef.current.innerHTML = ""
 			}
-			setImage(null)
-		} catch (err) {
-			console.error("Error sending data:", err)
-			setError("Failed to send data. Please try again.")
+		} catch (err: any) {
+			console.error("Error creating tour:", err)
+			if (err.data && err.data.data) {
+				console.log("Detailed error:", JSON.stringify(err.data.data, null, 2))
+			}
+			setError("Failed to create tour. Please check console for details.")
 		}
 	}
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files[0]) {
-			setImage(e.target.files[0])
+		if (e.target.files) {
+			const selectedImages = Array.from(e.target.files)
+			console.log("Images selected:", selectedImages)
+			selectedImages.forEach((image, index) => {
+				console.log(`Image ${index + 1} name:`, image.name)
+				console.log(`Image ${index + 1} type:`, image.type)
+				console.log(`Image ${index + 1} size:`, image.size, "bytes")
+			})
+			setImages(selectedImages)
 		}
 	}
 
-	const handleBoldClick = () => {
-		document.execCommand("bold", false)
-	}
-
-	const handleItalicClick = () => {
-		document.execCommand("italic", false)
-	}
-
-	const handleUnderlineClick = () => {
-		document.execCommand("underline", false)
+	const handleEditorCommand = (command: string) => {
+		document.execCommand(command, false)
 	}
 
 	return (
@@ -92,7 +115,7 @@ export default function AddTour() {
 					<input
 						type="text"
 						id="title"
-						className={styles.input}
+						className={styles.addTourInput}
 						value={title}
 						onChange={e => setTitle(e.target.value)}
 						required
@@ -103,14 +126,45 @@ export default function AddTour() {
 					</label>
 				</div>
 				<div className={styles.inputGroup}>
+					<input
+						type="text"
+						id="location"
+						className={styles.addTourInput}
+						value={location}
+						onChange={e => setLocation(e.target.value)}
+						required
+						placeholder=" "
+					/>
+					<label htmlFor="location" className={styles.label}>
+						Местоположение
+					</label>
+				</div>
+				<div className={styles.inputGroup}>
+					<input
+						type="number"
+						id="price"
+						className={styles.addTourInput}
+						value={price}
+						onChange={e => setPrice(e.target.value)}
+						required
+						placeholder=" "
+					/>
+					<label htmlFor="price" className={styles.label}>
+						Цена
+					</label>
+				</div>
+				<div className={styles.inputGroup}>
 					<div className={styles.editorToolbar}>
-						<button type="button" onClick={handleBoldClick}>
+						<button type="button" onClick={() => handleEditorCommand("bold")}>
 							B
 						</button>
-						<button type="button" onClick={handleItalicClick}>
+						<button type="button" onClick={() => handleEditorCommand("italic")}>
 							I
 						</button>
-						<button type="button" onClick={handleUnderlineClick}>
+						<button
+							type="button"
+							onClick={() => handleEditorCommand("underline")}
+						>
 							U
 						</button>
 					</div>
@@ -122,20 +176,23 @@ export default function AddTour() {
 							minHeight: "100px",
 							padding: "10px",
 							marginBottom: "10px",
+							whiteSpace: "pre-wrap",
 						}}
 					/>
 				</div>
 				<div className={styles.inputGroup}>
 					<input
 						type="file"
-						id="image"
-						className={styles.input}
+						id="images"
+						className={styles.addTourInput}
 						onChange={handleImageChange}
 						required
+						multiple
+						accept="image/*"
 						placeholder=" "
 					/>
-					<label htmlFor="image" className={styles.label}>
-						Изображение
+					<label htmlFor="images" className={styles.label}>
+						Изображения
 					</label>
 				</div>
 				<button type="submit" className={styles.submitButton}>

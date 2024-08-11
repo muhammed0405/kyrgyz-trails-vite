@@ -5,6 +5,7 @@ import { ITourState } from "../Interfaces/tourReducerType"
 const initialState: ITourState = {
 	regions: [],
 	tours: [],
+	tour: {},
 	loading: false,
 	error: null,
 }
@@ -32,6 +33,7 @@ export const toursReducer = (
 				loading: false,
 				error: null,
 			}
+
 		default:
 			return state
 	}

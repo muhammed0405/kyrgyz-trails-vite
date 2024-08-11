@@ -5,12 +5,12 @@
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	background-color: rgb(40, 39, 39); 
+	background-color: rgb(40, 39, 39);
 	padding: 20px;
 }
 
 .authForm {
-	background-color: #1a1a1a; 
+	background-color: #1a1a1a;
 	padding: 2rem;
 	border-radius: 8px;
 	width: 100%;
@@ -20,7 +20,7 @@
 
 .authTitle {
 	font-size: 2rem;
-	color: #ffffff; 
+	color: #ffffff;
 	text-align: center;
 	margin-bottom: 2rem;
 	text-transform: uppercase;
@@ -36,24 +36,35 @@
 	width: 100%;
 	padding: 10px 0;
 	font-size: 1rem;
-	color: #ffffff; 
+	color: #ffffff;
 	border: none;
-	border-bottom: 2px solid #4d4d4d; 
+	border-bottom: 2px solid #4d4d4d;
 	outline: none;
 	background: transparent;
-	transition: border-color 0.2s;
+	transition: all 0.3s ease-in-out;
 
-	&:focus {
-		border-color: #ffffff;  
+	&:hover {
+		color: black;
 	}
 }
 
+.addTourInput {
+	width: 100%;
+	padding: 10px 0;
+	font-size: 1rem;
+	color: #ffffff;
+	border: none;
+	border-bottom: 2px solid #4d4d4d;
+	outline: none;
+	background: transparent;
+	transition: all 0.3s ease-in-out;
+}
 .label {
 	position: absolute;
 	top: 10px;
 	left: 0;
 	font-size: 1rem;
-	color: #999999; 
+	color: #999999;
 	pointer-events: none;
 	transition: 0.2s ease all;
 
@@ -68,20 +79,20 @@
 .input:not(:placeholder-shown) ~ .label {
 	top: -15px;
 	font-size: 1rem;
-	color: #ffffff; 
+	color: #ffffff;
 }
 
 .input:focus ~ .label span,
 .input:not(:placeholder-shown) ~ .label span {
-	color: #ffffff; 
+	color: #ffffff;
 	transform: translateY(-5px);
 }
 
 .submitButton {
 	width: 100%;
 	padding: 10px;
-	background-color: #ffffff; 
-	color: #000000; 
+	background-color: #ffffff;
+	color: #000000;
 	border: none;
 	border-radius: 4px;
 	font-size: 1rem;
@@ -91,7 +102,7 @@
 	transition: background-color 0.3s ease;
 
 	&:hover {
-		background-color: #e6e6e6; 
+		background-color: #e6e6e6;
 	}
 }
 
@@ -99,12 +110,12 @@
 	display: block;
 	text-align: center;
 	margin-top: 1rem;
-	color: #b3b3b3; 
+	color: #b3b3b3;
 	text-decoration: none;
 	transition: color 0.3s ease;
 
 	&:hover {
-		color: #ffffff; 
+		color: #ffffff;
 	}
 }
 
@@ -112,13 +123,13 @@
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 1rem;
-	background-color: #2a2a2a; 
-	border: 1px solid #4d4d4d; 
+	background-color: #2a2a2a;
+	border: 1px solid #4d4d4d;
 	border-radius: 4px;
 	font-size: 0.9rem;
 	color: #ffffff;
 	cursor: pointer;
-	margin-top:10px ;
+	margin-top: 10px;
 
 	&::file-selector-button {
 		padding: 8px 12px;
@@ -135,14 +146,14 @@
 	}
 }
 
-.fileLabel{
-	color: #b3b3b3; 
+.fileLabel {
+	color: #b3b3b3;
 	transition: color 0.3s ease;
 }
 
 .successMessage {
-	background-color: #4d4d4d; 
-	color: #ffffff; 
+	background-color: #4d4d4d;
+	color: #ffffff;
 	padding: 1rem;
 	border-radius: 4px;
 	margin-top: 1rem;
