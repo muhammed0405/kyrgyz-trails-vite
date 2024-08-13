@@ -5,7 +5,6 @@ import pb from "../../lib/pocketbase"
 import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
 import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
 import { Link } from "react-router-dom"
-import axios from "axios"
 export default function MyTours() {
 	const { getTours } = UseTypedDispatch()
 	const tours = useTypedSelectorHook(state => state.tours.tours)
@@ -18,14 +17,6 @@ export default function MyTours() {
 
 	if (!sortedTours) return <div>Туров нет</div>
 	useEffect(() => {
-		const getBookings = async () => {
-			const responce = await axios.get(
-				"https://kyrgyz-tra.pockethost.io/api/collections/bookings/records"
-			)
-
-			console.log(responce)
-		}
-		getBookings()
 		getTours()
 	}, [])
 	return (

@@ -42,10 +42,6 @@
 	outline: none;
 	background: transparent;
 	transition: all 0.3s ease-in-out;
-
-	&:hover {
-		color: black;
-	}
 }
 
 .addTourInput {
@@ -158,4 +154,73 @@
 	border-radius: 4px;
 	margin-top: 1rem;
 	text-align: center;
+}
+
+.errorMessage {
+	background-color: #ff4d4d;
+
+	color: #ffffff;
+
+	padding: 1rem;
+
+	border-radius: 4px;
+
+	margin-bottom: 1rem;
+
+	text-align: center;
+}
+
+.fieldError {
+	color: #ff4d4d;
+
+	font-size: 0.8rem;
+
+	margin-top: 0.25rem;
+
+	display: block;
+}
+
+.input.error {
+	border-bottom-color: #ff4d4d;
+}
+
+.label.error {
+	color: #ff4d4d;
+}
+
+.roleSelect{
+	width: 100%;
+	padding: 10px;
+
+	option{
+		color: #000;
+		
+	}
+}
+
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-5px);
+	}
+
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(5px);
+	}
+}
+
+.fieldError,
+.errorMessage {
+	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }

@@ -3,8 +3,7 @@
 import PocketBase from "pocketbase"
 /** @format */
 
-export const url = "https://kyrgyz-tra.pockethost.io/"
-const pb = new PocketBase(url)
+const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL)
 
 pb.autoCancellation(false)
 

@@ -7,45 +7,70 @@ const initialState = {
 	isLoading: false,
 	error: null,
 	isAuth: false,
+	email: null,
+	password: null,
+	emailVerified: false,
+	isLoggedIn: false,
 }
 
-const authReducer = (state = initialState, action: any) => {
+export const authReducer = (state = initialState, action: any) => {
 	switch (action.type) {
 		case authActionTypes.LOGIN_REQUEST:
+		case authActionTypes.REGISTER_REQUEST:
 			return {
 				...state,
 				isLoading: true,
+				error: null,
 			}
+
 		case authActionTypes.LOGIN_SUCCESS:
 			return {
 				...state,
 				login: action.payload,
 				isLoading: false,
 				isAuth: true,
+				email: null,
+				password: null,
+				isLoggedIn: true,
 			}
+
+		case authActionTypes.REGISTER_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				email: action.payload.email,
+				password: action.payload.password,
+			}
+
 		case authActionTypes.LOGIN_FAILURE:
+		case authActionTypes.REGISTER_FAILURE:
 			return {
 				...state,
 				isLoading: false,
 				error: action.payload,
 			}
 
-		case authActionTypes.REGISTER_REQUEST:
+		case authActionTypes.LOGOUT:
 			return {
-				...state,
-				isLoading: true,
+				...initialState,
+				isLoggedIn: false,
 			}
-		case authActionTypes.REGISTER_SUCCESS:
+
+		case authActionTypes.EMAIL_VERIFIED:
 			return {
 				...state,
-				isLoading: false,
-				isAuth: true,
+				emailVerified: true,
 			}
-		case authActionTypes.REGISTER_FAILURE:
+
+		case authActionTypes.SET_AUTH_STATE:
 			return {
 				...state,
-				isLoading: false,
-				error: action.payload,
+				isAuth: action.payload.isAuth,
+				isLoggedIn: action.payload.isLoggedIn,
+				login: {
+					token: action.payload.token,
+					user: action.payload.user,
+				},
 			}
 
 		default:

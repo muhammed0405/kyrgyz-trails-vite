@@ -1,76 +1,125 @@
-import { useState } from "react";
-import PocketBase from "pocketbase";
+/** @format */
+
+// src/pages/LoginPages.tsx
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
+import styles from "../../styles/formStyles.module.scss" // Create this CSS module for styling
 
 export default function LoginPages() {
-  const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
-  const [error, setError] = useState<string | null>(null);
+	const navigate = useNavigate()
+	const { loginAfterVerification } = UseTypedDispatch()
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	})
+	const [error, setError] = useState<string | null>(null)
+	const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target
+		setFormData(prevData => ({
+			...prevData,
+			[name]: value,
+		}))
+	}
 
-    // Basic validation before making the request
-    if (!formData.email || !formData.password) {
-      setError("email and password are required.");
-      return;
-    }
+	const validateForm = () => {
+		if (!formData.email) {
+			setError("Почта обязательна.")
+			return false
+		}
+		if (!formData.password) {
+			setError("Пароль обязателен.")
+			return false
+		}
+		if (!/\S+@\S+\.\S+/.test(formData.email)) {
+			setError("Пожалуйста, введите действительный адрес электронной почты.")
+			return false
+		}
+		return true
+	}
 
-    try {
-      const authData = await pb
-        .collection("users")
-        .authWithPassword(formData.email, formData.password);
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		setError(null)
 
-      localStorage.setItem("pocketbase_auth", JSON.stringify(authData));
+		if (!validateForm()) {
+			return
+		}
 
-      console.log("Login successful:", pb.authStore.isValid);
-      console.log("Token:", pb.authStore.token);
-      // console.log("User ID:", pb.authStore.model?.id);
+		setIsLoading(true)
 
-      // Clear error on successful login
-      setError(null);
-    } catch (error: any) {
-      console.error("Error logging in:", error);
+		try {
+			const success = await loginAfterVerification(
+				formData.email,
+				formData.password
+			)
+			if (success) {
+				navigate("/")
+			} else {
+				setError("Вход не удался. Пожалуйста, попробуйте ещё раз.")
+			}
+		} catch (err) {
+			setError("Неопознанная ошибка. Пожалуйста, попробуйте ещё раз.")
+		} finally {
+			setIsLoading(false)
+		}
+	}
 
-      // Check for specific error codes or messages
-      if (error.status === 400) {
-        setError("Invalid email or password. Please try again.");
-      } else {
-        setError(
-          error.message || "Failed to log in. Please check your credentials."
-        );
-      }
-    }
-  };
+	return (
+		<div className={styles.loginContainer}>
+			<h1>Login</h1>
+			<p
+				style={{
+					height: "40px",
+				}}
+			>
+				{error && <p className={styles.errorMessage}>{error}</p>}
+			</p>
+			<div className={styles.authContainer}>
+				<form onSubmit={handleSubmit} className={styles.authForm}>
+					<div className={styles.formGroup}>
+						<label htmlFor="email">Почта:</label>
+						<input
+							className={styles.formInput}
+							type="email"
+							id="email"
+							name="email"
+							value={formData.email}
+							onChange={handleChange}
+							required
+							aria-required="true"
+							aria-invalid={error && error.includes("email") ? "true" : "false"}
+						/>
+					</div>
 
-  return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="email"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          required
-        />
+					<div className={styles.formGroup}>
+						<label htmlFor="password">Пароль:</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+							value={formData.password}
+							onChange={handleChange}
+							required
+							aria-required="true"
+							aria-invalid={
+								error && error.includes("password") ? "true" : "false"
+							}
+						/>
+					</div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-          required
-        />
-
-        <button type="submit">Log In</button>
-      </form>
-    </div>
-  );
+					<button
+						type="submit"
+						disabled={isLoading}
+						className={styles.submitButton}
+					>
+						{isLoading ? "Выполняется..." : "Войти"}
+					</button>
+				</form>
+			</div>
+		</div>
+	)
 }
