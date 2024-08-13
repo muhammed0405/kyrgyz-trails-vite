@@ -25,6 +25,7 @@
     "react-toastify": "^10.0.5",
     "redux-thunk": "^3.1.0",
     "sass": "^1.77.8",
+    "swiper": "^11.1.9",
     "thunk": "^0.0.1"
   },
   "devDependencies": {

@@ -56,12 +56,12 @@
 .regionsGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: 2rem;
+	gap: 1rem;
 }
 .destinationCard,
 .regionCard {
 	position: relative;
-	height: 250px;
+	height: 200px;
 	overflow: hidden;
 	border-radius: 10px;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;

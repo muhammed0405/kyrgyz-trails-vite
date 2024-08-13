@@ -47,9 +47,78 @@
 	padding: 2rem 0;
 	justify-content: center;
 }
+.imageWrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
+	height: 400px;
+}
+.mainImage {
+	width: 60%;
+	max-height: 380px;
+	border-radius: 15px;
+}
+.imageBlock {
+	display: grid;
+	grid-template-columns: repeat(2, 250px);
+	gap: 20px;
+	justify-content: center;
+
+	max-width: 500px !important;
+
+	div {
+		position: relative;
+	}
+	img {
+		max-width: 250px;
+		max-height: 250px;
+		object-fit: cover;
+		border-radius: 15px;
+	}
+
+	.imageCount {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		background-color: #000;
+		opacity: 0.7;
+
+		p {
+			text-align: center;
+			margin: 0;
+			color: #fff;
+			font-size: 2rem;
+			font-weight: 700;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+.tourImageSwipe {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: absolute;
+
+	&Shadow {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		background-color: #000;
+		opacity: 0.7;
+		z-index: 1;
+	}
+
+	Swiper {
+		z-index: 10;
+	}
+}
 .toursCard {
-	width: 300px;
+	width: 250px;
 	background-color: #1a1a1a;
 	border-radius: 8px;
 	overflow: hidden;
@@ -63,6 +132,7 @@
 	.image {
 		width: 100%;
 		height: 200px;
+
 		object-fit: cover;
 	}
 
@@ -77,8 +147,8 @@
 	align-items: center;
 }
 .tourImage {
-	width: 90%;
-	max-height: 500px;
+	width: 60%;
+	max-height: 350px;
 	object-fit: cover;
 	border-radius: 15px;
 	margin: 20px 20px 0 30px;
@@ -142,5 +212,22 @@ button {
 	.toursCard {
 		width: 100%;
 		max-width: 300px;
+	}
+	.imageWrapper {
+		display: grid;
+		gap: 2rem;
+		height: auto;
+
+		.mainImage {
+			width: 100%;
+		}
+
+		.imageBlock {
+			width: 100% !important;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 }
