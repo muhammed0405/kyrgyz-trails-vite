@@ -1,52 +1,48 @@
 /** @format */
-'use client'
-import { useEffect } from 'react'
-
-import { Link, useParams } from 'react-router-dom'
-import { UseTypedDispatch } from '../../Redux/customHooks/useTypedDispatch'
-import { useTypedSelectorHook } from '../../Redux/customHooks/useTypedSelectorHook'
-import '../../styles/regions_details.scss'
+"use client"
+import { useEffect } from "react"
+import { Link, useParams } from "react-router-dom"
+import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
+import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
+import "../../styles/regions_details.scss"
 
 export default function RegionDetails() {
-	const { getTours, getRegions } = UseTypedDispatch()
-	const params = useParams()
-	const regionState = useTypedSelectorHook((state) => state.tours.regions)
-	const tours = useTypedSelectorHook((state) => state.tours.tours)
+	const { id } = useParams()
+	const { getRegions, getTours } = UseTypedDispatch()
+	const regionState = useTypedSelectorHook(state => state.tours.regions)
+	const tours = useTypedSelectorHook(state => state.tours.tours)
 	const { items } = regionState
 
 	useEffect(() => {
-		if (!regionState.items) {
-			getRegions()
-			getTours()
-		}
+		getRegions()
+		getTours()
 	}, [])
 
-	const filteredRegion = items?.find((r) => r.id === params.id)
+	const filteredRegion = items?.find(r => r.id === id)
 	const filteredTours = tours.items?.filter(
-		(t) => t.location === filteredRegion.title
+		t => t.location === filteredRegion?.title
 	)
-	console.log('filteredTours', filteredTours)
 
 	if (!filteredRegion) {
 		return <h1>Region not found</h1>
 	}
 
-	console.log('tours', tours)
+	console.log("tours", tours)
 	return (
-		<div className={'container'}>
-			<div className={'region'}>
-				<div key={filteredRegion.id} className={'regionCard'}>
-					<div className={'regionImageTitle'}>
+		<div className={"container"}>
+			<div className={"region"}>
+				<div key={filteredRegion.id} className={"regionCard"}>
+					<div className={"regionImageTitle"}>
 						<img
 							src={`https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${filteredRegion.id}/${filteredRegion.image}?token=`}
 							alt={filteredRegion.name}
 							width={500}
 							height={500}
 						/>
-						<h1 className={'title'}>{filteredRegion.title}</h1>
+						<h1 className={"title"}>{filteredRegion.title}</h1>
 
 						<p
-							className={'tourDescription'}
+							className={"tourDescription"}
 							dangerouslySetInnerHTML={{ __html: filteredRegion.description }}
 						/>
 					</div>
@@ -54,14 +50,14 @@ export default function RegionDetails() {
 
 				<div>
 					<p>Все туры в регионе</p>
-					<div className={'toursGrid'}>
-						{filteredTours?.map((t) => (
-							<div className={'toursCard'} key={t.id}>
+					<div className={"toursGrid"}>
+						{filteredTours?.map(t => (
+							<div className={"toursCard"} key={t.id}>
 								<Link to={`/tour_details/${t.id}`}>
 									<img
-										className={'image'}
+										className={"image"}
 										src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${t.id}/${t.images[0]}?token=`}
-										alt={'it is a tour'}
+										alt={"it is a tour"}
 										width={500}
 										height={500}
 									/>

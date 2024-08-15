@@ -13,11 +13,11 @@ import Home from "./pages/Home"
 import Tours from "./pages/tours"
 import Restaurants from "./pages/restaurants"
 import Hotels from "./pages/hotels"
-import GuideTours from "./pages/guide_tours"
+import GuideTours from "./pages/guide_pages/guide_tours"
 import UsersList from "./pages/users"
 import RegionDetails from "./pages/region_details"
 import TourDetails from "./pages/tour_details"
-import AddTour from "./pages/add_tour"
+import AddTour from "./pages/guide_pages/add_tour"
 
 // Auth Pages
 import Register from "./auth/register_user"
@@ -25,8 +25,9 @@ import Login from "./auth/login_user"
 import { UseTypedDispatch } from "./Redux/customHooks/useTypedDispatch"
 import Dashboard from "./pages/dashboard"
 import VerifyEmailPage from "./auth/authentication/VerifyEmail"
-import MyTours from "./pages/my_tours"
+import MyTours from "./pages/guide_pages/my_tours"
 import Bookings from "./pages/bookigs"
+import UpdateTour from "./pages/guide_pages/update_tour"
 
 function App() {
 	const { checkAuthState } = UseTypedDispatch()
@@ -57,6 +58,7 @@ function App() {
 					<Route path="/verify-email/" element={<VerifyEmailPage />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/my_bookings_guide" element={<Bookings />} />
+					<Route path="/update-tour/:tourId" element={<UpdateTour />} />
 					{/* Other protected routes */}
 				</Route>
 				<Route path="/add_tour" element={<AddTour />} />

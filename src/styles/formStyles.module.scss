@@ -188,13 +188,12 @@
 	color: #ff4d4d;
 }
 
-.roleSelect{
+.roleSelect {
 	width: 100%;
 	padding: 10px;
 
-	option{
+	option {
 		color: #000;
-		
 	}
 }
 
@@ -223,4 +222,11 @@
 .fieldError,
 .errorMessage {
 	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.preformattedText {
+	font-family: monospace;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	resize: vertical;
 }

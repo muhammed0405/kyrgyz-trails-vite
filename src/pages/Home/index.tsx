@@ -1,5 +1,5 @@
 /** @format */
-
+"use client"
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import Search from "../../components/search/search"
@@ -7,15 +7,22 @@ import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
 import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
 import styles from "../../styles/page.module.scss"
 
+const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes in milliseconds
+
 export default function Home() {
 	const regions = useTypedSelectorHook(state => state.tours.regions)
 	const tours = useTypedSelectorHook(state => state.tours.tours)
+	const lastFetchTime = useTypedSelectorHook(state => state.tours.lastFetchTime)
 	const { getRegions, getTours } = UseTypedDispatch()
 	const { items } = regions
 
 	useEffect(() => {
-		getRegions()
-		getTours()
+		const shouldFetchData =
+			!lastFetchTime || Date.now() - lastFetchTime > CACHE_DURATION
+		if (shouldFetchData) {
+			getRegions()
+			getTours()
+		}
 	}, [])
 
 	const slicedTours = tours.items?.slice(0, 4)

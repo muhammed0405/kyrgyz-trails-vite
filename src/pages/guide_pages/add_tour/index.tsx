@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import PocketBase from "pocketbase"
-import styles from "../../styles/formStyles.module.scss"
+import styles from "../../../styles/formStyles.module.scss"
 
 const pb = new PocketBase("https://kyrgyz-tra.pockethost.io")
 

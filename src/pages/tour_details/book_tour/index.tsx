@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react'
-import pb from '../../../lib/pocketbase'
+/** @format */
+
+import { useEffect, useState } from "react"
+import pb from "../../../lib/pocketbase"
 const BookTour = ({ filteredTour }) => {
-	const [username, setUsername] = useState('')
-	const [additionalText, setAdditionalText] = useState('')
+	const [username, setUsername] = useState("")
+	const [additionalText, setAdditionalText] = useState("")
 	const [bookingSuccess, setBookingSuccess] = useState(false)
 	const [userId, setUserId] = useState(null)
 
-	const handleBooking = async (e) => {
+	const handleBooking = async e => {
 		e.preventDefault()
 
 		if (!userId) {
-			console.error('User ID not found. Please log in.')
+			console.error("User ID not found. Please log in.")
 			setBookingSuccess(false)
 			return
 		}
 
 		const bookingData = {
-			current_state: 'pending',
+			current_state: "pending",
 			username: username,
 			additional_text: additionalText,
 			tour_id: filteredTour.id,
@@ -24,34 +26,37 @@ const BookTour = ({ filteredTour }) => {
 		}
 
 		try {
-			const record = await pb.collection('booking').create(bookingData)
+			const record = await pb.collection("booking").create(bookingData)
 			setBookingSuccess(true)
 		} catch (error) {
-			console.error('Error booking the tour:', error)
+			console.error("Error booking the tour:", error)
 			setBookingSuccess(false)
 		}
 	}
 
 	useEffect(() => {
-		const authData = localStorage.getItem('pocketbase_auth')
+		const authData = localStorage.getItem("pocketbase_auth")
 
 		if (authData) {
 			const parsedData = JSON.parse(authData)
-			console.log('parsedData' + parsedData)
+			console.log("parsedData" + parsedData)
 			setUserId(parsedData.userId)
 		}
-	})
+	}, [])
+
+	console.log("userId " + userId)
+	console.log("filteredTour.id", filteredTour.id)
 	return (
-		<div className={'bookingFormWrapper'}>
+		<div className={"bookingFormWrapper"}>
 			<h2>Book this Tour</h2>
-			<form onSubmit={handleBooking} className={'bookingForm'}>
+			<form onSubmit={handleBooking} className={"bookingForm"}>
 				<label>
 					Полное имя
 					<input
-						className='input'
-						type='text'
+						className="input"
+						type="text"
 						value={username}
-						onChange={(e) => setUsername(e.target.value)}
+						onChange={e => setUsername(e.target.value)}
 						required
 					/>
 				</label>
@@ -59,16 +64,16 @@ const BookTour = ({ filteredTour }) => {
 					номер телефона
 					<input
 						value={additionalText}
-						onChange={(e) => setAdditionalText(e.target.value)}
+						onChange={e => setAdditionalText(e.target.value)}
 					/>
 				</label>
-				<button type='submit'>Book Now</button>
+				<button type="submit">Book Now</button>
 			</form>
 			{bookingSuccess !== null && (
 				<p>
 					{bookingSuccess
-						? 'Успешное бронирование. Спасибо!'
-						: 'Бронирование не успешно !'}
+						? "Успешное бронирование. Спасибо!"
+						: "Бронирование не успешно !"}
 				</p>
 			)}
 		</div>

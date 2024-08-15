@@ -2,7 +2,7 @@
 
 "use client"
 import React, { useEffect } from "react"
-import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
+import { useTypedSelectorHook } from "../../../Redux/customHooks/useTypedSelectorHook"
 // import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
 
 interface Tour {
