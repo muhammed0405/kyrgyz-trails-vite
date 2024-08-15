@@ -58,7 +58,30 @@ export const getTours = () => async (dispatch: Dispatch) => {
 	}
 }
 
-/** @format */
+export const getBookings = () => async (dispatch: Dispatch) => {
+	try {
+		const response = await pb.collection("booking").getFullList()
+
+		dispatch({
+			type: userActionsTypes.GET_USER_BOOKINGS_SUCCESS,
+			payload: response,
+		})
+
+		console.log("Data fetched successfully:", response)
+	} catch (error) {
+		console.error("Error fetching bookings:", error)
+
+		if (error.status === 401) {
+			console.log("You are not authorized to view bookings. Please log in.")
+		} else if (error.status === 403) {
+			console.log("You don't have permission to view bookings.")
+		} else {
+			console.log(
+				"There was an error fetching bookings. Please try again later."
+			)
+		}
+	}
+}
 
 // authActions.ts
 import { authActionTypes } from "../actionTypes/authActionTypes"

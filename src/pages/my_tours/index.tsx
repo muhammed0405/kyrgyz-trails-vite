@@ -15,10 +15,12 @@ export default function MyTours() {
 
 	const sortedTours = tours.items?.filter(el => el.guide_id === userId.userId)
 
-	if (!sortedTours) return <div>Туров нет</div>
 	useEffect(() => {
 		getTours()
 	}, [])
+
+	if (!sortedTours) return <div>Туров нет</div>
+
 	return (
 		<div>
 			<h1>Мои туры</h1>

@@ -27,10 +27,20 @@ export interface IComments {
 	text: string
 	created_at: string
 }
+
+export interface IBooking {
+	additional_text: string
+	username: string
+	current_state: string
+	id: string
+	tour_id: string
+	tourist_id: string
+}
 export interface ITourState {
 	regions: IRegion[]
 	tours: ITour[]
 	tour: ITour
 	loading: boolean
 	error: string | null
+	bookings: IBooking[]
 }

@@ -14,7 +14,7 @@ const Header: React.FC = () => {
 	const { logout } = UseTypedDispatch()
 	const navigate = useNavigate()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-
+	const [roleOfUser, setRoleOfUser] = useState(null)
 	const handleLogout = () => {
 		logout()
 		navigate("/")
@@ -24,6 +24,15 @@ const Header: React.FC = () => {
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen)
 	}
+
+	useEffect(() => {
+		const roleOfUser =
+			localStorage.getItem("pocketbase_auth") !== null
+				? JSON.parse(localStorage.getItem("pocketbase_auth") as string)
+				: null
+
+		setRoleOfUser(roleOfUser?.role)
+	}, [isLoggedIn])
 
 	return (
 		<header className={styles.header}>
@@ -37,6 +46,34 @@ const Header: React.FC = () => {
 				</div>
 				<div className={styles.navLinksBig}>
 					<NavLink to="/my_tours">Мои Туры</NavLink>
+				</div>
+				{roleOfUser === "guide" ? (
+					<div className={styles.navLinksBig}>
+						<NavLink to="/my_bookings_guide">Мои Бронирование</NavLink>
+					</div>
+				) : roleOfUser === "user" ? (
+					<div className={styles.navLinksBig}>
+						<NavLink to="/my_bookings_tourist">История Бронирование</NavLink>
+					</div>
+				) : (
+					<p></p>
+				)}
+
+				<div className={styles.authLinks}>
+					{isLoggedIn ? (
+						<button onClick={handleLogout} className={styles.logoutBtn}>
+							Выйти
+						</button>
+					) : (
+						<>
+							<NavLink to="/auth/login_user" className={styles.loginBtn}>
+								Войти
+							</NavLink>
+							<NavLink to="/auth/register_user" className={styles.registerBtn}>
+								Регистрация
+							</NavLink>
+						</>
+					)}
 				</div>
 
 				<button className={styles.burgerBtn} onClick={toggleMenu}>

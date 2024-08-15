@@ -1,5 +1,6 @@
 /** @format */
 
+import Bookings from "@/pages/bookigs"
 import { userActionsTypes } from "../actionTypes/actionTypes"
 import { ITourState } from "../Interfaces/tourReducerType"
 const initialState: ITourState = {
@@ -8,6 +9,7 @@ const initialState: ITourState = {
 	tour: {},
 	loading: false,
 	error: null,
+	bookings: [],
 }
 
 export const toursReducer = (
@@ -30,6 +32,14 @@ export const toursReducer = (
 			return {
 				...state,
 				tours: action.payload,
+				loading: false,
+				error: null,
+			}
+
+		case userActionsTypes.GET_USER_BOOKINGS_SUCCESS:
+			return {
+				...state,
+				bookings: action.payload,
 				loading: false,
 				error: null,
 			}

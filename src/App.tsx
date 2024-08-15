@@ -26,6 +26,7 @@ import { UseTypedDispatch } from "./Redux/customHooks/useTypedDispatch"
 import Dashboard from "./pages/dashboard"
 import VerifyEmailPage from "./auth/authentication/VerifyEmail"
 import MyTours from "./pages/my_tours"
+import Bookings from "./pages/bookigs"
 
 function App() {
 	const { checkAuthState } = UseTypedDispatch()
@@ -51,10 +52,11 @@ function App() {
 				<Route path="/auth/register_user" element={<Register />} />
 				<Route path="/auth/login_user" element={<Login />} />
 
-				<Route path="/verify-email/" element={<VerifyEmailPage />} />
 				{/* Protected Routes */}
 				<Route element={<ProtectedRoute />}>
+					<Route path="/verify-email/" element={<VerifyEmailPage />} />
 					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/my_bookings_guide" element={<Bookings />} />
 					{/* Other protected routes */}
 				</Route>
 				<Route path="/add_tour" element={<AddTour />} />
