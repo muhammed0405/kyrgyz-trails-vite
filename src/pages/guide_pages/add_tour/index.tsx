@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react"
 import PocketBase from "pocketbase"
 import styles from "../../../styles/formStyles.module.scss"
+import { join } from 'path'
+import { json } from 'stream/consumers'
 
 const pb = new PocketBase("https://kyrgyz-tra.pockethost.io")
 
@@ -40,9 +42,10 @@ export default function AddTour() {
 			setError("Please select at least one image")
 			return
 		}
-
+const UserId =JSON.parse(localStorage.getItem("pocketbase_auth")).userId 
 		try {
 			const formData = new FormData()
+			formData.append("guide_id",UserId)
 			formData.append("title", title)
 			formData.append("description", editorRef.current?.innerHTML || "")
 			formData.append("location", location)
