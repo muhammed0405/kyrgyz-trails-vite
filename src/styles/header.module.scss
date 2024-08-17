@@ -2,214 +2,216 @@
 @import "animations";
 
 .header {
-	padding: 1rem 0;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
-	background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BZX0vflFgBae3gi0atEh5yPluvuKBXnIBw&s");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .nav {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 1rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-	font-size: 1.5rem;
-	font-weight: bold;
-	color: #fff;
-	text-decoration: none;
-	transition: text-shadow 0.3s ease;
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  transition: text-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 
-	&:hover {
-		text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-	}
+  &:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
 }
 
 .navLinks {
-	display: flex;
-	gap: 1rem;
+  display: flex;
+  gap: 1rem;
 
-	a {
-		color: #fff;
-		text-decoration: none;
-		transition: all 0.3s ease;
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-		&:hover {
-			color: #ffd700;
-			transform: scale(1.05);
-		}
-	}
+    &:hover {
+      color: #ffd700;
+      transform: scale(1.05);
+    }
+  }
 }
 .navLinksBig {
-	display: flex;
-	gap: 1rem;
-	margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto;
 
-	a {
-		color: #fff;
-		text-decoration: none;
-		transition: all 0.3s ease;
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-		&:hover {
-			color: #ffd700;
-			transform: scale(1.05);
-		}
-	}
+    &:hover {
+      color: #ffd700;
+      transform: scale(1.05);
+    }
+  }
 }
 
 .authLinks {
-	display: flex;
-	gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .burgerBtn {
-	background: none;
-	border: none;
-	cursor: pointer;
-	display: none;
-	color: #fff;
-	font-size: 1.5rem;
-	transition: transform 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
 
-	&:hover {
-		transform: scale(1.1);
-		background-color: #000;
-	}
+  &:hover {
+    transform: scale(1.1);
+    background-color: #000;
+  }
 }
 
 .loginBtn,
 .registerBtn,
 .logoutBtn {
-	padding: 0.5rem 1rem;
-	border: 1px solid #fff;
-	border-radius: 4px;
-	transition: all 0.3s ease;
-	background: none;
-	color: #fff;
-	cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  background: none;
+  color: #fff;
+  cursor: pointer;
 
-	&:hover {
-		background-color: #fff;
-		color: #000;
-		animation: glow 1.5s infinite;
-	}
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    animation: glow 1.5s infinite;
+  }
 }
 
 .sideMenu {
-	position: fixed;
-	top: 0;
-	right: -300px;
-	width: 300px;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.9);
-	transition: right 0.3s ease-in-out;
-	display: flex;
-	flex-direction: column;
-	padding: 2rem;
-	z-index: 1001;
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  z-index: 1001;
 
-	&.active {
-		right: 0;
-	}
+  &.active {
+    right: 0;
+  }
 
-	.navLinks {
-		flex-direction: column;
-		align-items: flex-start;
-		margin-bottom: 2rem;
+  .navLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
 
-		a {
-			padding: 0.5rem 0;
-			width: 100%;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    a {
+      padding: 0.5rem 0;
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-			&:last-child {
-				border-bottom: none;
-			}
-		}
-	}
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
 
-	.authLinks {
-		flex-direction: column;
-		align-items: flex-start;
+  .authLinks {
+    flex-direction: column;
+    align-items: flex-start;
 
-		button,
-		a {
-			width: 100%;
-			text-align: center;
-			margin-bottom: 1rem;
-		}
-	}
+    button,
+    a {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  }
 
-	.closeBtn {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		background: none;
-		border: none;
-		color: #fff;
-		font-size: 1.5rem;
-		cursor: pointer;
-		transition: transform 0.3s ease;
+  .closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 
-		&:hover {
-			transform: rotate(90deg);
-		}
-	}
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
 }
 
 @keyframes slideIn {
-	from {
-		transform: translateX(100%);
-	}
-	to {
-		transform: translateX(0);
-	}
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideOut {
-	from {
-		transform: translateX(0);
-	}
-	to {
-		transform: translateX(100%);
-	}
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }
 
 .sideMenu.active {
-	animation: slideIn 0.3s forwards;
+  animation: slideIn 0.3s forwards;
 }
 
 .sideMenu:not(.active) {
-	animation: slideOut 0.3s forwards;
+  animation: slideOut 0.3s forwards;
 }
 
 @media (max-width: 900px) {
-	.navLinksBig,
-	.authLinks {
-		display: none;
-	}
+  .navLinksBig,
+  .authLinks {
+    display: none;
+  }
 
-	.burgerBtn {
-		display: block;
-	}
+  .burgerBtn {
+    display: block;
+  }
 
-	.sideMenu {
-		.navLinks,
-		.authLinks {
-			display: flex;
-		}
-	}
+  .sideMenu {
+    .navLinks,
+    .authLinks {
+      display: flex;
+    }
+  }
 }
 
 @media (max-width: 600px) {
-	.logo span {
-		display: none;
-	}
+  .logo span {
+    display: none;
+  }
 }
