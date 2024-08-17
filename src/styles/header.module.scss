@@ -2,12 +2,13 @@
 @import "animations";
 
 .header {
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BZX0vflFgBae3gi0atEh5yPluvuKBXnIBw&s");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  // z-index: 1000;
+  // width: 100%;
+  // position: fixed;
+  backdrop-filter: blur(5px);
+  padding: 25px 0;
+  border-bottom: 1px solid #ffffff1a;
+  background: rgba(176, 148, 99, 0.699);
 }
 
 .nav {
@@ -22,7 +23,7 @@
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: #070707;
   text-decoration: none;
   transition: text-shadow 0.3s ease;
   display: flex;
@@ -39,12 +40,14 @@
   gap: 1rem;
 
   a {
-    color: #fff;
+    color: #f5f2ee;
     text-decoration: none;
+
     transition: all 0.3s ease;
 
     &:hover {
-      color: #ffd700;
+      color: #e1e0dc;
+      font-weight: 800;
       transform: scale(1.05);
     }
   }
@@ -55,12 +58,14 @@
   margin: 0 auto;
 
   a {
-    color: #fff;
+    color: #f8f5f2;
+    font-weight: 700;
+    font-size: 20px;
     text-decoration: none;
     transition: all 0.3s ease;
 
     &:hover {
-      color: #ffd700;
+      color: #686057;
       transform: scale(1.05);
     }
   }
@@ -76,8 +81,8 @@
   border: none;
   cursor: pointer;
   display: none;
-  color: #fff;
-  font-size: 1.5rem;
+  color: #72635d;
+  font-size: 35px;
   transition: transform 0.3s ease;
 
   &:hover {
@@ -90,16 +95,17 @@
 .registerBtn,
 .logoutBtn {
   padding: 0.5rem 1rem;
-  border: 1px solid #fff;
+  border: 3px solid #f1ede8;
   border-radius: 4px;
+  font-weight: 800;
   transition: all 0.3s ease;
   background: none;
-  color: #fff;
+  color: #f5efe9;
   cursor: pointer;
 
   &:hover {
     background-color: #fff;
-    color: #000;
+    color: #686057;
     animation: glow 1.5s infinite;
   }
 }

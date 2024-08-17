@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between; // Изменено с space-around на space-between
   align-items: flex-start; // Изменено с center на flex-start
-  padding: 20px;
+  padding: 40px;
   gap: 3rem;
   margin-bottom: 20px;
   position: relative;
@@ -19,7 +19,7 @@
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
-      background-color: #4d764a5b;
+      background-color: #3f36235b;
       border: none;
       margin: 3px 0;
       border-radius: 7px;
@@ -32,13 +32,13 @@
 
       &:focus {
         outline: none;
-        background-color: #1e321e;
-        color: #deede4;
+        background-color: #97896a;
+        color: #faf2f2;
         box-shadow: 0 5px 8px 0 #232222;
       }
 
       &:hover {
-        background-color: #0f5123;
+        background-color: #b3a288;
       }
 
       option {
