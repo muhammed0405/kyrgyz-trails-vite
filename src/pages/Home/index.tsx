@@ -47,7 +47,7 @@ export default function Home() {
 									backgroundImage: `url(https://kyrgyz-tra.pockethost.io/api/files/6jd9gs9h9etivmp/${
 										el.id
 									}/${
-										Array.isArray(el.image) ? el.images[0] : el.images
+										Array.isArray(el.images) ? el.images[0] : el.images
 									}?token=)`,
 									backgroundRepeat: "no-repeat",
 									backgroundPosition: "center center",

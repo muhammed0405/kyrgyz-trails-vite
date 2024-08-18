@@ -22,6 +22,8 @@ export default function RegionDetails() {
 
 	const [modalOpen, setModalOpen] = useState(false)
 
+	const [mainImage, setMainImage] = useState(0)
+
 	useEffect(() => {
 		getRegions()
 		getTours()
@@ -42,75 +44,50 @@ export default function RegionDetails() {
 		setModalOpen(e)
 	}
 
-	const imagesSliced = images.slice(1, 4)
-
 	return (
-		<div className={"container"}>
-			<div className={"tourCardsWrapper"}>
-				<div className={"tourCard"}>
-					<div className="tourInfo">
-						{modalOpen ? (
-							<TourImageSwipe
-								handleModalOpenAndClose={handleModalOpenAndClose}
-								images={images}
-								filteredTour={filteredTour}
-							/>
-						) : (
-							<div
-								className="imageWrapper"
-								onClick={() => handleModalOpenAndClose(true)}
-							>
-								<img
-									className={"mainImage"}
-									src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${filteredTour.images[0]}?token=`}
-									alt={"it is a tour"}
-									style={{
-										width: images.length === 1 ? "80%" : "60%",
-										height: images.length === 1 ? "500px" : "500px",
-										objectFit: "cover",
-										margin: "0 auto",
-									}}
-								/>
-								{images.length > 1 ? (
-									<div className="imageBlock">
-										{imagesSliced.map((image, index) => (
-											<img
-												className={"image"}
-												src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${image}?token=`}
-												alt={"it is a tour"}
-											/>
-										))}
-										<div>
-											<img
-												className={"image"}
-												src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${filteredTour.images[4]}?token=`}
-												alt={"it is a tour"}
-											/>
-											{images.length > 6 ? (
-												<div className={"imageCount"}>
-													<p>{images.length - 6 + "+"}</p>
-												</div>
-											) : null}
-										</div>
-									</div>
-								) : null}
-							</div>
-						)}
-
-						<h2 className={"tourTitle"}>{filteredTour.title}</h2>
-						<p
-							className={"tourDescription"}
-							dangerouslySetInnerHTML={{ __html: filteredTour.description }}
+		<div className="container">
+			<div className="tourCard">
+				<div
+					className="imageGallery"
+					onClick={() => handleModalOpenAndClose(true)}
+				>
+					<div className="mainImageWrapper">
+						<img
+							className="mainImage"
+							src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${filteredTour.images[mainImage]}?token=`}
+							alt="Tour main image"
 						/>
-						<div className={"tourMeta"}>
-							<h1 className={"tourPrice"}>
-								Цена за тур: {filteredTour.price} сом
-							</h1>
-						</div>
 					</div>
+					{images.length > 1 && (
+						<div className="thumbnailStrip">
+							{images.slice(1, 5).map((image, index) => (
+								<div key={index} className="thumbnailWrapper">
+									<img
+										className="thumbnail"
+										src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${image}?token=`}
+										alt={`Tour image ${index + 2}`}
+										onClick={() => setMainImage(index + 1)}
+									/>
+									{index === 3 && images.length > 5 && (
+										<div className="imageCount">
+											<p>+{images.length - 5}</p>
+										</div>
+									)}
+								</div>
+							))}
+						</div>
+					)}
+				</div>
+
+				<div className="tourInfo">
+					<h2 className="tourTitle">{filteredTour.title}</h2>
+					<p className="tourPrice">Цена за тур: {filteredTour.price} сом</p>
+					<div
+						className="tourDescription"
+						dangerouslySetInnerHTML={{ __html: filteredTour.description }}
+					/>
 				</div>
 			</div>
-			{}
 			<Comments tour_id={filteredTour.id} />
 			<BookTour filteredTour={filteredTour} />
 		</div>
