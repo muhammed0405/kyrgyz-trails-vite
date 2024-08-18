@@ -1,0 +1,132 @@
+/** @format */
+
+.bookingFormWrapper {
+	max-width: 600px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background: rgba(176, 148, 99, 0.1);
+	border-radius: 8px;
+	backdrop-filter: blur(5px);
+	border: 1px solid #ffffff1a;
+
+	h2 {
+		color: #070707;
+		font-size: 1.8rem;
+		margin-bottom: 1.5rem;
+		text-align: center;
+	}
+}
+
+.bookingForm {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+
+	label {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		font-weight: 700;
+		color: #686057;
+	}
+
+	input {
+		padding: 0.75rem 1rem;
+		border: 3px solid #f1ede8;
+		border-radius: 4px;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		background: rgba(255, 255, 255, 0.8);
+		color: #070707;
+
+		&:focus {
+			outline: none;
+			border-color: rgba(176, 148, 99, 0.8);
+			box-shadow: 0 0 10px rgba(176, 148, 99, 0.3);
+		}
+	}
+
+	button {
+		padding: 0.75rem 1.5rem;
+		border: 3px solid #f1ede8;
+		border-radius: 4px;
+		font-weight: 800;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		background: rgba(176, 148, 99, 0.8);
+		color: #f5efe9;
+		cursor: pointer;
+		align-self: flex-start;
+
+		&:hover {
+			background-color: #f5efe9;
+			color: #686057;
+			animation: glow 1.5s infinite;
+		}
+	}
+}
+
+p {
+	margin-top: 1rem;
+	font-weight: 700;
+	text-align: center;
+}
+
+.error {
+	color: #ff0000;
+	font-size: 0.9rem;
+	margin-top: 0.2rem;
+	text-align: center;
+}
+
+.success {
+	color: #00ff00;
+	font-size: 0.9rem;
+	margin-top: 0.2rem;
+}
+
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.existingBooking {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+
+	h3 {
+		color: rgb(0, 89, 255);
+	}
+	p {
+		text-align: start;
+
+		span {
+			color: rgb(0, 181, 39);
+		}
+	}
+}
+
+@keyframes glow {
+	0% {
+		box-shadow: 0 0 5px rgba(176, 148, 99, 0.5);
+	}
+	50% {
+		box-shadow: 0 0 20px rgba(176, 148, 99, 0.8);
+	}
+	100% {
+		box-shadow: 0 0 5px rgba(176, 148, 99, 0.5);
+	}
+}
+
+@media (max-width: 600px) {
+	.bookingFormWrapper {
+		padding: 1.5rem;
+	}
+
+	.bookingForm {
+		button {
+			width: 100%;
+		}
+	}
+}
