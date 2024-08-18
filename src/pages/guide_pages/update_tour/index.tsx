@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react"
+import { useState, useEffect, ChangeEvent, FormEvent } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import PocketBase from "pocketbase"
 import "@/styles/update_tour.scss"
@@ -54,7 +54,10 @@ export default function UpdateTour(): JSX.Element {
 				setPrice(record.price)
 			} catch (err) {
 				console.error("Error fetching tour data:", err)
-				setError("Failed to fetch tour data")
+
+				setTimeout(() => {
+					setError("Failed to fetch tour data")
+				}, 5000)
 			}
 		}
 
@@ -132,17 +135,16 @@ export default function UpdateTour(): JSX.Element {
 					</label>
 				</div>
 				<div className={"update__tour__input__group"}>
-					<input
-						type="text"
-						id="location"
-						className={"addTourInput"}
-						value={location}
-						onChange={(e: ChangeEvent<HTMLInputElement>) =>
-							setLocation(e.target.value)
-						}
-						required
-						placeholder=" "
-					/>
+					<select name="location" id="location" value={location}>
+						<option value="Ош">Ош</option>
+						<option value="Чуй">Чуй</option>
+						<option value="Жалал-Абад">Жалал-Абад</option>
+						<option value="Баткен">Баткен</option>
+						<option value="Нарын">Нарын</option>
+						<option value="Ыссык-Кол">Ыссык-Кол</option>
+						<option value="Талас">Талас</option>
+						<option value="Бишкек">Бишкек</option>
+					</select>
 					<label
 						htmlFor="location"
 						className={"update__tour__input__group__label"}

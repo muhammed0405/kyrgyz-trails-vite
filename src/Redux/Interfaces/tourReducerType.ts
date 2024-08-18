@@ -12,20 +12,23 @@ export interface IRegion {
 }
 
 export interface ITour {
-	id: number
+	id: string
 	location: number
 	comments: IComments[]
 	title: string
-	images: string
-	price: string
-	guide: number
+	images: string[]
+	price: number
+	guide_id: string
+	created: string
 }
 
 export interface IComments {
 	id: number
 	user: string
-	text: string
-	created_at: string
+	comment: string
+	tour: string
+	star: number
+	created: string
 }
 
 export interface IBooking {
@@ -33,8 +36,8 @@ export interface IBooking {
 	username: string
 	current_state: string
 	id: string
-	tour_id: string
-	tourist_id: string
+	tour: string
+	tourist: string
 }
 export interface ITourState {
 	regions: IRegion[]

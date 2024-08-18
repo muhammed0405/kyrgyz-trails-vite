@@ -12,6 +12,7 @@ import "swiper/css/navigation"
 import "swiper/css/pagination"
 import TourImageSwipe from "../../components/swiper/swiper"
 import BookTour from "./book_tour"
+import Comments from "./comments"
 
 export default function RegionDetails() {
 	const { getTours, getRegions } = UseTypedDispatch()
@@ -110,7 +111,7 @@ export default function RegionDetails() {
 				</div>
 			</div>
 			{}
-
+			<Comments tour_id={filteredTour.id} />
 			<BookTour filteredTour={filteredTour} />
 		</div>
 	)

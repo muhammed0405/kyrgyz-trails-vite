@@ -2,6 +2,7 @@
 
 import { UseTypedDispatch } from "@/Redux/customHooks/useTypedDispatch"
 import { useTypedSelectorHook } from "@/Redux/customHooks/useTypedSelectorHook"
+import { IBooking, ITour } from "@/Redux/Interfaces/tourReducerType"
 import { useEffect } from "react"
 
 export default function Bookings() {
@@ -15,7 +16,11 @@ export default function Bookings() {
 
 	const userId = JSON.parse(authData)
 
-	const sortedTours = tours.items?.filter(el => el.guide_id === userId.userId)
+	console.log("userId", userId)
+
+	const sortedTours = tours.items?.filter(
+		(el: ITour) => el.guide_id === userId.userId
+	)
 	const sortedBookings = bookings.filter(booking =>
 		sortedTours.some(tour => tour.id === booking.tour_id)
 	)
@@ -25,18 +30,19 @@ export default function Bookings() {
 		getBookings()
 	}, [])
 
+	console.log(bookings)
+
+	console.log("sortedBookings", sortedBookings, userId.userId)
+
 	return (
 		<div>
 			<h1>Bookings</h1>
-			{bookings?.map(el => (
-				<div key={el.id}>{el.id}</div>
-			))}
 
 			<button
 				onClick={() => {
 					console.log(
 						"sortedTours",
-						sortedTours.flatMap(el => el.id)
+						sortedTours.flatMap((el: ITour) => el.id)
 					)
 					console.log("sortedBookings", sortedBookings)
 					console.log("bookings", bookings)
@@ -46,16 +52,26 @@ export default function Bookings() {
 			{sortedBookings?.map(el => (
 				<div
 					style={{
-						background: "red",
+						background: "white",
+						color: "black",
+						textAlign: "center",
 						width: "200px",
 						height: "100px",
 					}}
+					className="bookingCard"
 					key={el.id}
 				>
-					
-					<h3>{el.username}</h3>
-					<p>{el.additionalText}</p>
-					<p>{el.current_state}</p>
+					<h3>
+						<span>Имя :</span> {el.username}
+					</h3>
+					<p>
+						<span>Тел </span>
+						{el.additional_text}
+					</p>
+					<p>
+						<span>Статус: </span>
+						{el.current_state}
+					</p>
 				</div>
 			))}
 		</div>

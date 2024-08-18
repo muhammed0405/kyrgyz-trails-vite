@@ -9,13 +9,12 @@ $greenish-color: rgb(8, 188, 116);
 	margin: 0 auto;
 	max-width: 600px;
 
-	&__title {
-	}
+	// &__title {
+	// }
 
 	&__error {
 		color: red;
 	}
-
 	&__input__group {
 		input {
 			width: 100%;
@@ -24,6 +23,8 @@ $greenish-color: rgb(8, 188, 116);
 			padding: 0;
 			padding-left: 10px;
 			height: 40px;
+
+			color: rgba(255, 250, 241, 0.852);
 		}
 
 		label {
@@ -38,6 +39,15 @@ $greenish-color: rgb(8, 188, 116);
 			max-height: 200px;
 		}
 
+		select {
+			width: 100%;
+			background-color: $greenish-color;
+			margin: 0;
+			padding: 0;
+			padding-left: 10px;
+			height: 40px;
+		}
+
 		&__file {
 			display: none;
 		}
@@ -49,10 +59,9 @@ $greenish-color: rgb(8, 188, 116);
 			cursor: pointer;
 			color: black;
 			width: 100%;
-			margin: 0 ;
+			margin: 0;
 			padding: 0;
 			height: 40px;
-			
 		}
 	}
 }

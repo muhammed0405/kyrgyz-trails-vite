@@ -5,6 +5,7 @@ import { UseTypedDispatch } from "@/Redux/customHooks/useTypedDispatch"
 import { useTypedSelectorHook } from "@/Redux/customHooks/useTypedSelectorHook"
 import { Link, useNavigate } from "react-router-dom"
 import "@/styles/my_tours.scss"
+import { ITour } from "@/Redux/Interfaces/tourReducerType"
 
 export default function MyTours() {
 	const { getTours } = UseTypedDispatch()
@@ -12,20 +13,20 @@ export default function MyTours() {
 	const navigate = useNavigate()
 
 	const authData = localStorage.getItem("pocketbase_auth")
-	const userId = JSON.parse(authData)?.userId
+	const userId = authData ? JSON.parse(authData).userId : null
 
-	const sortedTours = tours.items?.filter(el => el.guide_id === userId)
+	const sortedTours = tours.items?.filter((el: ITour) => el.guide_id === userId)
 
 	useEffect(() => {
 		getTours()
 	}, [])
 
-	const formatCreationDay = dateString => {
+	const formatCreationDay = (dateString: string) => {
 		const date = new Date(dateString)
 		return date.toLocaleDateString("ru-RU", { day: "numeric", month: "long" })
 	}
 
-	const handleEdit = tourId => {
+	const handleEdit = (tourId: string) => {
 		navigate(`/update-tour/${tourId}`)
 	}
 
@@ -36,7 +37,7 @@ export default function MyTours() {
 		<div className={"pageContainer"}>
 			<h1 className={"pageTitle"}>Мои Захватывающие Туры</h1>
 			<div className={"toursGrid"}>
-				{sortedTours.map(el => (
+				{sortedTours.map((el: ITour) => (
 					<div className={"tourCard"} key={el.id}>
 						<Link to={`/tour_details/${el.id}`} className={"tourLink"}>
 							<div

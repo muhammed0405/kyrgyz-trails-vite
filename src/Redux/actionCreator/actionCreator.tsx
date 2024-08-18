@@ -89,9 +89,9 @@ import PocketBase from "pocketbase";
 
 const pb = new PocketBase(import.meta.env.VITE_POCKETBASE_URL);
 
-export const registerUser = (userData: any) => {
-  return async (dispatch: Dispatch) => {
-    dispatch({ type: authActionTypes.REGISTER_REQUEST });
+export const registerUser = (userData: { email: string; password: string }) => {
+	return async (dispatch: Dispatch) => {
+		dispatch({ type: authActionTypes.REGISTER_REQUEST })
 
     try {
       const newUser = await pb.collection("user").create(userData);

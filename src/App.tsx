@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import "./styles/global.scss"
 
@@ -14,7 +14,6 @@ import Tours from "./pages/tours"
 import Restaurants from "./pages/restaurants"
 import Hotels from "./pages/hotels"
 import GuideTours from "./pages/guide_pages/guide_tours"
-import UsersList from "./pages/users"
 import RegionDetails from "./pages/region_details"
 import TourDetails from "./pages/tour_details"
 import AddTour from "./pages/guide_pages/add_tour"
