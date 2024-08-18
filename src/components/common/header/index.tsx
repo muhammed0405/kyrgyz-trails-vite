@@ -90,7 +90,7 @@ const Header: React.FC = () => {
 					to='/'
 					className={styles.logo}
 				>
-					<img src={Logo} width={50} alt='Logo' />
+					<img  src={Logo} width={50} alt='Logo' />
 					<span>Kyrgyz Trails</span>
 				</NavLink>
 				<div className={styles.navLinksBig}>{renderNavLinks()}</div>

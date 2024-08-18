@@ -129,7 +129,7 @@ export default function RegisterPages() {
   return (
     <div className={styles.authContainer}>
       <form className={styles.authForm} onSubmit={handleSubmit}>
-        <h1 className={styles.authTitle}>Register</h1>
+        <h1 className={styles.authTitle}>Регистрация</h1>
 
         {error && <p className={styles.errorMessage}>{error}</p>}
 
@@ -147,7 +147,7 @@ export default function RegisterPages() {
             required
             placeholder=" "
           />
-          <label className={styles.label}>Username</label>
+          <label className={styles.label}>Имя</label>
           {formErrors.username && (
             <span className={styles.fieldError}>{formErrors.username}</span>
           )}
@@ -214,7 +214,7 @@ export default function RegisterPages() {
             <option value="user">Пользователь</option>
             <option value="guide">Гид</option>
           </select>
-          <label className={styles.label}>Роль</label>
+          <label className={styles.label_role}>Роль</label>
         </div>
 
         <button

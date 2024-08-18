@@ -1,0 +1,32 @@
+$textColor: #6e6359;
+$textColorHover: #ffaa00;
+.verify{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: start;
+	color: black;
+	&__btn{
+		
+		padding: 0.5rem 1rem;
+	border: 3px solid $textColor;
+	border-radius: 4px;
+	font-weight: 800;
+	transition: all 0.3s ease;
+	background: none;
+	color:$textColor ;
+	}
+	&__text{
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: $textColor;
+		text-decoration: none;
+		transition: text-shadow 0.3s ease;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		img{
+			width: 30px;
+		}
+	}
+}

@@ -57,6 +57,7 @@ const Tours = () => {
 			<h1>Tours</h1>
 			<div className={tourPageStyles.toursAndSortWrapper}>
 				<div className={tourPageStyles.sortWrapper}>
+					<div className={tourPageStyles.select_wrapper}>
 					<select value={currentSort} onChange={handleSortChange}>
 						<option value='default'>По умолчанию</option>
 						<option value='asc'>По возрастанию цены</option>
@@ -64,8 +65,10 @@ const Tours = () => {
 						<option value='A-Z'>А-Я</option>
 						<option value='Z-A'>Я-А</option>
 					</select>
+					</div>
 
-					<select value={currentLocation} onChange={handleLocationChange}>
+				<div className={tourPageStyles.select_wrapper}>
+				<select value={currentLocation} onChange={handleLocationChange}>
 						<option value='all'>Все локации</option>
 						<option value='Ош'>Ош</option>
 						<option value='Жалал-Абад'>Жалал-Абад</option>
@@ -75,9 +78,10 @@ const Tours = () => {
 						<option value='Талас'>Талас</option>
 						<option value='Нарын'>Нарын</option>
 					</select>
+				</div>
 
 					<div>
-						<input
+						<input 
 							type='number'
 							placeholder='от'
 							value={sortByPriceFrom}
@@ -95,7 +99,7 @@ const Tours = () => {
 					{sortedTours && sortedTours.length > 0 ? (
 						sortedTours.map((el) => <TourCard key={el.id} tour={el} />)
 					) : (
-						<p>Туры не доступны</p>
+						<p>Туры не найдены</p>
 					)}
 				</div>
 			</div>

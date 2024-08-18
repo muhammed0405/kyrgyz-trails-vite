@@ -70,17 +70,19 @@ export default function LoginPages() {
 
   return (
     <div className={styles.loginContainer}>
-      <h1>Login</h1>
-      <p
+    
+      <div className={styles.authContainer}>
+        <form onSubmit={handleSubmit} className={styles.authForm}>
+          <h1>Войти</h1>
+        <p
         style={{
           height: "40px",
         }}
       >
         {error && <p className={styles.errorMessage}>{error}</p>}
       </p>
-      <div className={styles.authContainer}>
-        <form onSubmit={handleSubmit} className={styles.authForm}>
           <div className={styles.formGroup}>
+
             <label htmlFor="email">Почта:</label>
             <input
               className={styles.formInput}

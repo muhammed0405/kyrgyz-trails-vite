@@ -28,20 +28,22 @@
 }
 
 .inputGroup {
+  margin: 10px 0;
   position: relative;
   margin-bottom: 2rem;
 }
 
-.input {
+input {
+background-color: #ffffff;
+
   width: 100%;
   padding: 10px 0;
   font-size: 1rem;
-  color: #ffffff;
+  color: #000;
   border: none;
-  border-bottom: 2px solid #4d4d4d;
   outline: none;
-  background: transparent;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 10px;
 }
 
 .addTourInput {
@@ -58,7 +60,7 @@
 .label {
   position: absolute;
   top: 10px;
-  left: 0;
+  left: 5px;
   font-size: 1rem;
   color: #999999;
   pointer-events: none;
@@ -70,10 +72,18 @@
     transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 }
-
+.label_role{
+  position: absolute;
+  top: -20px;
+  left: 5px;
+  font-size: 1rem;
+  color: #fff;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
 .input:focus ~ .label,
 .input:not(:placeholder-shown) ~ .label {
-  top: -15px;
+  top: -20px;
   font-size: 1rem;
   color: #ffffff;
 }
@@ -85,6 +95,7 @@
 }
 
 .submitButton {
+  margin-top: 17px;
   width: 100%;
   padding: 10px;
   background-color: #ffffff;
@@ -195,6 +206,8 @@ input::placeholder {
 .roleSelect {
   width: 100%;
   padding: 10px;
+  outline: none;
+  border: none;
 
   option {
     color: #000;

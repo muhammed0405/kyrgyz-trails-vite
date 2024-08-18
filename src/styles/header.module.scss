@@ -27,7 +27,12 @@ $textColorHover: #ffaa00;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+img{
+	border-image: 4px solid $textColor;
 
+	border-radius: 50px;
+	object-fit: cover;
+}
 	&:hover {
 		text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 	}

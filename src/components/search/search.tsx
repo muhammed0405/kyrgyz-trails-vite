@@ -27,7 +27,6 @@ const Search = () => {
 					placeholder="Куда вы хотите поехать?"
 					onChange={handleInputOnChange}
 				/>
-				<button>Искать</button>
 			</div>
 
 			{search.length > 0 ? (
