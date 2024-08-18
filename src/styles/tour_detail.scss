@@ -48,3 +48,70 @@
 		font-size: 1rem;
 	}
 }
+
+.mainImageWrapper {
+	height: 400px;
+	overflow: hidden;
+	position: relative;
+}
+
+.mainImage {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+
+	&:hover {
+		transform: scale(1.05);
+	}
+}
+
+.regionTitle {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	color: #ffffff;
+	font-size: 2.5rem;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.regionInfo {
+	padding: 2rem;
+}
+
+.regionDescription {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	color: #333;
+}
+
+.toursTitle {
+	font-size: 2rem;
+	color: #333;
+	margin-bottom: 1rem;
+}
+
+.noTours {
+	font-size: 1.2rem;
+	color: #666;
+	text-align: center;
+	padding: 2rem;
+}
+
+@media (max-width: 768px) {
+	.mainImageWrapper {
+		height: 300px;
+	}
+
+	.regionTitle {
+		font-size: 2rem;
+	}
+
+	.regionDescription {
+		font-size: 1rem;
+	}
+
+	.toursTitle {
+		font-size: 1.5rem;
+	}
+}

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import { UseTypedDispatch } from '../../Redux/customHooks/useTypedDispatch'
 import { useTypedSelectorHook } from '../../Redux/customHooks/useTypedSelectorHook'
-import '../../styles/tour_detail.scss'
+import '../../styles/regions_details.scss'
 
 // Import Swiper styles
 import 'swiper/css'
