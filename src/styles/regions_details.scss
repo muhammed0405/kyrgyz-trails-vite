@@ -1,5 +1,3 @@
-/** @format */
-
 .container {
 	max-width: 1200px;
 	margin: 0 auto;
@@ -7,26 +5,96 @@
 	background-color: #f9f9f9;
 }
 
-.tourCard {
+.regionCard {
 	background-color: #ffffff;
 	border-radius: 20px;
 	overflow: hidden;
 	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease;
+	margin-bottom: 2rem;
 
 	&:hover {
 		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 	}
 }
+.homeToursGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 30px;
+		div {
+		position: relative;
+		height: 250px;
+		overflow: hidden;
+		border-radius: 10px;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+		&:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+			&::after {
+				opacity: 1;
+			}
+
+			h3 {
+				transform: translate(-50%, -50%) scale(1.1);
+			}
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(
+				to top,
+				rgba(0, 0, 0, 0.6) 0%,
+				rgba(0, 0, 0, 0) 100%
+			);
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+
+		h3 {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: #fff;
+			text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+			z-index: 1;
+			transition: transform 0.3s ease;
+			text-align: center;
+			width: 100%;
+		}
+
+		p {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			padding: 1rem;
+			background-color: rgba(248, 243, 243, 0.6);
+			color: #0a0a0a;
+			font-size: 1rem;
+			font-weight: 600;
+			text-align: center;
+		}
+	}
+}
 
 .imageGallery {
 	position: relative;
-	cursor: pointer;
 }
 
 .mainImageWrapper {
-	height: 500px;
+	height: 400px;
 	overflow: hidden;
+	position: relative;
 }
 
 .mainImage {
@@ -40,79 +108,36 @@
 	}
 }
 
-.thumbnailStrip {
+.regionTitle {
 	position: absolute;
 	bottom: 20px;
 	left: 20px;
-	right: 20px;
-	display: flex;
-	gap: 10px;
-	overflow-x: auto;
-	padding: 10px;
-	background-color: rgba(255, 255, 255, 0.8);
-	border-radius: 10px;
-	scrollbar-width: none; // For Firefox
-	-ms-overflow-style: none; // For Internet Explorer and Edge
-
-	&::-webkit-scrollbar {
-		display: none; // For Chrome, Safari, and Opera
-	}
+	color: #ffffff;
+	font-size: 2.5rem;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.thumbnailWrapper {
-	flex: 0 0 auto;
-	width: 80px;
-	height: 80px;
-	border-radius: 8px;
-	overflow: hidden;
-	position: relative;
-}
-
-.thumbnail {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: opacity 0.3s ease;
-
-	&:hover {
-		opacity: 0.8;
-	}
-}
-
-.imageCount {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.6);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #fff;
-	font-weight: bold;
-}
-
-.tourInfo {
+.regionInfo {
 	padding: 2rem;
 }
 
-.tourTitle {
-	font-size: 2.5rem;
+.regionDescription {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	color: #333;
+}
+
+.toursTitle {
+	font-size: 2rem;
 	color: #333;
 	margin-bottom: 1rem;
 }
 
-.tourPrice {
-	font-size: 1.5rem;
-	color: #4caf50;
-	margin-bottom: 1.5rem;
-}
-
-.tourDescription {
-	font-size: 1.1rem;
-	line-height: 1.6;
-	color: #555;
+.noTours {
+	font-size: 1.2rem;
+	color: #666;
+	text-align: center;
+	padding: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -120,26 +145,15 @@
 		height: 300px;
 	}
 
-	.thumbnailStrip {
-		bottom: 10px;
-		left: 10px;
-		right: 10px;
-	}
-
-	.thumbnailWrapper {
-		width: 60px;
-		height: 60px;
-	}
-
-	.tourTitle {
+	.regionTitle {
 		font-size: 2rem;
 	}
 
-	.tourPrice {
-		font-size: 1.3rem;
+	.regionDescription {
+		font-size: 1rem;
 	}
 
-	.tourDescription {
-		font-size: 1rem;
+	.toursTitle {
+		font-size: 1.5rem;
 	}
 }

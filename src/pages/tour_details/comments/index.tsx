@@ -19,7 +19,7 @@ export default function Comments({ tour_id }) {
 	const data = {
 		comment: comments,
 		star: starState,
-		user: authData.userId, // Use the authenticated user's ID
+		user: authData?.userId, // Use the authenticated user's ID
 		tour: tour_id,
 	}
 	try {
