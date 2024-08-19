@@ -38,6 +38,25 @@
 		transform: translateY(-10px);
 		box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 	}
+
+	.deleteButton {
+		position: absolute;
+		top: 10px;
+		left: 20px;
+		background-color: rgba(255, 255, 255, 0.8);
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		z-index: 10;
+		color: red;
+		font-size: 20px;
+
+		&:hover {
+			background-color: rgba(255, 255, 255, 1);
+			transform: scale(1.05);
+		}
+	}
 }
 
 .tourImage {

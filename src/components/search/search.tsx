@@ -23,6 +23,7 @@ const Search = () => {
 		<div className={styles.searchBar}>
 			<div className={styles.search}>
 				<input
+				className={styles.searchInput}
 					type="text"
 					placeholder="Куда вы хотите поехать?"
 					onChange={handleInputOnChange}

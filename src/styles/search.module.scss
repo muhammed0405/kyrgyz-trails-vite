@@ -11,11 +11,11 @@
 		align-items: center;
 		width: 100%;
 	}
-	input {
+	.searchInput {
 		flex-grow: 1;
 		padding: 1rem;
 		border: none;
-		background-color: rgba(255, 255, 255, 0.1);
+		background-color: rgba(246, 246, 246, 0.1) !important;
 		color: #fff;
 		border-radius: 4px 0 0 4px;
 

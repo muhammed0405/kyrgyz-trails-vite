@@ -14,7 +14,7 @@ const Header: React.FC = () => {
 	const navigate = useNavigate()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [roleOfUser, setRoleOfUser] = useState(null)
-
+	const [isAdmin, setIsAdmin] = useState(false)
 	const handleLogout = () => {
 		logout()
 		navigate('/')
@@ -32,6 +32,7 @@ const Header: React.FC = () => {
 				: null
 
 		setRoleOfUser(roleOfUser?.role)
+		setIsAdmin(roleOfUser?.role === 'admin')
 	}, [isLoggedIn])
 
 	const renderNavLinks = () => (
@@ -39,17 +40,36 @@ const Header: React.FC = () => {
 			<NavLink onClick={() => setIsMenuOpen(false)} to='/tours'>
 				Туры
 			</NavLink>
-			<NavLink onClick={() => setIsMenuOpen(false)} to='/my_tours'>
-				Мои Туры
-			</NavLink>
+			{isAdmin && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to='/delete'>
+					Удалить
+				</NavLink>
+			)}
+			<div className='add_tor'>
+				{(roleOfUser === 'admin' || roleOfUser === 'guide') && (
+					<NavLink onClick={() => setIsMenuOpen(false)} to='/add_tour'>
+						Добавить новый тур
+					</NavLink>
+				)}
+			</div>
+			{roleOfUser === 'guide' && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_tours'>
+					Мои Туры
+				</NavLink>
+			)}
+			{roleOfUser === 'user' && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_tours'>
+					Избранные туры
+				</NavLink>
+			)}
 			{roleOfUser === 'guide' && (
 				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_bookings_guide'>
-					Мои Бронирование
+					Мои бронирование
 				</NavLink>
 			)}
 			{roleOfUser === 'user' && (
 				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_bookings_tourist'>
-					История Бронирование
+					Мои бронирование
 				</NavLink>
 			)}
 		</>
@@ -90,7 +110,7 @@ const Header: React.FC = () => {
 					to='/'
 					className={styles.logo}
 				>
-					<img  src={Logo} width={50} alt='Logo' />
+					<img src={Logo} width={50} alt='Logo' />
 					<span>Kyrgyz Trails</span>
 				</NavLink>
 				<div className={styles.navLinksBig}>{renderNavLinks()}</div>

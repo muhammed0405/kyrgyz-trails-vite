@@ -1,249 +1,250 @@
 /** @format */
 
 .authContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: rgb(250, 249, 245);
-  padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: rgb(250, 249, 245);
+	padding: 20px;
 }
 
 .authForm {
-  background-color: #c29364c7;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+	background-color: #c29364c7;
+	padding: 2rem;
+	border-radius: 8px;
+	width: 100%;
+	max-width: 400px;
+	box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 .authTitle {
-  font-size: 2rem;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+	font-size: 2rem;
+	color: #ffffff;
+	text-align: center;
+	margin-bottom: 2rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
 }
 
 .inputGroup {
-  margin: 10px 0;
-  position: relative;
-  margin-bottom: 2rem;
+	margin: 10px 0;
+	position: relative;
+	margin-bottom: 2rem;
 }
 
 input {
-background-color: #ffffff;
+	background-color: #ffffff;
 
-  width: 100%;
-  padding: 10px 0;
-  font-size: 1rem;
-  color: #000;
-  border: none;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 10px;
+	width: 100%;
+	padding: 10px 0;
+	font-size: 1rem;
+	color: #000;
+	border: none;
+	outline: none;
+	transition: all 0.3s ease-in-out;
+	margin-bottom: 10px;
 }
 
 .addTourInput {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 1rem;
-  color: #ffffff;
-  border: none;
-  border-bottom: 2px solid #4d4d4d;
-  outline: none;
-  background: transparent;
-  transition: all 0.3s ease-in-out;
+	width: 100%;
+	padding: 10px 0;
+	font-size: 1rem;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	border-bottom: 2px solid #4d4d4d;
+	outline: none;
+	background: transparent;
+	transition: all 0.3s ease-in-out;
 }
 .label {
-  position: absolute;
-  top: 10px;
-  left: 5px;
-  font-size: 1rem;
-  color: #999999;
-  pointer-events: none;
-  transition: 0.2s ease all;
+	position: absolute;
+	top: 10px;
+	left: 5px;
+	font-size: 1rem;
+	color: #999999;
+	pointer-events: none;
+	transition: 0.2s ease all;
 
-  span {
-    display: inline-block;
-    min-width: 5px;
-    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
+	span {
+		display: inline-block;
+		min-width: 5px;
+		transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	}
 }
-.label_role{
-  position: absolute;
-  top: -20px;
-  left: 5px;
-  font-size: 1rem;
-  color: #fff;
-  pointer-events: none;
-  transition: 0.2s ease all;
+.label_role {
+	position: absolute;
+	top: -25px;
+	left: 5px;
+	font-size: 1rem;
+	color: #fff;
+	pointer-events: none;
+	transition: 0.2s ease all;
 }
 .input:focus ~ .label,
 .input:not(:placeholder-shown) ~ .label {
-  top: -20px;
-  font-size: 1rem;
-  color: #ffffff;
+	top: -20px;
+	font-size: 1rem;
+	color: #ffffff;
 }
 
 .input:focus ~ .label span,
 .input:not(:placeholder-shown) ~ .label span {
-  color: #ffffff;
-  transform: translateY(-5px);
+	color: #ffffff;
+	transform: translateY(-5px);
 }
 
 .submitButton {
-  margin-top: 17px;
-  width: 100%;
-  padding: 10px;
-  background-color: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+	margin-top: 17px;
+	width: 100%;
+	padding: 10px;
+	background-color: #ffffff;
+	color: #000000;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: #e6e6e6;
-  }
+	&:hover {
+		background-color: #e6e6e6;
+	}
 }
 
 .switchLink {
-  display: block;
-  text-align: center;
-  margin-top: 1rem;
-  color: #b3b3b3;
-  text-decoration: none;
-  transition: color 0.3s ease;
+	display: block;
+	text-align: center;
+	margin-top: 1rem;
+	color: #b3b3b3;
+	text-decoration: none;
+	transition: color 0.3s ease;
 
-  &:hover {
-    color: #ffffff;
-  }
+	&:hover {
+		color: #ffffff;
+	}
 }
 
 .fileInput {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  background-color: #2a2a2a;
-  border: 1px solid #4d4d4d;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: #ffffff;
-  cursor: pointer;
-  margin-top: 10px;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 1rem;
+	background-color: #2a2a2a;
+	border: 1px solid #4d4d4d;
+	border-radius: 4px;
+	font-size: 0.9rem;
+	color: #ffffff;
+	cursor: pointer;
+	margin-top: 10px;
 
-  &::file-selector-button {
-    padding: 8px 12px;
-    background-color: #ffffff;
-    color: #000000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+	&::file-selector-button {
+		padding: 8px 12px;
+		background-color: #ffffff;
+		color: #000000;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
 
-    &:hover {
-      background-color: #e6e6e6;
-    }
-  }
+		&:hover {
+			background-color: #e6e6e6;
+		}
+	}
 }
 
 input::placeholder {
-  color: #ffffff;
+	color: #ffffff;
 }
 
 .fileLabel {
-  color: #f0d8d8;
-  transition: color 0.3s ease;
+	color: #f0d8d8;
+	transition: color 0.3s ease;
 }
 
 .successMessage {
-  background-color: #c7c3c3;
-  color: #ffffff;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-top: 1rem;
-  text-align: center;
+	background-color: #c7c3c3;
+	color: #ffffff;
+	padding: 1rem;
+	border-radius: 4px;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 .errorMessage {
-  background-color: #ff4d4d;
+	background-color: #ff4d4d;
 
-  color: #ffffff;
+	color: #ffffff;
 
-  padding: 1rem;
+	padding: 1rem;
 
-  border-radius: 4px;
+	border-radius: 4px;
 
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 
-  text-align: center;
+	text-align: center;
 }
 
 .fieldError {
-  color: #ff4d4d;
+	color: #ff4d4d;
 
-  font-size: 0.8rem;
+	font-size: 0.8rem;
 
-  margin-top: 0.25rem;
+	margin-top: 0.25rem;
 
-  display: block;
+	display: block;
 }
 
 .input.error {
-  border-bottom-color: #ff4d4d;
+	border-bottom-color: #ff4d4d;
 }
 
 .label.error {
-  color: #ff4d4d;
+	color: #ff4d4d;
 }
 
 .roleSelect {
-  width: 100%;
-  padding: 10px;
-  outline: none;
-  border: none;
+	width: 100%;
+	padding: 10px;
+	outline: none;
+	border: none;
 
-  option {
-    color: #000;
-  }
+	option {
+		color: #000;
+	}
 }
 
 @keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
+	0%,
+	100% {
+		transform: translateX(0);
+	}
 
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-5px);
-  }
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-5px);
+	}
 
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(5px);
-  }
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(5px);
+	}
 }
 
 .fieldError,
 .errorMessage {
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 .preformattedText {
-  font-family: monospace;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  resize: vertical;
+	font-family: monospace;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	resize: vertical;
 }

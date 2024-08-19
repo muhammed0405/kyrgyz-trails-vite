@@ -1,6 +1,6 @@
 /** @format */
 @import 'animations';
-$textColor: #f8f5f2;
+$textColor: #252525;
 $textColorHover: #ffaa00;
 .header {
 	backdrop-filter: blur(5px);
@@ -40,7 +40,11 @@ img{
 
 .navLinks {
 	display: flex;
-	gap: 1rem;
+	gap: 2rem;
+
+	li {
+		list-style: none;
+	}
 
 	a {
 		color: $textColor;
@@ -48,7 +52,6 @@ img{
 		transition: all 0.3s ease-in-out;
 
 		&:hover {
-			color: $textColorHover;
 			transform: scale(1.05);
 		}
 	}
@@ -72,7 +75,11 @@ img{
 		}
 	}
 }
-
+.add_tor {
+	a{
+		color: red;
+	}
+}
 .authLinks {
 	display: flex;
 	gap: 1rem;
