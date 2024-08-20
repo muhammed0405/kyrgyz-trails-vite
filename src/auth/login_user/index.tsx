@@ -2,7 +2,7 @@
 
 // src/pages/LoginPages.tsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch";
 import styles from "../../styles/formStyles.module.scss"; // Create this CSS module for styling
 
@@ -70,19 +70,17 @@ export default function LoginPages() {
 
   return (
     <div className={styles.loginContainer}>
-    
       <div className={styles.authContainer}>
         <form onSubmit={handleSubmit} className={styles.authForm}>
           <h1>Войти</h1>
-        <p
-        style={{
-          height: "40px",
-        }}
-      >
-        {error && <p className={styles.errorMessage}>{error}</p>}
-      </p>
+          <p
+            style={{
+              height: "40px",
+            }}
+          >
+            {error && <p className={styles.errorMessage}>{error}</p>}
+          </p>
           <div className={styles.formGroup}>
-
             <label htmlFor="email">Почта:</label>
             <input
               className={styles.formInput}
@@ -112,6 +110,10 @@ export default function LoginPages() {
               }
             />
           </div>
+
+          <Link to={"/request-password"}>
+            <button>Забыли пароль?</button>
+          </Link>
 
           <button
             type="submit"

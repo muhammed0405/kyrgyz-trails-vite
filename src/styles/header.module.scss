@@ -1,253 +1,253 @@
 /** @format */
-@import 'animations';
+@import "animations";
 $textColor: #252525;
 $textColorHover: #ffaa00;
 .header {
-	backdrop-filter: blur(5px);
-	padding: 25px 0;
-	border-bottom: 1px solid #ffffff1a;
-	background: rgba(176, 148, 99, 0.699);
+  backdrop-filter: blur(5px);
+  padding: 25px 0;
+  border-bottom: 1px solid #ffffff1a;
+  background: rgba(176, 148, 99, 0.699);
 }
 
 .nav {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 1rem;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-	font-size: 1.5rem;
-	font-weight: bold;
-	color: #070707;
-	text-decoration: none;
-	transition: text-shadow 0.3s ease;
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-img{
-	border-image: 4px solid $textColor;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #070707;
+  text-decoration: none;
+  transition: text-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  img {
+    border-image: 4px solid $textColor;
 
-	border-radius: 50px;
-	object-fit: cover;
-}
-	&:hover {
-		text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-	}
+    border-radius: 50px;
+    object-fit: cover;
+  }
+  &:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
 }
 
 .navLinks {
-	display: flex;
-	gap: 2rem;
+  display: flex;
+  gap: 2rem;
 
-	li {
-		list-style: none;
-	}
+  li {
+    list-style: none;
+  }
 
-	a {
-		color: $textColor;
-		text-decoration: none;
-		transition: all 0.3s ease-in-out;
+  a {
+    color: $textColor;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
 
-		&:hover {
-			transform: scale(1.05);
-		}
-	}
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 }
 
 .navLinksBig {
-	display: flex;
-	gap: 1rem;
-	margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  margin: 0 auto;
 
-	a {
-		color: $textColor;
-		font-weight: 700;
-		font-size: 20px;
-		text-decoration: none;
-		transition: all 0.3s ease;
+  a {
+    color: $textColor;
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 
-		&:hover {
-			color: $textColorHover;
-			transform: scale(1.05);
-		}
-	}
+    &:hover {
+      color: $textColorHover;
+      transform: scale(1.05);
+    }
+  }
 }
 .add_tor {
-	a{
-		color: red;
-	}
+  a {
+    color: red;
+  }
 }
 .authLinks {
-	display: flex;
-	gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .burgerBtn {
-	background: none;
-	border: none;
-	cursor: pointer;
-	display: none;
-	color: #72635d;
-	font-size: 35px;
-	transition: transform 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+  color: #72635d;
+  font-size: 35px;
+  transition: transform 0.3s ease;
 
-	&:hover {
-		transform: scale(1.1);
-		background-color: #000;
-	}
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
 }
 
 .loginBtn,
 .registerBtn,
 .logoutBtn {
-	padding: 0.5rem 1rem;
-	border: 3px solid $textColor;
-	border-radius: 4px;
-	font-weight: 800;
-	transition: all 0.3s ease;
-	background: none;
-	color: $textColor;
-	cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 3px solid $textColor;
+  border-radius: 4px;
+  font-weight: 800;
+  transition: all 0.3s ease;
+  background: none;
+  color: $textColor;
+  cursor: pointer;
 
-	a {
-		text-decoration: none;
-	}
+  a {
+    text-decoration: none;
+  }
 
-	&:hover {
-		background-color: #fff;
-		color: $textColorHover;
-		animation: glow 1.5s infinite;
-		border: 3px solid $textColorHover;
-	}
+  &:hover {
+    background-color: #fff;
+    color: $textColorHover;
+    animation: glow 1.5s infinite;
+    border: 3px solid $textColorHover;
+  }
 }
 
 .sideMenu {
-	position: fixed;
-	top: 0;
-	right: -300px;
-	width: 300px;
-	height: 100vh;
-	background-color: wheat;
-	transition: transform 0.3s ease-in-out;
-	display: flex;
-	flex-direction: column;
-	padding: 2rem;
-	z-index: 10001;
-	overflow-y: auto;
-	transform: translateX(100%);
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: wheat;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  z-index: 1000;
+  overflow-y: auto;
+  transform: translateX(100%);
 
-	&.active {
-		transform: translateX(-300px);
-	}
+  &.active {
+    transform: translateX(-300px);
+  }
 
-	.navLinks {
-		flex-direction: column;
-		align-items: flex-start;
-		margin-bottom: 2rem;
+  .navLinks {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 2rem;
 
-		a {
-			padding: 0.5rem 0;
-			width: 100%;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    a {
+      padding: 0.5rem 0;
+      width: 100%;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-			&:last-child {
-				border-bottom: none;
-			}
-		}
-	}
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
 
-	.authLinks {
-		flex-direction: column;
-		align-items: flex-start;
+  .authLinks {
+    flex-direction: column;
+    align-items: flex-start;
 
-		button,
-		a {
-			width: 100%;
-			text-align: center;
-			margin-bottom: 1rem;
-		}
-	}
+    button,
+    a {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  }
 
-	.closeBtn {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		background: none;
-		border: none;
-		color: #fff;
-		font-size: 1.5rem;
-		cursor: pointer;
-		transition: transform 0.3s ease;
+  .closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 
-		&:hover {
-			transform: rotate(90deg);
-		}
-	}
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
 }
 
 body {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 @media (max-width: 1200px) {
-	.nav {
-		padding: 0 2rem;
-	}
+  .nav {
+    padding: 0 2rem;
+  }
 }
 
 @media (max-width: 900px) {
-	.header {
-		padding: 15px 0;
-	}
+  .header {
+    padding: 15px 0;
+  }
 
-	.navLinksBig,
-	.authLinks {
-		display: none;
-	}
+  .navLinksBig,
+  .authLinks {
+    display: none;
+  }
 
-	.burgerBtn {
-		display: block;
-	}
+  .burgerBtn {
+    display: block;
+  }
 
-	.sideMenu {
-		.navLinks,
-		.authLinks {
-			display: flex;
-		}
-	}
+  .sideMenu {
+    .navLinks,
+    .authLinks {
+      display: flex;
+    }
+  }
 }
 
 @media (max-width: 600px) {
-	.logo {
-		font-size: 1.2rem;
+  .logo {
+    font-size: 1.2rem;
 
-		img {
-			width: 40px;
-		}
+    img {
+      width: 40px;
+    }
 
-		span {
-			display: none;
-		}
-	}
+    span {
+      display: none;
+    }
+  }
 
-	.header {
-		padding: 10px 0;
-	}
+  .header {
+    padding: 10px 0;
+  }
 
-	.nav {
-		padding: 0 1rem;
-	}
+  .nav {
+    padding: 0 1rem;
+  }
 
-	.sideMenu {
-		width: 250px;
-	}
+  .sideMenu {
+    width: 250px;
+  }
 }
 
 @media (max-width: 400px) {
-	.sideMenu {
-		width: 100%;
-	}
+  .sideMenu {
+    width: 100%;
+  }
 }
