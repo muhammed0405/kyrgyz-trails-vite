@@ -85,15 +85,16 @@ export const getBookings = () => async (dispatch: Dispatch) => {
 
 export const updateBooking = (id, current_state) => {
 	return async (dispatch: Dispatch) => {
-		const data = {
-			current_state: current_state,
-		}
-		try {
-			const response = await pb.collection('booking').update(id, data)
-			console.log('Data updated successfully:', response)
-		} catch (error) {
-			console.error('Error updating data:', error)
-		}
+			const data = {
+					current_state: current_state,
+			}
+			try {
+					const response = await pb.collection('booking').update(id, data)
+					console.log('Data updated successfully:', response)
+					dispatch(getBookings()) // Маалыматтарды жаңыртуу үчүн
+			} catch (error) {
+					console.error('Error updating data:', error)
+			}
 	}
 }
 
