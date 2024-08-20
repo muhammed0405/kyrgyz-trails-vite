@@ -68,6 +68,17 @@ function App() {
           {/* Other protected routes */}
         </Route>
         <Route path="/add_tour" element={<AddTour />} />
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/verify-email/" element={<VerifyEmailPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my_bookings_guide" element={<Bookings />} />
+          <Route path="/my_bookings_tourist" element={<BookingsTourist />} />
+
+          <Route path="/update-tour/:tourId" element={<UpdateTour />} />
+          {/* Other protected routes */}
+        </Route>
+        <Route path="/add_tour" element={<AddTour />} />
 
         <Route element={<ProtectedRouteAdmin />}>
           <Route path="/delete" element={<DeleteTour />} />

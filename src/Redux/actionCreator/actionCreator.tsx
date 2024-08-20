@@ -96,6 +96,19 @@ export const updateBooking = (id, current_state) => {
     }
   };
 };
+	return async (dispatch: Dispatch) => {
+			const data = {
+					current_state: current_state,
+			}
+			try {
+					const response = await pb.collection('booking').update(id, data)
+					console.log('Data updated successfully:', response)
+					dispatch(getBookings()) // Маалыматтарды жаңыртуу үчүн
+			} catch (error) {
+					console.error('Error updating data:', error)
+			}
+	}
+}
 
 // authActions.ts
 import PocketBase from "pocketbase";

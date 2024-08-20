@@ -39,7 +39,7 @@ export default function Home() {
 				<h2>Популярные направления</h2>
 				<div className={styles.destinationGrid}>
 					{slicedTours?.map(el => (
-						<Link to={`/tour_details/${el.id}`} key={el.id}>
+						<Link style={{ zIndex:100 }} to={`/tour_details/${el.id}`} key={el.id}>
 							<div
 								key={el.id}
 								className={styles.destinationCard}
