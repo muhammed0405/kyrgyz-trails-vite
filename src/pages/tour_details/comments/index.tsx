@@ -22,13 +22,15 @@ export default function Comments({ tour_id }) {
 		user: authData?.userId, // Use the authenticated user's ID
 		tour: tour_id,
 	}
-	try {
-		const response = pb.collection("comments").create(data)
-		console.log("Comment added successfully:", response)
-	} catch (error) {
-		console.error("Error adding comment:", error.status)
-		// Display error message to the user
-	}
+
+
+	// try {
+	// 	const response = pb.collection("comments").create(data)
+	// 	console.log("Comment added successfully:", response)
+	// } catch (error) {
+	// 	console.error("Error adding comment:", error.status)
+	// 	// Display error message to the user
+	// }
 
 	return (
 		<div>
