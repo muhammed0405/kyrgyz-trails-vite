@@ -1,15 +1,15 @@
 /** @format */
 
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useTypedSelectorHook } from '../../Redux/customHooks/useTypedSelectorHook'
-
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
+import "@/styles/search.scss"
 const Search = () => {
-	const tours = useTypedSelectorHook((state) => state.tours.tours)
-	const [searchValue, setSearchValue] = useState<string>('')
+	const tours = useTypedSelectorHook(state => state.tours.tours)
+	const [searchValue, setSearchValue] = useState<string>("")
 
 	const search = searchValue
-		? tours?.items?.filter((el) =>
+		? tours?.items?.filter(el =>
 				el.title?.toLowerCase().includes(searchValue.toLowerCase())
 		  )
 		: []
@@ -19,21 +19,21 @@ const Search = () => {
 	}
 
 	return (
-		<div className={searchBar}>
+		<div className={"searchBar"}>
 			<div className={search}>
 				<input
-					className={searchInput}
-					type='text'
-					placeholder='Куда вы хотите поехать?'
+					className={"searchInput"}
+					type="text"
+					placeholder="Куда вы хотите поехать?"
 					onChange={handleInputOnChange}
 				/>
 			</div>
 
 			{search.length > 0 ? (
-				<div className={searchedResultsWrapper}>
-					{search.map((t) => (
-						<div key={t.id} className={searchedResult}>
-							<Link to={`/tour_details/${t.id}`} className={link}>
+				<div className={"searchedResultsWrapper"}>
+					{search.map(t => (
+						<div key={t.id} className={"searchedResult"}>
+							<Link to={`/tour_details/${t.id}`} className={"link"}>
 								{t.title}
 							</Link>
 						</div>
@@ -41,7 +41,7 @@ const Search = () => {
 				</div>
 			) : (
 				searchValue && (
-					<div className={noResults}>
+					<div className={"noResults"}>
 						<p>No results found</p>
 					</div>
 				)
