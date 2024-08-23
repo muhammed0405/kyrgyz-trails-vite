@@ -6,7 +6,6 @@ import CustomToast, {
 } from '@/components/common/toaster/customToast'
 import PocketBase from 'pocketbase'
 import React, { useEffect, useRef, useState } from 'react'
-import styles from '../../../styles/formStyles.module.scss'
 
 const pb = new PocketBase('https://kyrgyz-tra.pockethost.io')
 
@@ -20,7 +19,7 @@ export default function AddTour() {
 	const editorRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		const labels = document.querySelectorAll(`.${styles.label}`)
+		const labels = document.querySelectorAll(`.${label}`)
 		labels.forEach((label) => {
 			const text = (label as HTMLElement).innerText
 			label.innerHTML = text
@@ -110,56 +109,56 @@ export default function AddTour() {
 	}
 
 	return (
-		<div className={styles.authContainer}>
-			<form className={styles.authForm} onSubmit={handleSubmit}>
-				<h2 className={styles.authTitle}>Создать локацию</h2>
-				{error && <p className={styles.errorMessage}>{error}</p>}
-				<div className={styles.inputGroup}>
+		<div className={authContainer}>
+			<form className={authForm} onSubmit={handleSubmit}>
+				<h2 className={authTitle}>Создать локацию</h2>
+				{error && <p className={errorMessage}>{error}</p>}
+				<div className={inputGroup}>
 					<input
 						type='text'
 						id='title'
-						className={styles.input}
+						className={input}
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 						required
 						placeholder=' '
 					/>
-					<label htmlFor='title' className={styles.label}>
+					<label htmlFor='title' className={label}>
 						Название
 					</label>
 				</div>
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='text'
 						id='location'
-						className={styles.input}
+						className={input}
 						value={location}
 						onChange={(e) => setLocation(e.target.value)}
 						required
 						placeholder=' '
 					/>
-					<label htmlFor='location' className={styles.label}>
+					<label htmlFor='location' className={label}>
 						Местоположение
 					</label>
 				</div>
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='number'
 						id='price'
-						className={styles.input}
+						className={input}
 						value={price}
 						onChange={(e) => setPrice(e.target.value)}
 						required
 						placeholder=' '
 					/>
-					<label htmlFor='price' className={styles.label}>
+					<label htmlFor='price' className={label}>
 						Цена
 					</label>
 				</div>
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<div
 						ref={editorRef}
-						className={styles.editor}
+						className={editor}
 						style={{
 							border: '1px solid #ccc',
 							minHeight: '100px',
@@ -169,22 +168,22 @@ export default function AddTour() {
 						}}
 					/>
 				</div>
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='file'
 						id='images'
-						className={styles.input}
+						className={input}
 						onChange={handleImageChange}
 						required
 						multiple
 						accept='image/*'
 						placeholder=' '
 					/>
-					<label htmlFor='images' className={styles.label}>
+					<label htmlFor='images' className={label}>
 						Изображения
 					</label>
 				</div>
-				<button type='submit' className={styles.submitButton}>
+				<button type='submit' className={submitButton}>
 					Создать
 				</button>
 			</form>

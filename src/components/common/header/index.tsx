@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import Logo from '../../../assets/img/logo.png'
 import { UseTypedDispatch } from '../../../Redux/customHooks/useTypedDispatch'
 import { useTypedSelectorHook } from '../../../Redux/customHooks/useTypedSelectorHook'
-import styles from '../../../styles/header.module.scss'
 import BurgerMenu from '../burgerMenu'
 
 const Header: React.FC = () => {
@@ -78,7 +77,7 @@ const Header: React.FC = () => {
 	const renderAuthLinks = () => (
 		<>
 			{isLoggedIn ? (
-				<button onClick={handleLogout} className={styles.logoutBtn}>
+				<button onClick={handleLogout} className={logoutBtn}>
 					Выйти
 				</button>
 			) : (
@@ -86,14 +85,14 @@ const Header: React.FC = () => {
 					<NavLink
 						onClick={() => setIsMenuOpen(false)}
 						to='/auth/login_user'
-						className={styles.loginBtn}
+						className={loginBtn}
 					>
 						Войти
 					</NavLink>
 					<NavLink
 						onClick={() => setIsMenuOpen(false)}
 						to='/auth/register_user'
-						className={styles.registerBtn}
+						className={registerBtn}
 					>
 						Регистрация
 					</NavLink>
@@ -103,30 +102,24 @@ const Header: React.FC = () => {
 	)
 
 	return (
-		<header className={styles.header}>
-			<nav className={styles.nav}>
-				<NavLink
-					onClick={() => setIsMenuOpen(false)}
-					to='/'
-					className={styles.logo}
-				>
+		<header className={header}>
+			<nav className={nav}>
+				<NavLink onClick={() => setIsMenuOpen(false)} to='/' className={logo}>
 					<img src={Logo} width={50} alt='Logo' />
 					<span>Kyrgyz Trails</span>
 				</NavLink>
-				<div className={styles.navLinksBig}>{renderNavLinks()}</div>
-				<div className={styles.authLinks}>{renderAuthLinks()}</div>
+				<div className={navLinksBig}>{renderNavLinks()}</div>
+				<div className={authLinks}>{renderAuthLinks()}</div>
 
-				<button className={styles.burgerBtn} onClick={toggleMenu}>
+				<button className={burgerBtn} onClick={toggleMenu}>
 					<BurgerMenu />
 				</button>
 
-				<div
-					className={`${styles.sideMenu} ${isMenuOpen ? styles.active : ''}`}
-				>
-					<button className={styles.closeBtn} onClick={toggleMenu}>
+				<div className={`${sideMenu} ${isMenuOpen ? active : ''}`}>
+					<button className={closeBtn} onClick={toggleMenu}>
 						×
 					</button>
-					<div className={styles.navLinks}>
+					<div className={navLinks}>
 						{renderNavLinks()}
 						<NavLink
 							onClick={() => setIsMenuOpen(false)}
@@ -143,7 +136,7 @@ const Header: React.FC = () => {
 							История гидов
 						</NavLink>
 					</div>
-					<div className={styles.authLinks}>{renderAuthLinks()}</div>
+					<div className={authLinks}>{renderAuthLinks()}</div>
 				</div>
 			</nav>
 		</header>

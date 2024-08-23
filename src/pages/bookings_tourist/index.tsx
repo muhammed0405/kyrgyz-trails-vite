@@ -10,7 +10,6 @@ import { useTypedSelectorHook } from '@/Redux/customHooks/useTypedSelectorHook'
 import { useEffect } from 'react'
 import { FaTimes, FaTrash } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import styles from '../../styles/bookingsTourist.module.scss'
 export default function BookingsTourist() {
 	const dispatch = UseTypedDispatch()
 	const { getBookings, updateBooking, getTours } = dispatch
@@ -46,42 +45,38 @@ export default function BookingsTourist() {
 	const getStatusClass = (status) => {
 		switch (status) {
 			case 'pending':
-				return styles.pendingStatus
+				return pendingStatus
 			case 'confirmed':
-				return styles.confirmedStatus
+				return confirmedStatus
 			case 'canceled':
-				return styles.canceledStatus
+				return canceledStatus
 			default:
 				return ''
 		}
 	}
 
 	return (
-		<div className={styles.bookingsContainer}>
-			<h1 className={styles.title}>Мои брони</h1>
+		<div className={bookingsContainer}>
+			<h1 className={title}>Мои брони</h1>
 			{sortedBookings?.map((el) => {
 				const tourInfo = getTourInfo(el.tour_id)
 				return (
-					<div key={el.id} className={styles.bookingCard}>
+					<div key={el.id} className={bookingCard}>
 						{tourInfo && (
 							<>
-								<h2 className={styles.tourTitle}>{tourInfo.title}</h2>
+								<h2 className={tourTitle}>{tourInfo.title}</h2>
 								{tourInfo.images && tourInfo.images[0] && (
 									<Link to={`/tour_details/${tourInfo.id}`}>
 										<img
 											src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${tourInfo.id}/${tourInfo.images[0]}`}
 											alt={tourInfo.title}
-											className={styles.tourImage}
+											className={tourImage}
 										/>
 									</Link>
 								)}
 							</>
 						)}
-						<p
-							className={`${styles.statusText} ${getStatusClass(
-								el.current_state
-							)}`}
-						>
+						<p className={`${statusText} ${getStatusClass(el.current_state)}`}>
 							Статус:{' '}
 							{el.current_state === 'pending'
 								? 'Ожидает подтверждения'
@@ -89,10 +84,10 @@ export default function BookingsTourist() {
 								? 'Подтверждено'
 								: 'Отменено'}
 						</p>
-						<div className={styles.buttonGroup}>
+						<div className={buttonGroup}>
 							<button
 								onClick={() => deleteBooking(el.id)}
-								className={`${styles.button} ${styles.deleteButton}`}
+								className={`${button} ${deleteButton}`}
 							>
 								<FaTrash /> Удалить
 							</button>
@@ -100,7 +95,7 @@ export default function BookingsTourist() {
 								onClick={() =>
 									updateBooking({ id: el.id, current_state: 'canceled' })
 								}
-								className={`${styles.button} ${styles.cancelButton}`}
+								className={`${button} ${cancelButton}`}
 							>
 								<FaTimes /> Отменить
 							</button>

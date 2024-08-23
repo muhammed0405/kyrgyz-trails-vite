@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 
-import styles from '../../styles/formStyles.module.scss'
-
 import { useNavigate } from 'react-router-dom'
 
 import { UseTypedDispatch } from '../../Redux/customHooks/useTypedDispatch'
@@ -121,86 +119,82 @@ export default function RegisterPages() {
 		validateForm()
 	}, [formData])
 	return (
-		<div className={styles.authContainer}>
-			<form className={styles.authForm} onSubmit={handleSubmit}>
-				<h1 className={styles.authTitle}>Регистрация Sawerty2005/@</h1>
+		<div className={authContainer}>
+			<form className={authForm} onSubmit={handleSubmit}>
+				<h1 className={authTitle}>Регистрация Sawerty2005/@</h1>
 
-				{error && <p className={styles.errorMessage}>{error}</p>}
+				{error && <p className={errorMessage}>{error}</p>}
 
-				{successMessage && (
-					<p className={styles.successMessage}>{successMessage}</p>
-				)}
+				{successMessage && <p className={successMessage}>{successMessage}</p>}
 
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='text'
 						name='username'
-						className={styles.input}
+						className={input}
 						value={formData.username}
 						onChange={handleChange}
 						required
 						placeholder=' '
 					/>
-					<label className={styles.label}>Имя</label>
+					<label className={label}>Имя</label>
 					{formErrors.username && (
-						<span className={styles.fieldError}>{formErrors.username}</span>
+						<span className={fieldError}>{formErrors.username}</span>
 					)}
 				</div>
 
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='email'
 						name='email'
-						className={styles.input}
+						className={input}
 						value={formData.email}
 						onChange={handleChange}
 						required
 						placeholder=' '
 					/>
-					<label className={styles.label}>Почта</label>
+					<label className={label}>Почта</label>
 					{formErrors.email && (
-						<span className={styles.fieldError}>{formErrors.email}</span>
+						<span className={fieldError}>{formErrors.email}</span>
 					)}
 				</div>
 
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='password'
 						name='password'
-						className={styles.input}
+						className={input}
 						value={formData.password}
 						onChange={handleChange}
 						required
 						placeholder=' '
 					/>
-					<label className={styles.label}>Пароль</label>
+					<label className={label}>Пароль</label>
 					{formErrors.password && (
-						<span className={styles.fieldError}>{formErrors.password}</span>
+						<span className={fieldError}>{formErrors.password}</span>
 					)}
 				</div>
 
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<input
 						type='password'
 						name='passwordConfirm'
-						className={styles.input}
+						className={input}
 						value={formData.passwordConfirm}
 						onChange={handleChange}
 						required
 						placeholder=' '
 					/>
-					<label className={styles.label}>Подтвердите пароль</label>
+					<label className={label}>Подтвердите пароль</label>
 					{formErrors.passwordConfirm && (
-						<span className={styles.fieldError}>
-							{formErrors.passwordConfirm}
-						</span>
+						<span className={fieldError}>{formErrors.passwordConfirm}</span>
 					)}
 				</div>
 
-				<div className={styles.inputGroup}>
+				<div className={inputGroup}>
 					<select
 						name='role'
-						className={styles.roleSelect}
+						className={roleSelect}
 						value={formData.role}
 						onChange={handleChange}
 					>
@@ -208,14 +202,10 @@ export default function RegisterPages() {
 						<option value='user'>Пользователь</option>
 						<option value='guide'>Гид</option>
 					</select>
-					<label className={styles.label_role}>Роль</label>
+					<label className={label_role}>Роль</label>
 				</div>
 
-				<button
-					type='submit'
-					className={styles.submitButton}
-					disabled={isLoading}
-				>
+				<button type='submit' className={submitButton} disabled={isLoading}>
 					{isLoading ? 'Регистрируемся...' : 'Регистрация'}
 				</button>
 			</form>

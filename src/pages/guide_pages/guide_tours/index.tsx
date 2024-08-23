@@ -1,8 +1,8 @@
 /** @format */
 
-"use client"
-import React, { useEffect } from "react"
-import { useTypedSelectorHook } from "../../../Redux/customHooks/useTypedSelectorHook"
+'use client'
+import React, { useEffect } from 'react'
+import { useTypedSelectorHook } from '../../../Redux/customHooks/useTypedSelectorHook'
 // import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
 
 interface Tour {
@@ -17,7 +17,7 @@ interface Tour {
 const GuideTours: React.FC = () => {
 	// const dispatch = UseTypedDispatch()
 	const { guideTours, loading, error } = useTypedSelectorHook(
-		state => state.guide.guideTours
+		(state) => state.guide.guideTours
 	)
 	// const { user } = useTypedSelectorHook(state => state.auth)
 
@@ -33,11 +33,11 @@ const GuideTours: React.FC = () => {
 		return <div>You haven't added any tours yet.</div>
 
 	return (
-		<div className={styles.guideTours}>
+		<div className={guideTours}>
 			<h1>My Tours</h1>
 			<ul>
 				{guideTours.map((tour: Tour) => (
-					<li key={tour.id} className={styles.tourItem}>
+					<li key={tour.id} className={tourItem}>
 						<h2>{tour.name}</h2>
 						<p>{tour.description}</p>
 						<p>Price: ${tour.price}</p>

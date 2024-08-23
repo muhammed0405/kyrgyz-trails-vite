@@ -22,6 +22,8 @@ import Tours from './pages/tours'
 import VerifyEmailPage from './auth/authentication/VerifyEmail'
 import Login from './auth/login_user'
 import Register from './auth/register_user'
+import RequestEmailPass from './auth/RequestEmailPass.tsx'
+import ResetPassword from './auth/ResetPassword.tsx'
 import ProtectedRouteAdmin from './components/ProtectedRout/ProtectedRouteAdmin.tsx'
 import Bookings from './pages/bookigs'
 import BookingsTourist from './pages/bookings_tourist/index.tsx'
@@ -55,7 +57,8 @@ function App() {
 				{/* Auth Routes */}
 				<Route path='/auth/register_user' element={<Register />} />
 				<Route path='/auth/login_user' element={<Login />} />
-
+				<Route path='request-password' element={<RequestEmailPass />} />
+				<Route path='/reset-password' element={<ResetPassword />} />
 				{/* Protected Routes */}
 				<Route element={<ProtectedRoute />}>
 					<Route path='/verify-email/' element={<VerifyEmailPage />} />
