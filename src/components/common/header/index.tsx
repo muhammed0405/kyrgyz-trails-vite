@@ -1,104 +1,129 @@
 /** @format */
 
-import '@/components/common/header/header.scss'
-import React, { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import Logo from '../../../assets/img/logo.png'
-import { UseTypedDispatch } from '../../../Redux/customHooks/useTypedDispatch'
-import { useTypedSelectorHook } from '../../../Redux/customHooks/useTypedSelectorHook'
-import BurgerMenu from '../burgerMenu'
+import React, { useEffect, useState } from "react"
+import { NavLink, useNavigate } from "react-router-dom"
+import Logo from "../../../assets/img/logo.png"
+import { UseTypedDispatch } from "../../../Redux/customHooks/useTypedDispatch"
+import { useTypedSelectorHook } from "../../../Redux/customHooks/useTypedSelectorHook"
+import BurgerMenu from "../burgerMenu"
+import "./header.scss"
 
-const Header: React.FC = () => {
-	const { isLoggedIn } = useTypedSelectorHook((state) => state.auth)
+// Башкы компонент
+const Header = () => {
+	// Керектүү state жана hook'тор
+	const { isLoggedIn } = useTypedSelectorHook(state => state.auth)
 	const { logout } = UseTypedDispatch()
 	const navigate = useNavigate()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [roleOfUser, setRoleOfUser] = useState(null)
 	const [isAdmin, setIsAdmin] = useState(false)
+
+	// Колдонуучуну чыгаруу функциясы
 	const handleLogout = () => {
 		logout()
-		navigate('/')
+		navigate("/")
 		setIsMenuOpen(false)
 	}
 
+	// Меню ачуу/жабуу функциясы
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen)
 	}
 
+	// Колдонуучунун ролун текшерүү
 	useEffect(() => {
 		const roleOfUser =
-			localStorage.getItem('pocketbase_auth') !== null
-				? JSON.parse(localStorage.getItem('pocketbase_auth') as string)
+			localStorage.getItem("pocketbase_auth") !== null
+				? JSON.parse(localStorage.getItem("pocketbase_auth"))
 				: null
 
 		setRoleOfUser(roleOfUser?.role)
-		setIsAdmin(roleOfUser?.role === 'admin')
+		setIsAdmin(roleOfUser?.role === "admin")
 	}, [isLoggedIn])
 
+	// Навигация шилтемелерин көрсөтүү
 	const renderNavLinks = () => (
 		<>
-			<NavLink onClick={() => setIsMenuOpen(false)} to='/'>
-				Главная
+			{/* Башкы бет шилтемеси */}
+			<NavLink onClick={() => setIsMenuOpen(false)} to="/">
+				Башкы бет
 			</NavLink>
-			<NavLink onClick={() => setIsMenuOpen(false)} to='/tours'>
-				Туры
+
+			{/* Турлар шилтемеси */}
+			<NavLink onClick={() => setIsMenuOpen(false)} to="/tours">
+				Турлар
 			</NavLink>
+
+			{/* Админ үчүн өчүрүү шилтемеси */}
 			{isAdmin && (
-				<NavLink onClick={() => setIsMenuOpen(false)} to='/delete'>
-					Удалить
+				<NavLink onClick={() => setIsMenuOpen(false)} to="/delete">
+					Өчүрүү
 				</NavLink>
 			)}
-			<div className='add_tor'>
-				{(roleOfUser === 'admin' || roleOfUser === 'guide') && (
-					<NavLink onClick={() => setIsMenuOpen(false)} to='/add_tour'>
-						Добавить новый тур
+
+			{/* Жаңы тур кошуу шилтемеси (админ жана гид үчүн) */}
+			<div className="add_tor">
+				{(roleOfUser === "admin" || roleOfUser === "guide") && (
+					<NavLink onClick={() => setIsMenuOpen(false)} to="/add_tour">
+						Жаңы тур кошуу
 					</NavLink>
 				)}
 			</div>
-			{roleOfUser === 'guide' && (
-				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_tours'>
-					Мои Туры
+
+			{/* Гид үчүн "Менин турларым" шилтемеси */}
+			{roleOfUser === "guide" && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to="/my_tours">
+					Менин турларым
 				</NavLink>
 			)}
-			{roleOfUser === 'user' && (
-				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_tours'>
-					Избранные туры
+
+			{/* Колдонуучу үчүн "Тандалган турлар" шилтемеси */}
+			{roleOfUser === "user" && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to="/my_tours">
+					Тандалган турлар
 				</NavLink>
 			)}
-			{roleOfUser === 'guide' && (
-				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_bookings_guide'>
-					Мои бронирование
+
+			{/* Гид үчүн "Менин броньдорум" шилтемеси */}
+			{roleOfUser === "guide" && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to="/my_bookings_guide">
+					Менин броньдорум
 				</NavLink>
 			)}
-			{roleOfUser === 'user' && (
-				<NavLink onClick={() => setIsMenuOpen(false)} to='/my_bookings_tourist'>
-					Мои бронирование
+
+			{/* Колдонуучу үчүн "Менин броньдорум" шилтемеси */}
+			{roleOfUser === "user" && (
+				<NavLink onClick={() => setIsMenuOpen(false)} to="/my_bookings_tourist">
+					Менин броньдорум
 				</NavLink>
 			)}
 		</>
 	)
 
+	// Авторизация шилтемелерин көрсөтүү
 	const renderAuthLinks = () => (
 		<>
 			{isLoggedIn ? (
-				<button onClick={handleLogout} className={'logoutBtn'}>
-					Выйти
+				// Эгер колдонуучу кирген болсо, чыгуу баскычын көрсөтүү
+				<button onClick={handleLogout} className={"logoutBtn"}>
+					Чыгуу
 				</button>
 			) : (
 				<>
+					{/* Эгер колдонуучу кирбеген болсо, кирүү жана катталуу шилтемелерин көрсөтүү */}
 					<NavLink
 						onClick={() => setIsMenuOpen(false)}
-						to='/auth/login_user'
-						className={'loginBtn'}
+						to="/auth/login_user"
+						className={"loginBtn"}
 					>
-						Войти
+						Кирүү
 					</NavLink>
 					<NavLink
 						onClick={() => setIsMenuOpen(false)}
-						to='/auth/register_user'
-						className={'registerBtn'}
+						to="/auth/register_user"
+						className={"registerBtn"}
 					>
-						Регистрация
+						Катталуу
 					</NavLink>
 				</>
 			)}
@@ -106,41 +131,46 @@ const Header: React.FC = () => {
 	)
 
 	return (
-		<header className={'header'}>
-			<nav className={'nav'}>
-				<NavLink onClick={() => setIsMenuOpen(false)} to='/' className={'logo'}>
-					<img src={Logo} width={50} alt='Logo' />
+		// Башкы header элементи
+		<header className={"header"}>
+			<nav className={"nav"}>
+				{/* Логотип жана башкы бет шилтемеси */}
+				<NavLink onClick={() => setIsMenuOpen(false)} to="/" className={"logo"}>
+					<img src={Logo} width={50} alt="Logo" />
 					<span>Kyrgyz Trails</span>
 				</NavLink>
-				<div className={'navLinksBig'}>{renderNavLinks()}</div>
-				<div className={'authLinks'}>{renderAuthLinks()}</div>
 
-				<button className={'burgerBtn'} onClick={toggleMenu}>
+				{/* Негизги навигация шилтемелери */}
+				<div className={"navLinksBig"}>{renderNavLinks()}</div>
+
+				{/* Авторизация шилтемелери */}
+				<div className={"authLinks"}>{renderAuthLinks()}</div>
+
+				{/* Бургер меню баскычы */}
+				<button className={"burgerBtn"} onClick={toggleMenu}>
 					<BurgerMenu />
 				</button>
 
-				<div className={`${'sideMenu'} ${isMenuOpen ? 'active' : ''}`}>
-					<button className={'closeBtn'} onClick={toggleMenu}>
+				{/* Каптал меню */}
+				<div className={`sideMenu ${isMenuOpen ? "active" : ""}`}>
+					{/* Меню жабуу баскычы */}
+					<button className={"closeBtn"} onClick={toggleMenu}>
 						×
 					</button>
-					<div className={'navLinks'}>
+
+					{/* Каптал меню навигация шилтемелери */}
+					<div className={"navLinks"}>
 						{renderNavLinks()}
-						<NavLink
-							onClick={() => setIsMenuOpen(false)}
-							to='/orders'
-							onClick={toggleMenu}
-						>
-							Заказы
+						<NavLink onClick={() => setIsMenuOpen(false)} to="/orders">
+							Заказдар
 						</NavLink>
-						<NavLink
-							onClick={() => setIsMenuOpen(false)}
-							to='/guide_tours'
-							onClick={toggleMenu}
-						>
-							История гидов
+						<NavLink onClick={() => setIsMenuOpen(false)} to="/guide_tours">
+							Гиддердин тарыхы
 						</NavLink>
 					</div>
-					<div className={'authLinks'}>{renderAuthLinks()}</div>
+
+					{/* Каптал меню авторизация шилтемелери */}
+					<div className={"authLinks"}>{renderAuthLinks()}</div>
 				</div>
 			</nav>
 		</header>

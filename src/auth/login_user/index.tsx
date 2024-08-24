@@ -72,7 +72,7 @@ export default function LoginPages() {
 		<div className={"loginContainer"}>
 			<div className={"authContainer"}>
 				<form onSubmit={handleSubmit} className={"authForm"}>
-					<h1>Войти</h1>
+					<h1 className={"authTitle"}>Войти</h1>
 					<p
 						style={{
 							height: "40px",
@@ -111,7 +111,7 @@ export default function LoginPages() {
 						/>
 					</div>
 
-					<Link to={"/request-password"}>
+					<Link className={"forgotPassword"} to={"/request-password"}>
 						<button>Забыли пароль?</button>
 					</Link>
 

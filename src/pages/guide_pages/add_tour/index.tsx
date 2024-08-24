@@ -159,13 +159,7 @@ export default function AddTour() {
 					<div
 						ref={editorRef}
 						className={"editor"}
-						style={{
-							border: "1px solid #ccc",
-							minHeight: "100px",
-							padding: "10px",
-							marginBottom: "10px",
-							whiteSpace: "pre-wrap",
-						}}
+						
 					/>
 				</div>
 				<div className={"inputGroup"}>

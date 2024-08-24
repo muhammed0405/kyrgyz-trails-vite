@@ -1,5 +1,5 @@
 /** @format */
-@import '@/styles/animations.scss';
+@import "@/styles/animations.scss";
 $textColor: #252525;
 $textColorHover: #ffaa00;
 .header {
@@ -122,14 +122,14 @@ $textColorHover: #ffaa00;
 		color: $textColorHover;
 		animation: glow 1.5s infinite;
 		// border: 1px solid $textColorHover;
-    scale: 1.05;
+		scale: 1.05;
 	}
 }
 
 .sideMenu {
 	position: fixed;
 	top: 0;
-	right: -300px;
+	right: 0;
 	width: 300px;
 	height: 100vh;
 	background-color: wheat;
@@ -137,12 +137,12 @@ $textColorHover: #ffaa00;
 	display: flex;
 	flex-direction: column;
 	padding: 2rem;
-	z-index: 1000;
+	z-index: 10000;
 	overflow-y: auto;
 	transform: translateX(100%);
 
 	&.active {
-		transform: translateX(-300px);
+		transform: translateX(0);
 	}
 
 	.navLinks {

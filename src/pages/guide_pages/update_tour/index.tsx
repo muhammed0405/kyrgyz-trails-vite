@@ -3,7 +3,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import PocketBase from "pocketbase"
-import "@/styles/update_tour.scss"
+import "@/styles/formStyles.scss"
 
 const pb = new PocketBase("https://kyrgyz-tra.pockethost.io")
 
@@ -114,15 +114,15 @@ export default function UpdateTour(): JSX.Element {
 	}
 
 	return (
-		<div className={"update__tour__container"}>
-			<form className={"update__tour"} onSubmit={handleSubmit}>
-				<h2 className={"update__tour__title"}>Обновить тур</h2>
+		<div className={"authContainer "}>
+			<form className={"authForm"} onSubmit={handleSubmit}>
+				<h2 className={"authTitle "}>Обновить тур</h2>
 				{error && <p className={"update__tour__error"}>{error}</p>}
-				<div className={"update__tour__input__group"}>
+				<div className={"inputGroup "}>
 					<input
 						type="text"
 						id="title"
-						className={"addTourInput"}
+						className={"input "}
 						value={title}
 						onChange={(e: ChangeEvent<HTMLInputElement>) =>
 							setTitle(e.target.value)
@@ -130,12 +130,17 @@ export default function UpdateTour(): JSX.Element {
 						required
 						placeholder=" "
 					/>
-					<label htmlFor="title" className={"update__tour__label"}>
+					<label htmlFor="title" className={"label"}>
 						Название
 					</label>
 				</div>
-				<div className={"update__tour__input__group"}>
-					<select name="location" id="location" value={location}>
+				<div className={"inputGroup "}>
+					<select
+						name="location"
+						id="location"
+						className="roleSelect"
+						value={location}
+					>
 						<option value="Ош">Ош</option>
 						<option value="Чуй">Чуй</option>
 						<option value="Жалал-Абад">Жалал-Абад</option>
@@ -145,18 +150,15 @@ export default function UpdateTour(): JSX.Element {
 						<option value="Талас">Талас</option>
 						<option value="Бишкек">Бишкек</option>
 					</select>
-					<label
-						htmlFor="location"
-						className={"update__tour__input__group__label"}
-					>
+					<label htmlFor="location" className={"inputGroup __label"}>
 						Местоположение
 					</label>
 				</div>
-				<div className={"update__tour__input__group"}>
+				<div className={"inputGroup "}>
 					<input
 						type="number"
 						id="price"
-						className={"addTourInput"}
+						className={"input "}
 						value={price}
 						onChange={(e: ChangeEvent<HTMLInputElement>) =>
 							setPrice(e.target.value)
@@ -164,40 +166,55 @@ export default function UpdateTour(): JSX.Element {
 						required
 						placeholder=" "
 					/>
-					<label htmlFor="price" className={"update__tour__label"}>
+					<label htmlFor="price" className={"label"}>
 						Цена
 					</label>
 				</div>
-				<div className={"update__tour__input__group"}>
+				<div className={"inputGroup "}>
 					<textarea
 						id="description"
-						className={`${"addTourInput"} ${"preformattedText"}`}
+						className={`editor`}
 						value={description}
 						onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
 							setDescription(e.target.value)
 						}
+						style={{
+							border: "1px solid #ccc",
+							minHeight: "100px",
+							padding: "10px",
+							width: "100%",
+							maxWidth: "400px",
+							marginBottom: "10px",
+							whiteSpace: "pre-wrap",
+						}}
 						required
 						placeholder=" "
 						rows={10}
 					/>
-					<label htmlFor="description" className={"update__tour__label"}>
+					<label
+						htmlFor="description"
+						className={"label"}
+						style={{
+							position: "absolute",
+							top: "-20px",
+							color: "black",
+							fontSize: "16px",
+						}}
+					>
 						Описание
 					</label>
 				</div>
-				<div className={"update__tour__input__group"}>
+				<div className={"inputGroup "}>
 					<input
 						type="file"
 						id="images"
-						className={"update__tour__input__group__file"}
+						className={"inputGroup __file"}
 						onChange={handleImageChange}
 						multiple
 						accept="image/*"
 						placeholder=" "
 					/>
-					<label
-						htmlFor="images"
-						className={"update__tour__input__group__label__file"}
-					>
+					<label htmlFor="images" className={"inputGroup __label__file"}>
 						Добавить новые изображения
 					</label>
 				</div>
