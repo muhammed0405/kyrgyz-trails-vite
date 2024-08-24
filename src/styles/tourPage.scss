@@ -10,7 +10,7 @@
 		font-size: 2rem;
 		margin-bottom: 20px;
 		text-align: center;
-    color:black
+		color: black;
 	}
 
 	&__content {
@@ -55,12 +55,11 @@
 			}
 		}
 
-    @media screen and (max-width: 768px) {
-      &-select{
-        width: 103%;
-      }
-      
-    }
+		@media screen and (max-width: 768px) {
+			&-select {
+				width: 103%;
+			}
+		}
 
 		&-input {
 			width: 100%;
@@ -83,6 +82,9 @@
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 2rem;
 		width: calc(100% - 200px - 3rem);
+	}	
+	&__card-wrapper {
+		position: relative;
 	}
 
 	&__card {
@@ -106,7 +108,7 @@
 		}
 
 		&::after {
-			content: "";
+			content: '';
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -117,8 +119,9 @@
 				rgba(0, 0, 0, 0.6) 0%,
 				rgba(0, 0, 0, 0) 100%
 			);
-			opacity: 0;
+			opacity: 0; /* Initially hidden */
 			transition: opacity 0.3s ease;
+			pointer-events: none; /* Allow clicks to pass through */
 		}
 
 		&-title {
