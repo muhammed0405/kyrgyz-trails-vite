@@ -8,6 +8,7 @@ import Search from "@/components/search/search"
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
 import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
+import TourCard from '@/components/tourCard'
 
 export default function Home() {
 	const regions = useTypedSelectorHook(state => state.tours.regions)
@@ -115,28 +116,7 @@ export default function Home() {
 				<h2>Белгилуу турлар</h2>
 				<div className={"destinationGrid"}>
 					{slicedTours?.map(el => (
-						<Link
-							style={{ zIndex: 100 }}
-							to={`/tour_details/${el.id}`}
-							key={el.id}
-						>
-							<div
-								key={el.id}
-								className={"destinationCard"}
-								style={{
-									backgroundImage: `url(https://kyrgyz-tra.pockethost.io/api/files/6jd9gs9h9etivmp/${
-										el.id
-									}/${
-										Array.isArray(el.images) ? el.images[0] : el.images
-									}?token=)`,
-									backgroundRepeat: "no-repeat",
-									backgroundPosition: "center center",
-									backgroundSize: "cover",
-								}}
-							>
-								<h3>{el.title}</h3>
-							</div>
-						</Link>
+						<TourCard key={el.id} tour={el} />
 					))}
 				</div>
 			</section>

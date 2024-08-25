@@ -24,34 +24,26 @@ export default function Regions() {
 			getRegions()
 			getTours()
 		}
-	}, [lastFetchTime, getRegions])
+	}, [lastFetchTime])
 
 	return (
-		<div>
-			<section className={'popularTours'}>
-				<div className={'regionsGrid'}>
+		<div className='regions-container'>
+			<section className='popularTours'>
+				<div className='regionsGrid'>
 					{items.map((el) => (
-						<div className='regions_block'>
-							<div
-								className={'regionCard'}
-								style={{
-									backgroundImage: `url(https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${el.id}/${el.image}?token=)`,
-									backgroundRepeat: 'no-repeat',
-									backgroundPosition: 'center center',
-									backgroundSize: 'cover',
-								}}
-							></div>
-
-							<h3>{el.title}</h3>
-							<Link to={`/region_details/${el.id}`} key={el.id}>
-								<div className='regions_block__title'>
-									<h3>...</h3>
-									{
-										tours.items?.filter((tour) => tour.location === el.title)
-											.length
-									}
-								</div>
+						<div className='regions_block' key={el.id}>
+							<Link to={`/region_details/${el.id}`} className='region-link'>
+								<img
+									src={`https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${el.id}/${el.image}?token=`}
+									alt={el.title}
+									className='regions_block__card'
+								/>
 							</Link>
+							<h3>{el.title} область</h3>
+							<div className='regions_block__title'>
+						
+								<h3>		{tours.items?.filter((tour) => tour.location === el.title.trim()).length} туров</h3>
+							</div>
 						</div>
 					))}
 				</div>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
-import Logo from "../../../assets/img/logo.png"
+import Logo from "../../../assets/img/abaz1.png"
 import { UseTypedDispatch } from "../../../Redux/customHooks/useTypedDispatch"
 import { useTypedSelectorHook } from "../../../Redux/customHooks/useTypedSelectorHook"
 import BurgerMenu from "../burgerMenu"
@@ -112,7 +112,7 @@ const Header = () => {
 			<nav className="nav">
 				<NavLink onClick={() => setIsMenuOpen(false)} to="/" className="logo">
 					<img src={Logo} width={50} alt="Logo" />
-					<span>Кыргыз турлары</span>
+					<span>Главная</span>
 				</NavLink>
 
 				<div className="navLinksBig">{renderNavLinks()}</div>

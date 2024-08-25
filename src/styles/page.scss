@@ -66,30 +66,96 @@
 	h3{
 		font-size: 1.5rem;
 		padding: 0.5rem 1rem;
-		font-weight: 300;
+		font-weight: 700;
 		margin-bottom: 1rem;
-		color: #0b1eed;
+		color: #FFFF;
 	}
 }
-.regions_block{
-	background: #ffffff;
-	border-radius: 10px 10px  0px 0px;
-	-webkit-box-shadow: -2px 9px 14px 1px rgba(0,0,0,0.6);
-	-moz-box-shadow: -2px 9px 14px 1px rgba(0,0,0,0.6);
-	box-shadow: -2px 9px 14px 1px rgba(0,0,0,0.6);
-	&__title{
-	h3{
-		font-size: 1.5rem;
-		padding: 0.5rem 1rem;
-		font-weight: 300;
-		margin-bottom: 1rem;
-		color: #0b1eed;
-	}
 
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+.regions-container {
+	padding: 20px;
+	background-color: #f9f9f9;
 }
-.destinationCard,
+
+.regions-title {
+	text-align: center;
+	font-size: 2rem;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.popularTours {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.regionsGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 15px;
+	width: 100%;
+}
+
+.regions_block {
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	transition: transform 0.2s;
+	h3 {
+		font-size: 1.2rem;
+		font-weight: 300;
+		text-align: start;
+		margin: 10px 0;
+		box-shadow: #2575Fc;
+		color: #2575Fc;
+	}
+	
+	
+}
+
+.regions_block:hover {
+	transform: scale(1.05);
+}
+
+.region-link {
+	display: block;
+}
+
 .regionCard {
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.destinationCard,
+.regions_block__card {
 	// z-index: -1;
 
 	// position: relative;
@@ -102,30 +168,28 @@
 		transform: translateY(-5px);
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
-		&::after {
-			opacity: 1;
-		}
+		
 
 		h3 {
 			transform: translate(-50%, -50%) scale(1.1);
 		}
 	}
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: linear-gradient(
-			to top,
-			rgba(0, 0, 0, 0.6) 0%,
-			rgba(0, 0, 0, 0) 100%
-		);
-		opacity: 0;
-		transition: opacity 0.3s ease;
-	}
+	// &::after {
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	background: linear-gradient(
+	// 		to top,
+	// 		rgba(0, 0, 0, 0.6) 0%,
+	// 		rgba(0, 0, 0, 0) 100%
+	// 	);
+	// 	opacity: 0;
+	// 	transition: opacity 0.3s ease;
+	// }
 
 	
 }
