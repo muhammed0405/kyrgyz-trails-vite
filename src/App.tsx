@@ -32,6 +32,7 @@ import DeleteTour from './pages/delete/index.tsx'
 import MyTours from './pages/guide_pages/my_tours'
 import UpdateTour from './pages/guide_pages/update_tour'
 import { UseTypedDispatch } from './Redux/customHooks/useTypedDispatch'
+import Regions from './pages/regions/index.tsx'
 
 function App() {
 	const { checkAuthState } = UseTypedDispatch()
@@ -47,6 +48,8 @@ function App() {
 				{/* Public Routes */}
 				<Route path='/' element={<Home />} />
 				<Route path='/tours' element={<Tours />} />
+				<Route path='/regions' element={<Regions/>} />
+
 
 				<Route path='/hotels' element={<Hotels />} />
 				<Route path='/restaurants' element={<Restaurants />} />

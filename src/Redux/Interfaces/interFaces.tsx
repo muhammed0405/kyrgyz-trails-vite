@@ -10,11 +10,18 @@ export interface IUserType {
 	role: string
 	emailVisibility: boolean
 }
+export interface IUserData {
+	username: string
+	email: string
+	role: string
+	emailVisibility: boolean
+}
 
 export interface IUserState {
 	users: IUserType[]
 	loading: boolean
 	error: string | null
+	user: IUserData
 }
 
 export interface ILocation {
@@ -49,9 +56,15 @@ export interface IUserLoading {
 	payload: boolean
 }
 
+export interface IGetUserData {
+	type: userActionsTypes.GET_ONE_USER
+	payload: IUserData
+}
+
 export type IUserAction =
 	| IUserSuccess
 	| IUserError
 	| IUserLoading
 	| ILocationsSuccess
 	| ILocationsError
+	| IGetUserData

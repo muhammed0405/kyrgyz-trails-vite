@@ -1,13 +1,13 @@
 import pb from '@/lib/pocketbase'
 import { UseTypedDispatch } from '@/Redux/customHooks/useTypedDispatch'
+import { useTypedSelectorHook } from '@/Redux/customHooks/useTypedSelectorHook'
 import { useEffect, useState } from 'react'
 import { FaHeart } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { user } from './userDataOnLocalStorage'
 
 const TourCard = ({ tour }) => {
-	const { addLikedTour } = UseTypedDispatch()
-
+	const { addLikedTour, getOneUserById } = UseTypedDispatch()
+	const user = useTypedSelectorHook((state) => state.user.user)
 	const [isLiked, setIsLiked] = useState(false)
 	const [loading, setLoading] = useState(true)
 
@@ -54,6 +54,11 @@ const TourCard = ({ tour }) => {
 			console.error('Error adding liked tour:', error)
 		}
 	}
+	useEffect(() => {
+		getOneUserById(tour?.guide_id)
+	}, [])
+
+	console.log('user', user)
 	if (loading) {
 		return <div>Loading...</div> // Show loading state
 	}
@@ -86,6 +91,7 @@ const TourCard = ({ tour }) => {
 						<h3 className='tours__card-title'>{tour.title}</h3>
 						<p className='tours__card-price'>Цена: {tour.price} сом</p>
 					</div>
+					<p>{user.username}</p>
 				</div>
 			</Link>
 		</div>

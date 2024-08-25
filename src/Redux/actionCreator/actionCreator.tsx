@@ -226,3 +226,14 @@ export const addLikedTour = (userId, tourId) => {
 		}
 	}
 }
+
+export const getOneUserById = (userId) => {
+	return async (dispatch: Dispatch) => {
+		try {
+			const user = await pb.collection('users').getOne(userId)
+			dispatch({ type: userActionsTypes.GET_ONE_USER, payload: user })
+		} catch (error) {
+			console.error('Error fetching user:', error)
+		}
+	}
+}

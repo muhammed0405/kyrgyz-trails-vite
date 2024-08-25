@@ -7,6 +7,9 @@ $textColorHover: #ffaa00;
 	padding: 25px 0;
 	border-bottom: 1px solid #ffffff1a;
 	background: #ffffff;
+	-webkit-box-shadow: -7px 2px 21px -7px rgba(0,0,0,0.6);
+-moz-box-shadow: -7px 2px 21px -7px rgba(0,0,0,0.6);
+box-shadow: -7px 2px 21px -7px rgba(0,0,0,0.6);
 }
 
 .nav {

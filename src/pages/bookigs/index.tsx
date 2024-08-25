@@ -46,13 +46,13 @@ export default function Bookings() {
               Подтвердить
             </button>
             <button
-              className='retro-button'
+              className='retro1-button'
               onClick={() => changeBookingStatus(el.id, 'cancelled')}
             >
               Отменить
             </button>
             <button
-              className='retro-button'
+              className='retro1-button'
               onClick={() => changeBookingStatus(el.id, 'completed')}
             >
               Завершить

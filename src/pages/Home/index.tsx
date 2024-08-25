@@ -68,14 +68,14 @@ export default function Home() {
 						zIndex: 1,
 					}}
 				>
-					Откройте для себя красоту Кыргызстана
+					Кыргызстандын укмуштуудай керемет дүйнөсүн өзүңүз үчүн ачыңыз!!!
 				</h1>
 				<p
 					style={{
 						zIndex: 1,
 					}}
 				>
-					Планируйте свое путешествие, бронируйте туры и делитесь впечатлениями
+					Саякатыңызды пландаштырыңыз, керемет жерлерге барыңыз, жана унутулгус элестерди түбөлүккө сактаңыз
 				</p>
 				<button
 					style={{
@@ -118,7 +118,7 @@ export default function Home() {
 				<Search />
 			</section>
 			<section className={'featuredDestinations'}>
-				<h2>Популярные направления</h2>
+				<h2>Белгилуу турлар</h2>
 				<div className={'destinationGrid'}>
 					{slicedTours?.map((el) => (
 						<Link
@@ -146,26 +146,7 @@ export default function Home() {
 					))}
 				</div>
 			</section>
-			<section className={'popularTours'}>
-				<h2>Все области</h2>
-				<div className={'regionsGrid'}>
-					{items?.map((el) => (
-						<Link to={`/region_details/${el.id}`} key={el.id}>
-							<div
-								className={'regionCard'}
-								style={{
-									backgroundImage: `url(https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${el.id}/${el.image}?token=)`,
-									backgroundRepeat: 'no-repeat',
-									backgroundPosition: 'center center',
-									backgroundSize: 'cover',
-								}}
-							>
-								<h3>{el.title}</h3>
-							</div>
-						</Link>
-					))}
-				</div>
-			</section>
+		
 		</div>
 	)
 }
