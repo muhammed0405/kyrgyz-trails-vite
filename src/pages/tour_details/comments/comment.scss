@@ -1,0 +1,39 @@
+/** @format */
+.comments_title {
+	color: black;
+	font-size: 30px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+.star {
+	font-size: 24px; /* Adjust size as needed */
+	color: lightgray; /* Default color for unselected stars */
+	cursor: pointer;
+	transition: color 0.2s; /* Smooth transition for color change */
+}
+
+.star.filled {
+	color: #369ef4; /* Color for filled stars */
+}
+
+.stars {
+	display: flex;
+}
+
+.comment_input {
+	width: 500px;
+	height: 50px;
+	border-radius: 10px;
+	padding: 10px;
+	border: 3px solid #369ef4;
+}
+.add_comment_btn {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #369ef4;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: background-color 0.2s; /* Smooth transition for background color change */
+}

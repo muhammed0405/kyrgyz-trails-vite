@@ -39,22 +39,15 @@
 }
 
 .thumbnailStrip {
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	right: 20px;
+	
 	display: flex;
+	margin: 30px 0;
 	gap: 10px;
 	overflow-x: auto;
 	padding: 10px;
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(131, 131, 131, 0.8);
 	border-radius: 10px;
-	scrollbar-width: none; // For Firefox
-	-ms-overflow-style: none; // For Internet Explorer and Edge
-
-	&::-webkit-scrollbar {
-		display: none; // For Chrome, Safari, and Opera
-	}
+	
 }
 
 .thumbnailWrapper {

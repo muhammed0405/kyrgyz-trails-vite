@@ -61,26 +61,21 @@ export default function RegionDetails() {
 							alt="Tour main image"
 						/>
 					</div>
-					{images.length > 1 && (
-						<div className="thumbnailStrip">
-							{images.slice(1, 5).map((image, index) => (
-								<div key={index} className="thumbnailWrapper">
-									<img
-										className="thumbnail"
-										src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${image}?token=`}
-										alt={`Tour image ${index + 2}`}
-										onClick={() => setMainImage(index + 1)}
-									/>
-									{index === 3 && images.length > 5 && (
-										<div className="imageCount">
-											<p>+{images.length - 5}</p>
-										</div>
-									)}
-								</div>
-							))}
-						</div>
-					)}
 				</div>
+				{images.length > 1 && (
+					<div className="thumbnailStrip">
+						{images.map((image, index) => (
+							<div key={index} className="thumbnailWrapper">
+								<img
+									className="thumbnail"
+									src={`https://kyrgyz-tra.pockethost.io/api/files/tours/${filteredTour.id}/${image}?token=`}
+									alt={`Tour image ${index + 2}`}
+									onClick={() => setMainImage(index + 1)}
+								/>
+							</div>
+						))}
+					</div>
+				)}
 
 				<div className="tourInfo">
 					<h2 className="tourTitle">{filteredTour.title}</h2>
@@ -91,6 +86,19 @@ export default function RegionDetails() {
 					/>
 				</div>
 			</div>
+
+			{
+				<a
+					style={{
+						marginTop: "40px",
+						padding: "10px",
+						display: "block",
+					}}
+					href="/comments"
+				>
+					Все коментрии
+				</a>
+			}
 			<Comments tour_id={filteredTour.id} />
 			<BookTour filteredTour={filteredTour} />
 		</div>
