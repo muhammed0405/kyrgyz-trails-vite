@@ -46,4 +46,5 @@ export interface ITourState {
 	loading: boolean
 	error: string | null
 	bookings: IBooking[]
+	comments: IComments[]
 }

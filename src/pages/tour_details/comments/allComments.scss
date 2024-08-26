@@ -52,5 +52,28 @@
 .comment-label {
 	color: #4a90e2; // Светло-синий цвет
 	font-weight: bold;
+}
 
+.comments-container-empty{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.comments-title {
+	color: #2c3e50;
+	text-align: center;
+}
+
+.comments__back-button {
+	padding: 10px;
+	font-size: large;
+	background: transparent;
+	border: 2px solid #4a90e2;
+	color: #4a90e2;
+	border-radius: 10px;
+	cursor: pointer;
+	margin: 0 auto;
 }

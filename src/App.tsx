@@ -33,7 +33,7 @@ import MyTours from "./pages/guide_pages/my_tours"
 import UpdateTour from "./pages/guide_pages/update_tour"
 import { UseTypedDispatch } from "./Redux/customHooks/useTypedDispatch"
 import Regions from "./pages/regions/index.tsx"
-import AllComents from "./pages/tour_details/comments/allComents.tsx"
+import AllComments from "./pages/tour_details/comments/allComments.tsx"
 
 function App() {
 	const { checkAuthState } = UseTypedDispatch()
@@ -72,10 +72,7 @@ function App() {
 					<Route path="/update-tour/:tourId" element={<UpdateTour />} />
 					{/* Other protected routes */}
 					<Route path="/add_tour" element={<AddTour />} />
-					<Route
-						path="/comments"
-						element={<AllComents tour_id="40o9zgcnqzvcg8m" />}
-					/>
+					<Route path="/comments/:id" element={<AllComments />} />
 				</Route>
 
 				<Route element={<ProtectedRouteAdmin />}>

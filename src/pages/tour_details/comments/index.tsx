@@ -6,13 +6,17 @@ import CustomToast, {
 } from "@/components/common/toaster/customToast"
 import { user } from "@/components/userDataOnLocalStorage"
 import pb from "@/lib/pocketbase"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./comment.scss"
+import { UseTypedDispatch } from "@/Redux/customHooks/useTypedDispatch"
+import { useParams } from "react-router-dom"
 
 export default function Comments({ tour_id }: { tour_id: string }) {
 	const [comments, setComments] = useState("")
 	const [starState, setStarState] = useState(0)
-	const [commentList, setCommentList] = useState<IComment[]>([])
+	const { addComment } = UseTypedDispatch()
+	const [commentAdded, setCommentAdded] = useState(false)
+	const params = useParams()
 
 	interface IComment {
 		id: string
@@ -23,14 +27,13 @@ export default function Comments({ tour_id }: { tour_id: string }) {
 	}
 
 	const data: IComment = {
-		id: "", // Placeholder for the ID
 		comment: comments,
 		star: starState,
 		user: user?.userId,
 		tour: tour_id,
 	}
 
-	const addComment = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = e => {
 		e.preventDefault()
 
 		if (!user.userId) {
@@ -38,29 +41,17 @@ export default function Comments({ tour_id }: { tour_id: string }) {
 			return
 		}
 		try {
-			await pb.collection("comments").create(data)
+			addComment(data)
 			showSuccessToast("Комментарий добавлен")
-			fetchComments()
+			setComments("") // Clear the comment input after submission
+			setStarState(0) // Reset star rating
 		} catch (err) {
 			console.log(err)
 			showErrorToast("Комментарий не добавлен")
 		}
 	}
 
-	const fetchComments = async () => {
-		try {
-			const fetchedComments = await pb.collection("comments").getList(1, 50, {
-				filter: `tour = "${tour_id}"`,
-			})
-			setCommentList(fetchedComments.items)
-		} catch (err) {
-			console.error("Error fetching comments:", err)
-			showErrorToast("Не удалось загрузить комментарии")
-		}
-	}
-
 	const handleStarClick = (rating: number) => {
-		// If the clicked star is already selected, decrease the rating
 		if (starState === rating) {
 			setStarState(rating - 1)
 		} else {
@@ -68,33 +59,44 @@ export default function Comments({ tour_id }: { tour_id: string }) {
 		}
 	}
 
-	return (
-		<div>
-			<h1 className="comments_title">Оставьте комментарий</h1>
+	useEffect(() => {
+		const amIAddedComment = async () => {
+			try {
+				const fetchedComment = await pb
+					.collection("comments")
+					.getFirstListItem(
+						`tour = "${params.id}" and user = "${user?.userId}"`
+					)
 
-			<form onSubmit={addComment}>
-				<input
-					className="comment_input"
-					type="text"
-					onChange={e => setComments(e.target.value)}
-					required
-				/>
-				<div className="stars">
-					{[1, 2, 3, 4, 5].map(star => (
-						<span
-							key={star}
-							className={`star ${star <= starState ? "filled" : ""}`}
-							onClick={() => handleStarClick(star)}
-						>
-							★
-						</span>
-					))}
-				</div>
-				<button className="add_comment_btn" type="submit">
-					Добавить	
-				</button>
-				<CustomToast />
-			</form>
-		</div>
+				setCommentAdded(true)
+				console.log("fetchedComment", fetchedComment)
+			} catch (err) {
+				setCommentAdded(false)
+			}
+		}
+		amIAddedComment()
+	}, [])
+
+	if (commentAdded) {
+		return <div>Вы уже оставляли комментарий</div> // Message displayed if comment exists
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<h3>Оставьте комментарий</h3>
+			<textarea
+				value={comments}
+				onChange={e => setComments(e.target.value)}
+				required
+			/>
+			<div>
+				{[1, 2, 3, 4, 5].map(star => (
+					<span key={star} onClick={() => handleStarClick(star)}>
+						★
+					</span>
+				))}
+			</div>
+			<button type="submit">Добавить</button>
+		</form>
 	)
 }

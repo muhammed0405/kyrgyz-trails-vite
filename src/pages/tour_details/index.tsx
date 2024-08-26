@@ -12,6 +12,7 @@ import "swiper/css/navigation"
 import "swiper/css/pagination"
 import BookTour from "./book_tour"
 import Comments from "./comments"
+import { user } from "@/components/userDataOnLocalStorage"
 
 export default function RegionDetails() {
 	const { getTours, getRegions, addLikedTour } = UseTypedDispatch()
@@ -27,7 +28,7 @@ export default function RegionDetails() {
 		getRegions()
 		getTours()
 	}, [])
-	const userId = JSON.parse(localStorage.getItem("pocketbase_auth"))?.userId
+	const userId = user?.userId
 
 	const filteredTour = tours.items?.find(t => t?.id === params.id)
 
@@ -94,7 +95,7 @@ export default function RegionDetails() {
 						padding: "10px",
 						display: "block",
 					}}
-					href="/comments"
+					href={`/comments/${filteredTour.id}`}
 				>
 					Все коментрии
 				</a>

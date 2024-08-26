@@ -8,6 +8,7 @@ const initialState: IUserState = {
 	loading: false,
 	error: null,
 	user: {},
+	
 }
 
 // reducer
