@@ -1,17 +1,17 @@
 /** @format */
-"use client"
-import TourCard from "@/components/tourCard"
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
-import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
-import "../../styles/regions_details.scss"
+'use client'
+import TourCard from '@/components/tourCard'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { UseTypedDispatch } from '../../Redux/customHooks/useTypedDispatch'
+import { useTypedSelectorHook } from '../../Redux/customHooks/useTypedSelectorHook'
+import '../../styles/regions_details.scss'
 
 export default function RegionDetails() {
 	const { id } = useParams()
 	const { getRegions, getTours } = UseTypedDispatch()
-	const regionState = useTypedSelectorHook(state => state.tours.regions)
-	const tours = useTypedSelectorHook(state => state.tours.tours)
+	const regionState = useTypedSelectorHook((state) => state.tours.regions)
+	const tours = useTypedSelectorHook((state) => state.tours.tours)
 	const { items } = regionState
 
 	useEffect(() => {
@@ -19,9 +19,9 @@ export default function RegionDetails() {
 		getTours()
 	}, [getRegions, getTours]) // Added dependencies for useEffect
 
-	const filteredRegion = items?.find(r => r.id === id)
+	const filteredRegion = items?.find((r) => r.id === id)
 	const filteredTours = tours.items?.filter(
-		t => t.location === filteredRegion?.title.trim()
+		(t) => t.location === filteredRegion?.title.trim()
 	)
 
 	if (!filteredRegion) {
@@ -29,31 +29,31 @@ export default function RegionDetails() {
 	}
 
 	return (
-		<div className="container">
-			<div className="regionCard">
-				<div className="imageGallery">
-					<div className="mainImageWrapper">
+		<div className='container'>
+			<div className='regionCard'>
+				<div className='imageGallery'>
+					<div className='mainImageWrapper'>
 						<img
-							className="mainImage"
+							className='mainImage'
 							src={`https://kyrgyz-tra.pockethost.io/api/files/29nabdum39hq6n2/${filteredRegion.id}/${filteredRegion.image}?token=`}
 							alt={filteredRegion.name}
 						/>
-						<h1 className="regionTitle">{filteredRegion.title}</h1>
+						<h1 className='regionTitle'>{filteredRegion.title}</h1>
 					</div>
 				</div>
-				<div className="regionInfo">
+				<div className='regionInfo'>
 					<p
-						className="regionDescription"
+						className='regionDescription'
 						dangerouslySetInnerHTML={{ __html: filteredRegion.description }}
 					/>
 				</div>
 			</div>
-			<h2 className="toursTitle">Available Tours</h2>
-			<div className="homeToursGrid">
+			<h2 className='toursTitle'>Available Tours</h2>
+			<div className='homeToursGrid'>
 				{filteredTours && filteredTours.length > 0 ? (
-					filteredTours.map(tour => <TourCard key={tour.id} tour={tour} />)
+					filteredTours.map((tour) => <TourCard key={tour.id} tour={tour} />)
 				) : (
-					<p className="noTours">No tours available</p>
+					<p className='noTours'>No tours available</p>
 				)}
 			</div>
 		</div>

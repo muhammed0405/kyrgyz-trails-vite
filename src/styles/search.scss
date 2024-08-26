@@ -1,43 +1,30 @@
 /** @format */
 
-@import "animations";
+@import 'animations';
 
 .searchBar {
 	max-width: 600px;
 	width: 100%;
+	padding-top: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
 
-	.search {
-		display: flex;
-		align-items: center;
-		width: 100%;
-	}
 	.searchInput {
-		flex-grow: 1;
+		width: 400px;
 		padding: 1rem;
-		border: none;
 		background-color: transparent !important;
 		color: #000000;
 		border-radius: 10px;
-		border: 3px solid rgba(255, 255, 255, );
-	
-		&::placeholder {
-			color: rgba(255, 253, 253, 0.9);
-			font-size: 18px;
-			font-weight: 700;
-		}
-	}
+		border: 2px solid #2575fc !important;
 
-	button {
-		background-color: #fff;
-		color: #000;
-		border: none;
 		cursor: pointer;
 		transition: all 0.3s ease;
-		height: 50px;
+		height: 30px;
 
 		&:hover {
 			background-color: #000;
-			color: #fff;
 			animation: glow 1.5s infinite;
 		}
 	}
@@ -45,6 +32,7 @@
 	.searchedResultsWrapper {
 		max-height: 200px;
 		overflow-y: scroll;
+		
 	}
 	.searchedResult {
 		background-color: white;

@@ -12,7 +12,7 @@
 }
 
 .homePage {
-	font-family: "Arial", sans-serif;
+	font-family: 'Arial', sans-serif;
 	background-color: #f7f6f5;
 	color: #fff;
 }
@@ -28,20 +28,106 @@
 			rgba(73, 45, 22, 0.7),
 			rgba(221, 195, 154, 0.7)
 		),
-		url("/hero-image.jpg");
+		url('/hero-image.jpg');
 	background-size: cover;
 	background-position: center;
+
 	// z-index: -1;
 
-	h1 {
-		font-size: 3rem;
-		margin-bottom: 1rem;
+	.image-container {
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		max-width: 1520px;
+		height: 500px;
+		transition: opacity 1s ease;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 
+	.heroText {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 1s ease, transform 1s ease;
+		color: #fff;
+		z-index: 1;
+		&.show {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		h1,
+		p {
+			color: #fff;
+			opacity: 0;
+			transform: translateY(20px);
+			transition: opacity 0.5s ease, transform 0.5s ease;
+		}
+
+		&.show h1 {
+			opacity: 1;
+			transform: translateY(0);
+			transition-delay: 0.2s;
+		}
+
+		&.show p {
+			opacity: 1;
+			transform: translateY(0);
+			transition-delay: 0.4s;
+		}
+	}
+
+	@keyframes comeIn {
+		0% {
+			position: absolute;
+			bottom: -1px;
+			opacity: 0;
+		}
+		10% {
+			opacity: 0.3;
+		}
+		25% {
+			bottom: 10px;
+			opacity: 0.5;
+		}
+		50% {
+			bottom: 50px;
+			opacity: 0.7;
+		}
+		75% {
+			bottom: 100px;
+			opacity: 0.9;
+		}
+		100% {
+			position: absolute;
+			bottom: 200px;
+			opacity: 1;
+		}
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+.hero .heroText.animate {
+	opacity: 1;
+	transform: translateY(0);
+
+	h1,
 	p {
-		font-size: 1.2rem;
-		margin-bottom: 2rem;
-		color: #499863;
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 
@@ -63,26 +149,14 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 1rem;
-	h3{
+	h3 {
 		font-size: 1.5rem;
 		padding: 0.5rem 1rem;
 		font-weight: 700;
 		margin-bottom: 1rem;
-		color: #FFFF;
+		color: #ffff;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 .regions-container {
 	padding: 20px;
@@ -120,11 +194,9 @@
 		font-weight: 300;
 		text-align: start;
 		margin: 10px 0;
-		box-shadow: #2575Fc;
-		color: #2575Fc;
+		box-shadow: #2575fc;
+		color: #2575fc;
 	}
-	
-	
 }
 
 .regions_block:hover {
@@ -134,25 +206,6 @@
 .region-link {
 	display: block;
 }
-
-.regionCard {
-	width: 100%;
-	height: 400px;
-	object-fit: cover;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .destinationCard,
 .regions_block__card {
@@ -167,8 +220,6 @@
 	&:hover {
 		transform: translateY(-5px);
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-
-		
 
 		h3 {
 			transform: translate(-50%, -50%) scale(1.1);
@@ -190,8 +241,6 @@
 	// 	opacity: 0;
 	// 	transition: opacity 0.3s ease;
 	// }
-
-	
 }
 @media (max-width: 768px) {
 	.footerContent {
@@ -199,4 +248,3 @@
 		gap: 2rem;
 	}
 }
-

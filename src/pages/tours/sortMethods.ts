@@ -13,21 +13,21 @@ export const sortTours = (
 
 	// First, filter by price range and location
 	let filteredItems = items.filter(
-		item =>
+		(item) =>
 			item.price >= Number(sortByPriceFrom) &&
 			item.price <= Number(sortByPriceTo) &&
-			(currentLocation === "all" || item.location === currentLocation)
+			(currentLocation === 'all' || item.location === currentLocation.trim())
 	)
 
 	// Then, sort the filtered items
 	switch (sortType) {
-		case "asc":
+		case 'asc':
 			return filteredItems.sort((a, b) => (a.price || 0) - (b.price || 0))
-		case "dsc":
+		case 'dsc':
 			return filteredItems.sort((a, b) => (b.price || 0) - (a.price || 0))
-		case "A-Z":
+		case 'A-Z':
 			return filteredItems.sort((a, b) => a.title.localeCompare(b.title))
-		case "Z-A":
+		case 'Z-A':
 			return filteredItems.sort((a, b) => b.title.localeCompare(a.title))
 		default:
 			return filteredItems

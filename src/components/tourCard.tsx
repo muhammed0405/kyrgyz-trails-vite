@@ -57,8 +57,6 @@ const TourCard = ({ tour }) => {
 	useEffect(() => {
 		getOneUserById(tour?.guide_id)
 	}, [])
-
-	console.log('user', user)
 	if (loading) {
 		return <div>Loading...</div> // Show loading state
 	}
