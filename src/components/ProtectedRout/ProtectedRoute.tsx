@@ -2,15 +2,15 @@
 
 import { useTypedSelectorHook } from "../../Redux/customHooks/useTypedSelectorHook"
 import { Navigate, Outlet } from "react-router-dom"
+import { user } from "../userDataOnLocalStorage"
+import pb from "@/lib/pocketbase"
 
 const ProtectedRoute = () => {
-	const { isLoggedIn, isAuth } = useTypedSelectorHook(state => state.auth)
+	const auth = pb.authStore.isValid
 
-	const authData = localStorage.getItem("pocketbase_auth")
-
-	// if (!authData.userId) {
-	// 	return <Navigate to="/auth/login_user" replace />
-	// }
+	if (!auth) {
+		return <Navigate to="/" replace />
+	}
 
 	// if (!authData.userId) {
 	// 	return <Navigate to="/verify-email" replace />

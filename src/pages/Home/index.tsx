@@ -36,7 +36,7 @@ export default function Home() {
 				setCurrentImage(nextImageUrl)
 				setIsTransitioning(false)
 				setShowText(true)
-			}, 1000) // 1 секунд анимация үчүн
+			}, 2000) 
 		}, 5000)
 
 		return () => clearInterval(interval)

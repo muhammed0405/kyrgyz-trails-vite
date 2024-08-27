@@ -34,6 +34,7 @@ import UpdateTour from "./pages/guide_pages/update_tour"
 import { UseTypedDispatch } from "./Redux/customHooks/useTypedDispatch"
 import Regions from "./pages/regions/index.tsx"
 import AllComments from "./pages/tour_details/comments/allComments.tsx"
+import LikedTours from "./pages/liked_tours/index.tsx"
 
 function App() {
 	const { checkAuthState } = UseTypedDispatch()
@@ -63,8 +64,8 @@ function App() {
 				<Route path="request-password" element={<RequestEmailPass />} />
 				<Route path="/reset-password" element={<ResetPassword />} />
 				{/* Protected Routes */}
+				<Route path="/verify-email/" element={<VerifyEmailPage />} />
 				<Route element={<ProtectedRoute />}>
-					<Route path="/verify-email/" element={<VerifyEmailPage />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/my_bookings_guide" element={<Bookings />} />
 					<Route path="/my_bookings_tourist" element={<BookingsTourist />} />
@@ -73,6 +74,7 @@ function App() {
 					{/* Other protected routes */}
 					<Route path="/add_tour" element={<AddTour />} />
 					<Route path="/comments/:id" element={<AllComments />} />
+					<Route path="/liked_tours" element={<LikedTours />} />
 				</Route>
 
 				<Route element={<ProtectedRouteAdmin />}>

@@ -40,9 +40,8 @@ const Header = () => {
 
 	const renderNavLinks = () => (
 		<>
-		
 			<NavLink onClick={() => setIsMenuOpen(false)} to="/regions">
-				 Областар
+				Областар
 			</NavLink>
 			<NavLink onClick={() => setIsMenuOpen(false)} to="/tours">
 				Турлар
@@ -69,10 +68,13 @@ const Header = () => {
 			)}
 			{roleOfUser === "user" && (
 				<>
-					<NavLink onClick={() => setIsMenuOpen(false)} to="/my_tours">
+					<NavLink onClick={() => setIsMenuOpen(false)} to="/liked_tours">
 						Тандалган турлар
 					</NavLink>
-					<NavLink onClick={() => setIsMenuOpen(false)} to="/my_bookings_tourist">
+					<NavLink
+						onClick={() => setIsMenuOpen(false)}
+						to="/my_bookings_tourist"
+					>
 						Менин броньдорум
 					</NavLink>
 				</>

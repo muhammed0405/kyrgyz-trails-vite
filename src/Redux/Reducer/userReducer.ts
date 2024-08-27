@@ -1,15 +1,16 @@
 /** @format */
 
-import { IUserAction, IUserState } from '../Interfaces/interFaces'
-import { userActionsTypes } from '../actionTypes/actionTypes'
+import { IUserAction, IUserState } from "../Interfaces/interFaces"
+import { userActionsTypes } from "../actionTypes/actionTypes"
 
 const initialState: IUserState = {
 	users: [],
 	loading: false,
 	error: null,
 	user: {},
-	
 }
+
+
 
 // reducer
 export const userReducer = (
