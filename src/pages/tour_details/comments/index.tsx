@@ -1,18 +1,18 @@
 /** @format */
 
-import CustomToast, {
+import {
 	showErrorToast,
 	showSuccessToast,
-} from "@/components/common/toaster/customToast"
-import { user } from "@/components/userDataOnLocalStorage"
-import pb from "@/lib/pocketbase"
-import { useEffect, useState } from "react"
-import "./comment.scss"
-import { UseTypedDispatch } from "@/Redux/customHooks/useTypedDispatch"
-import { useParams } from "react-router-dom"
+} from '@/components/common/toaster/customToast'
+import { user } from '@/components/userDataOnLocalStorage'
+import pb from '@/lib/pocketbase'
+import { UseTypedDispatch } from '@/Redux/customHooks/useTypedDispatch'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import './comment.scss'
 
 export default function Comments({ tour_id }: { tour_id: string }) {
-	const [comments, setComments] = useState("")
+	const [comments, setComments] = useState('')
 	const [starState, setStarState] = useState(0)
 	const { addComment } = UseTypedDispatch()
 	const [commentAdded, setCommentAdded] = useState(false)
@@ -33,21 +33,21 @@ export default function Comments({ tour_id }: { tour_id: string }) {
 		tour: tour_id,
 	}
 
-	const handleSubmit = e => {
+	const handleSubmit = (e) => {
 		e.preventDefault()
 
 		if (!user.userId) {
-			showErrorToast("Вы должны войти в аккаунт")
+			showErrorToast('Вы должны войти в аккаунт')
 			return
 		}
 		try {
 			addComment(data)
-			showSuccessToast("Комментарий добавлен")
-			setComments("") // Clear the comment input after submission
+			showSuccessToast('Комментарий добавлен')
+			setComments('') // Clear the comment input after submission
 			setStarState(0) // Reset star rating
 		} catch (err) {
 			console.log(err)
-			showErrorToast("Комментарий не добавлен")
+			showErrorToast('Комментарий не добавлен')
 		}
 	}
 
@@ -63,13 +63,13 @@ export default function Comments({ tour_id }: { tour_id: string }) {
 		const amIAddedComment = async () => {
 			try {
 				const fetchedComment = await pb
-					.collection("comments")
+					.collection('comments')
 					.getFirstListItem(
 						`tour = "${params.id}" and user = "${user?.userId}"`
 					)
 
 				setCommentAdded(true)
-				console.log("fetchedComment", fetchedComment)
+				console.log('fetchedComment', fetchedComment)
 			} catch (err) {
 				setCommentAdded(false)
 			}
@@ -83,20 +83,27 @@ export default function Comments({ tour_id }: { tour_id: string }) {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h3>Оставьте комментарий</h3>
+			<h3 className='comments_title'>Оставьте комментарий</h3>
 			<textarea
+				className='comment_input'
 				value={comments}
-				onChange={e => setComments(e.target.value)}
+				onChange={(e) => setComments(e.target.value)}
 				required
 			/>
-			<div>
-				{[1, 2, 3, 4, 5].map(star => (
-					<span key={star} onClick={() => handleStarClick(star)}>
+			<div className='stars'>
+				{[1, 2, 3, 4, 5].map((star) => (
+					<span
+						key={star}
+						className={`star ${star <= starState ? 'filled' : ''}`}
+						onClick={() => handleStarClick(star)}
+					>
 						★
 					</span>
 				))}
 			</div>
-			<button type="submit">Добавить</button>
+			<button className='add_comment_btn' type='submit'>
+				Добавить
+			</button>
 		</form>
 	)
 }

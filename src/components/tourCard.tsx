@@ -1,110 +1,99 @@
 /** @format */
+import pb from '@/lib/pocketbase'
+import '@/styles/tourPage.scss'
+import { useCallback, useEffect, useState } from 'react'
+import { FaHeart } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { showErrorToast } from './common/toaster/customToast'
+import { user } from './userDataOnLocalStorage'
 
-import { useEffect, useState, useMemo } from "react"
-import pb from "@/lib/pocketbase"
-import { FaHeart } from "react-icons/fa"
-import { Link } from "react-router-dom"
-import { user } from "./userDataOnLocalStorage"
-import CustomToast, { showErrorToast } from "./common/toaster/customToast"
-import "@/styles/tourPage.scss"
-
-const TourCard = ({ tour }) => {
+const TourCard = ({ tour, onUnlike }) => {
 	const [isLiked, setIsLiked] = useState(false)
-	const [likedTours, setLikedTours] = useState(new Set())
 
-	useEffect(() => {
-		const fetchLikedTours = async () => {
-			if (!user?.userId) return
-
-			try {
-				const response = await pb.collection("liked_tours").getFullList({
-					filter: `user_id = "${user.userId}"`,
-				})
-				const likedTourIds = new Set(response.map(item => item.tour_id))
-				setLikedTours(likedTourIds)
-				setIsLiked(likedTourIds.has(tour.id))
-			} catch (error) {
-				console.error("Error fetching liked tours:", error)
+	const fetchLikedStatus = useCallback(async () => {
+		if (!user?.userId) return
+		try {
+			const record = await pb
+				.collection('liked_tours')
+				.getFirstListItem(
+					`user_id = "${user.userId}" && tour_id = "${tour.id}"`
+				)
+			setIsLiked(!!record)
+		} catch (error) {
+			if (error.status !== 404) {
+				console.error('Error fetching liked status:', error)
 			}
 		}
-
-		fetchLikedTours()
 	}, [tour.id, user?.userId])
+
+	useEffect(() => {
+		fetchLikedStatus()
+	}, [fetchLikedStatus])
 
 	const toggleLike = async () => {
 		if (!user?.userId) {
-			return showErrorToast("You need to log in to like a tour")
+			return showErrorToast('You need to log in to like a tour')
 		}
 
-		// Optimistically toggle the like state
-		setIsLiked(prevState => !prevState)
-
+		setIsLiked(!isLiked)
 		try {
 			if (isLiked) {
-				const likedTour = await pb
-					.collection("liked_tours")
+				const record = await pb
+					.collection('liked_tours')
 					.getFirstListItem(
 						`user_id = "${user.userId}" && tour_id = "${tour.id}"`
 					)
-				await pb.collection("liked_tours").delete(likedTour.id)
-				setLikedTours(prev => {
-					const updated = new Set(prev)
-					updated.delete(tour.id)
-					return updated
-				})
+
+				await pb.collection('liked_tours').delete(record?.id)
+				setIsLiked(false)
+				onUnlike && onUnlike(tour.id)
 			} else {
-				await pb.collection("liked_tours").create({
+				await pb.collection('liked_tours').create({
 					user_id: user.userId,
 					tour_id: tour.id,
 				})
-				setLikedTours(prev => new Set(prev).add(tour.id))
+				setIsLiked(true)
+				console.log(
+					`Tour ${tour.id} added to liked tours for user ${user.userId}`
+				)
 			}
 		} catch (error) {
-			console.error("Error toggling like:", error)
-			// Revert state if there's an error
-			setIsLiked(prevState => !prevState)
+			console.error('Error toggling like:', error)
+			showErrorToast('Error toggling like status')
 		}
 	}
 
 	return (
-		<div className="tours__card-wrapper" style={{ position: "relative" }}>
-			<span
-				className={`tours__card-like ${
-					isLiked ? "tours__card-like--active" : ""
-				}`}
-				onClick={toggleLike}
-				style={{
-					color: isLiked ? "red" : "white",
-					cursor: "pointer",
-					fontSize: "30px",
-					width: "40px",
-					height: "40px",
-				}}
-			>
-				<FaHeart />
-			</span>
-			<Link to={`/tour_details/${tour.id}`}>
-				<div
-					className="tours__card"
+		<div className='regions_block' key={tour.id} >
+			<Link to={`/tour_details/${tour.id}`} className='region-link'>
+				<img
+					src={`https://kyrgyz-tra.pockethost.io/api/files/6jd9gs9h9etivmp/${
+						tour.id
+					}/${
+						Array.isArray(tour.images) ? tour.images[0] : tour.images
+					}?token=`}
+					alt={tour.title}
+					className='regions_block__card'
+				/>
+			</Link>
+			<div className='regions_block__content'>
+				<div>
+					<h3 className=''>{tour.title}</h3>
+					<p className=''>Цена: {tour.price} сом</p>
+				</div>
+				<span
+					onClick={toggleLike}
 					style={{
-						backgroundImage: `url(https://kyrgyz-tra.pockethost.io/api/files/6jd9gs9h9etivmp/${
-							tour.id
-						}/${
-							Array.isArray(tour.images) ? tour.images[0] : tour.images
-						}?token=)`,
-						backgroundRepeat: "no-repeat",
-						backgroundPosition: "center center",
-						backgroundSize: "cover",
+						color: isLiked ? 'red' : '#858484',
+						cursor: 'pointer',
+						fontSize: '25px',
+						
+						zIndex: '10',
 					}}
 				>
-					<div className="tours__card-image">
-						<h3 className="tours__card-title">{tour.title}</h3>
-						<p className="tours__card-price">Цена: {tour.price} сом</p>
-					</div>
-					<p>{user?.username}</p>
-				</div>
-			</Link>
-			<CustomToast />
+					<FaHeart />
+				</span>
+			</div>
 		</div>
 	)
 }

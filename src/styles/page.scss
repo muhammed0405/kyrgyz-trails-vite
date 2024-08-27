@@ -188,6 +188,7 @@
 	border-radius: 8px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
+	max-width: 400px;
 	transition: transform 0.2s;
 	h3 {
 		font-size: 1.2rem;
@@ -214,6 +215,7 @@
 	// position: relative;
 	height: 200px;
 	overflow: hidden;
+	width: 100%;
 	border-radius: 10px;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -242,9 +244,18 @@
 	// 	transition: opacity 0.3s ease;
 	// }
 }
+.regions_block__content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
 @media (max-width: 768px) {
 	.footerContent {
 		flex-direction: column;
 		gap: 2rem;
+	}
+	.regions_block {
+		max-width: 100%;
 	}
 }
