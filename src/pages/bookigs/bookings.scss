@@ -1,95 +1,106 @@
+/** @format */
+
 .retro-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5e6d3;
-  border: 2px solid #8b4513;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #f5e6d3;
+	border: 2px solid #8b4513;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .retro-header {
-  text-align: center;
-  color: #8b4513;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 2.5em;
-  margin-bottom: 30px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	color: #8b4513;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 2.5em;
+	margin-bottom: 30px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .retro-booking-card {
-  background-color: #fff;
-  border: 1px solid #d2b48c;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+	border: 1px solid #d2b48c;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+	display: flex;
+  justify-content: space-between;
 
-  h3 {
-    color: #8b4513;
-    font-family: 'Georgia', serif;
-    margin-bottom: 10px;
-  }
+	h3 {
+		color: #8b4513;
+		font-family: "Georgia", serif;
+		margin-bottom: 10px;
+	}
 
-  p {
-    color: #5e3a1a;
-    font-family: 'Arial', sans-serif;
-    margin-bottom: 8px;
-  }
+	p {
+		color: #5e3a1a;
+		font-family: "Arial", sans-serif;
+		margin-bottom: 8px;
+	}
 }
 
+.booking__ride__side {
+	&__img {
+		width: 100%;
+		max-width: 300px;
+	}
+}
 .button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+  gap: 10px;
 }
 
 .retro-button {
-  background-color: #2575FC;
-  border: none;
-  border-radius: 5px;
-  color: #ffff;
-  cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  padding: 10px 15px;
-  transition: all 0.3s ease;
+	background-color: #2575fc;
+	border: none;
+	border-radius: 5px;
+	color: #ffff;
+	cursor: pointer;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+	padding: 10px 15px;
+	transition: all 0.3s ease;
 
-  &:hover {
-    background-color: #ffff;
-    color: #fff;
-  }
+	&:hover {
+		background-color: #ffff;
+		color: #fff;
+	}
 
-  &:active {
-    transform: translateY(2px);
-  }
+	&:active {
+		transform: translateY(2px);
+	}
 }
 .retro1-button {
-  background-color: red;
-  border: none;
-  border-radius: 5px;
-  color: #ffff;
-  cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  padding: 10px 15px;
-  transition: all 0.3s ease;
+	background-color: red;
+	border: none;
+	border-radius: 5px;
+	color: #ffff;
+	cursor: pointer;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+	padding: 10px 15px;
+	transition: all 0.3s ease;
 
-  &:hover {
-    background-color: #ffff;
-    color: #fff;
-  }
+	&:hover {
+		background-color: #ffff;
+		color: #fff;
+	}
 
-  &:active {
-    transform: translateY(2px);
-  }
+	&:active {
+		transform: translateY(2px);
+	}
 }
 @media (max-width: 600px) {
-  .button-group {
-    flex-direction: column;
-  }
+	.button-group {
+		flex-direction: column;
+	}
 
-  .retro-button {
-    margin-bottom: 10px;
-  }
+	.retro-button {
+		margin-bottom: 10px;
+	}
 }

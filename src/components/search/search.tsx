@@ -47,7 +47,7 @@ const Search = () => {
 			) : (
 				searchValue && (
 					<div className={'noResults'}>
-						<p>No results found</p>
+						<p>Туры не найдены </p>
 					</div>
 				)
 			)}

@@ -41,47 +41,48 @@ const Header = () => {
 	const renderNavLinks = () => (
 		<>
 			<NavLink onClick={() => setIsMenuOpen(false)} to="/regions">
-				Областар
+				Облусы 
 			</NavLink>
 			<NavLink onClick={() => setIsMenuOpen(false)} to="/tours">
-				Турлар
+				Туры
 			</NavLink>
 			{isAdmin && (
 				<NavLink onClick={() => setIsMenuOpen(false)} to="/delete">
-					Өчүрүү
+					Удалить 
 				</NavLink>
 			)}
 			{(roleOfUser === "admin" || roleOfUser === "guide") && (
 				<NavLink onClick={() => setIsMenuOpen(false)} to="/add_tour">
-					Жаңы тур кошуу
+					Добавить новый тур
 				</NavLink>
 			)}
 			{roleOfUser === "guide" && (
 				<>
 					<NavLink onClick={() => setIsMenuOpen(false)} to="/my_tours">
-						Менин турларым
+						Мои туры 
 					</NavLink>
 					<NavLink onClick={() => setIsMenuOpen(false)} to="/my_bookings_guide">
-						Менин броньдорум
+						Мои брони
 					</NavLink>
 				</>
 			)}
 			{roleOfUser === "user" && (
 				<>
 					<NavLink onClick={() => setIsMenuOpen(false)} to="/liked_tours">
-						Тандалган турлар
+						Избранные туры
 					</NavLink>
 					<NavLink
 						onClick={() => setIsMenuOpen(false)}
 						to="/my_bookings_tourist"
 					>
-						Менин броньдорум
+						Мои брони
 					</NavLink>
 				</>
 			)}
 		</>
 	)
 
+	
 	const renderAuthLinks = () => (
 		<>
 			{isLoggedIn ? (
