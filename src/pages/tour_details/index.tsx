@@ -40,11 +40,11 @@ export default function RegionDetails() {
 		const authData = localStorage.getItem('pocketbase_auth')
 		if (authData) {
 			const parsed = JSON.parse(authData)
-			setIsLoggedIn(!!parsed.userId)
-		} else {
+			setIsLoggedIn(parsed.userId)
+		} else {	
 			setIsLoggedIn(false)
 		}
-	}, []) 
+	}, [])
 
 	// Предполагаем, что filteredTour.images - это массив URL изображений
 	const images = Array.isArray(filteredTour.images)
@@ -109,6 +109,7 @@ export default function RegionDetails() {
 					href={`/comments/${filteredTour.id}`}
 				>
 					Все коментрии
+					{isLoggedIn.toString()}
 				</a>
 			)}
 			{isLoggedIn ? (
@@ -116,7 +117,7 @@ export default function RegionDetails() {
 			) : (
 				<h1>Зарегестрируйтесь чтобы оставлять комментарии</h1>
 			)}
-			<BookTour filteredTour={filteredTour} />
+			<BookTour loggedIn={isLoggedIn} filteredTour={filteredTour} />
 		</div>
 	)
 }
