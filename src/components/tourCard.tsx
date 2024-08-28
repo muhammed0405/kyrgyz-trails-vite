@@ -1,14 +1,23 @@
-/** @format */
 import pb from '@/lib/pocketbase'
 import '@/styles/tourPage.scss'
 import { useCallback, useEffect, useState } from 'react'
 import { FaHeart } from 'react-icons/fa'
+import { IoStar } from 'react-icons/io5'
+import { TfiComment } from 'react-icons/tfi'
 import { Link } from 'react-router-dom'
 import { showErrorToast } from './common/toaster/customToast'
 import { user } from './userDataOnLocalStorage'
 
 const TourCard = ({ tour, onUnlike }) => {
 	const [isLiked, setIsLiked] = useState(false)
+	const [guideUser, setGuideUser] = useState(null)
+	const [comments, setComments] = useState([])
+
+	const cache = {
+		users: {},
+		likes: {},
+		comments: {},
+	}
 
 	const fetchLikedStatus = useCallback(async () => {
 		if (!user?.userId) return
@@ -55,7 +64,6 @@ const TourCard = ({ tour, onUnlike }) => {
 		if (!user?.userId) {
 			return showErrorToast('You need to log in to like a tour')
 		}
-
 		setIsLiked(!isLiked)
 		try {
 			if (isLiked) {
@@ -64,7 +72,6 @@ const TourCard = ({ tour, onUnlike }) => {
 					.getFirstListItem(
 						`user_id = "${user.userId}" && tour_id = "${tour.id}"`
 					)
-
 				await pb.collection('liked_tours').delete(record?.id)
 				setIsLiked(false)
 				onUnlike && onUnlike(tour.id)
@@ -85,7 +92,7 @@ const TourCard = ({ tour, onUnlike }) => {
 	}
 
 	return (
-		<div className='regions_block' key={tour.id} >
+		<div className='regions_block' key={tour.id}>
 			<Link to={`/tour_details/${tour.id}`} className='region-link'>
 				<img
 					src={`https://kyrgyz-tra.pockethost.io/api/files/6jd9gs9h9etivmp/${
@@ -102,7 +109,6 @@ const TourCard = ({ tour, onUnlike }) => {
 					<h3 className=''>{tour.title}</h3>
 					<p className=''>Цена: {tour.price} сом</p>
 				</div>
-
 				<div className='like_block'>
 					<span
 						onClick={toggleLike}
