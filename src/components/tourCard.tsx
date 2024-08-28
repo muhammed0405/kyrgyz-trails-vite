@@ -13,12 +13,33 @@ const TourCard = ({ tour, onUnlike }) => {
 	const fetchLikedStatus = useCallback(async () => {
 		if (!user?.userId) return
 		try {
-			const record = await pb
-				.collection('liked_tours')
-				.getFirstListItem(
-					`user_id = "${user.userId}" && tour_id = "${tour.id}"`
-				)
-			setIsLiked(!!record)
+			// Гиддин маалыматын алуу
+			if (!cache.users[tour.guide_id]) {
+				const userRecord = await pb.collection('users').getOne(tour.guide_id)
+				cache.users[tour.guide_id] = userRecord
+			}
+			setGuideUser(cache.users[tour.guide_id])
+
+			// Лайктарды текшерүү
+			if (!cache.likes[tour.id]) {
+				const likedRecord = await pb
+					.collection('liked_tours')
+					.getFirstListItem(
+						`user_id = "${user.userId}" && tour_id = "${tour.id}"`
+					)
+					.catch(() => null)
+				cache.likes[tour.id] = !!likedRecord
+			}
+			setIsLiked(cache.likes[tour.id])
+
+			// Комментарийлерди алуу
+			if (!cache.comments[tour.id]) {
+				const commentsRecord = await pb.collection('comments').getList(1, 5, {
+					filter: `tour = "${tour.id}"`,
+				})
+				cache.comments[tour.id] = commentsRecord.items
+			}
+			setComments(cache.comments[tour.id])
 		} catch (error) {
 			if (error.status !== 404) {
 				console.error('Error fetching liked status:', error)
@@ -81,18 +102,32 @@ const TourCard = ({ tour, onUnlike }) => {
 					<h3 className=''>{tour.title}</h3>
 					<p className=''>Цена: {tour.price} сом</p>
 				</div>
-				<span
-					onClick={toggleLike}
-					style={{
-						color: isLiked ? 'red' : '#858484',
-						cursor: 'pointer',
-						fontSize: '25px',
-						
-						zIndex: '10',
-					}}
-				>
-					<FaHeart />
-				</span>
+
+				<div className='like_block'>
+					<span
+						onClick={toggleLike}
+						style={{
+							color: isLiked ? 'red' : '#2575FC',
+							cursor: 'pointer',
+							fontSize: '25px',
+						}}
+					>
+						<FaHeart />
+					</span>
+					<Link className='commentsLink' to={`/comments/${tour.id}`}>
+						<TfiComment /> : <p> {comments.length}</p>
+					</Link>
+					<p className='comment__stars'>
+						<IoStar /> :{' '}
+						{(
+							comments.reduce((a, b) => a + b.star, 0) / comments.length
+						).toFixed(1) === 'NaN'
+							? '0'
+							: (
+									comments.reduce((a, b) => a + b.star, 0) / comments.length
+							  ).toFixed(1)}
+					</p>
+				</div>
 			</div>
 		</div>
 	)
