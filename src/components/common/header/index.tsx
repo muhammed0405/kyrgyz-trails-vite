@@ -41,10 +41,10 @@ const Header = () => {
 	const renderNavLinks = () => (
 		<>
 			<NavLink onClick={() => setIsMenuOpen(false)} to="/regions">
-				Облусы 
+				Области
 			</NavLink>
 			<NavLink onClick={() => setIsMenuOpen(false)} to="/tours">
-				Туры
+				Все туры
 			</NavLink>
 			{isAdmin && (
 				<NavLink onClick={() => setIsMenuOpen(false)} to="/delete">
@@ -87,7 +87,7 @@ const Header = () => {
 		<>
 			{isLoggedIn ? (
 				<button onClick={handleLogout} className="logoutBtn">
-					Чыгуу
+					Выход
 				</button>
 			) : (
 				<>
@@ -96,14 +96,14 @@ const Header = () => {
 						to="/auth/login_user"
 						className="loginBtn"
 					>
-						Кирүү
+						Войти
 					</NavLink>
 					<NavLink
 						onClick={() => setIsMenuOpen(false)}
 						to="/auth/register_user"
 						className="registerBtn"
 					>
-						Катталуу
+						Регистрация
 					</NavLink>
 				</>
 			)}
@@ -134,10 +134,10 @@ const Header = () => {
 					<div className="navLinks">
 						{renderNavLinks()}
 						<NavLink onClick={() => setIsMenuOpen(false)} to="/orders">
-							Заказдар
+							Заказы
 						</NavLink>
 						<NavLink onClick={() => setIsMenuOpen(false)} to="/guide_tours">
-							Гиддердин тарыхы
+							Гидские туры
 						</NavLink>
 					</div>
 

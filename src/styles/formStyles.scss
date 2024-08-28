@@ -10,9 +10,13 @@ $light-blue: #0671e2;
 }
 
 .authForm {
+	background: #f2f5f8;
+	padding: 10px;
+	border: 1px solid#2575fc;
 	border-radius: 8px;
 	width: 100%;
 	max-width: 400px;
+	height: auto;
 }
 
 .authTitle {
@@ -31,7 +35,7 @@ $light-blue: #0671e2;
 }
 
 input {
-	width: 100%;
+	width: 93%;
 	padding: 10px 0;
 	font-size: 1rem;
 	color: #000;

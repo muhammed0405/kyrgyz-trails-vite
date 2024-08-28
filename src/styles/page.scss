@@ -120,18 +120,17 @@
 	}
 }
 
-.hero .heroText.animate {
-	opacity: 1;
-	transform: translateY(0);
-
-	h1,
-	p {
-		opacity: 1;
-		transform: translateY(0);
-	}
+.popular__tours__title {
+	color: black;
+	text-align: center;
+	margin: 200px 0 40px 0;
 }
 
-.featuredDestinations,
+.featuredDestinations {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
 .popularTours {
 	max-width: 1200px;
 	margin: 0 auto;
@@ -144,38 +143,6 @@
 	}
 }
 
-.destinationGrid,
-.regionsGrid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: 1rem;
-	h3 {
-		font-size: 1.5rem;
-		padding: 0.5rem 1rem;
-		font-weight: 700;
-		margin-bottom: 1rem;
-		color: #ffff;
-	}
-}
-
-.regions-container {
-	padding: 20px;
-	background-color: #f9f9f9;
-}
-
-.regions-title {
-	text-align: center;
-	font-size: 2rem;
-	margin-bottom: 20px;
-	color: #333;
-}
-
-.popularTours {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 .regionsGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -186,10 +153,11 @@
 .regions_block {
 	background: white;
 	border-radius: 8px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
 	max-width: 400px;
 	transition: transform 0.2s;
+	padding: 10px;
 	h3 {
 		font-size: 1.2rem;
 		font-weight: 300;
@@ -200,9 +168,9 @@
 	}
 }
 
-.regions_block:hover {
-	transform: scale(1.05);
-}
+// .regions_block:hover {
+// 	transform: scale(1.05);
+// }
 
 .region-link {
 	display: block;
@@ -219,14 +187,14 @@
 	border-radius: 10px;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-	&:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	// &:hover {
+	// 	transform: translateY(-5px);
+	// 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
-		h3 {
-			transform: translate(-50%, -50%) scale(1.1);
-		}
-	}
+	// 	h3 {
+	// 		transform: translate(-50%, -50%) scale(1.1);
+	// 	}
+	// }
 
 	// &::after {
 	// 	content: "";
@@ -245,14 +213,22 @@
 	// }
 }
 .regions_block__content {
-	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px;
+	padding: 10px 10px 0 10px;
 
-	h3{
+	h3 {
 		font-size: 1.2rem;
 		font-weight: 600;
+	}
+	span {
+		color: #06c93a;
+	}
+
+	.like_block {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 }
 @media (max-width: 768px) {

@@ -17,7 +17,7 @@ export default function RegionDetails() {
 	useEffect(() => {
 		getRegions()
 		getTours()
-	}, [getRegions, getTours]) // Added dependencies for useEffect
+	}, []) // Added dependencies for useEffect
 
 	const filteredRegion = items?.find((r) => r.id === id)
 	const filteredTours = tours.items?.filter(
