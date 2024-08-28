@@ -48,8 +48,8 @@ export default function RegionDetails() {
 					/>
 				</div>
 			</div>
-			<h2 className='toursTitle'>Available Tours</h2>
-			<div className='homeToursGrid'>
+			<h2 className='toursTitle'>Доступные туры</h2>
+			<div className='tours_grid'>
 				{filteredTours && filteredTours.length > 0 ? (
 					filteredTours.map((tour) => <TourCard key={tour.id} tour={tour} />)
 				) : (
