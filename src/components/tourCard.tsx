@@ -73,6 +73,7 @@ const TourCard = ({ tour, onUnlike }) => {
 		if (!user?.userId) {
 			return showErrorToast('You need to log in to like a tour')
 		}
+
 		setIsLiked((prevIsLiked) => !prevIsLiked)
 		try {
 			if (isLiked) {
