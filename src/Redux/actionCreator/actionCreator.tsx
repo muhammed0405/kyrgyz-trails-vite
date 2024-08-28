@@ -220,16 +220,16 @@ export const addLikedTour = (userId, tourId) => {
 	}
 }
 
-export const getOneUserById = (userId: string) => {
-	return async (dispatch: Dispatch) => {
-		try {
-			const user = await pb
-				.collection("users")
-				.getFirstListItem(`id = "${userId}"`)
-			dispatch({ type: userActionsTypes.GET_ONE_USER, payload: user })
-			console.log("User fetched successfully:", user)
-		} catch (error) {
-			console.error("Error fetching user:", error)
-		}
-	}
-}
+// export const getOneUserById = (userId: string) => {
+// 	return async (dispatch: Dispatch) => {
+// 		try {
+// 			const user = await pb
+// 				.collection("users")
+// 				.getFirstListItem(`id = "${userId}"`)
+// 			dispatch({ type: userActionsTypes.GET_ONE_USER, payload: user })
+// 			console.log("User fetched successfully:", user)
+// 		} catch (error) {
+// 			console.error("Error fetching user:", error)
+// 		}
+// 	}
+// }

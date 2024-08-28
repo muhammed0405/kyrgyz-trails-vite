@@ -32,16 +32,25 @@ const RequestEmailPass = () => {
 	}
 
 	return (
-		<div className='request-style'>
+		<div
+			style={{
+				textAlign: 'center',
+				width: '100%',
+				maxWidth: '500px',
+				margin: '0 auto',
+				color: 'black',
+			}}
+			className='request-style'
+		>
 			<h1>Напишите ваш email</h1>
 			<form onSubmit={requestChange}>
-				<input
+				<input style={{width: '100%',maxWidth: '500px'}}
 					onChange={(e) => setEmail(e.target.value)}
 					type='email'
 					value={email}
 					required
 				/>
-				<button type='submit'>Подтвердить</button>
+				<button className='submitButton' type='submit'>Подтвердить</button>
 			</form>
 			<CustomToast />
 		</div>

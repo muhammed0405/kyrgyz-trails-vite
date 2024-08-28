@@ -1,26 +1,30 @@
 import pb from '@/lib/pocketbase'
 import '@/styles/tourPage.scss'
 import { useCallback, useEffect, useState } from 'react'
+import { BsFillPersonFill } from 'react-icons/bs'
 import { FaHeart } from 'react-icons/fa'
+import { GiPriceTag } from 'react-icons/gi'
 import { IoStar } from 'react-icons/io5'
 import { TfiComment } from 'react-icons/tfi'
 import { Link } from 'react-router-dom'
 import { showErrorToast } from './common/toaster/customToast'
 import { user } from './userDataOnLocalStorage'
 
+// Кэш объектисин түзөбүз
+const cache = {
+	users: {},
+	likes: {},
+	comments: {},
+}
+
 const TourCard = ({ tour, onUnlike }) => {
 	const [isLiked, setIsLiked] = useState(false)
-	const [guideUser, setGuideUser] = useState(null)
 	const [comments, setComments] = useState([])
+	const [guideUser, setGuideUser] = useState(null)
 
-	const cache = {
-		users: {},
-		likes: {},
-		comments: {},
-	}
+	const fetchData = useCallback(async () => {
+		if (!user?.userId || !tour.id || !tour.guide_id) return
 
-	const fetchLikedStatus = useCallback(async () => {
-		if (!user?.userId) return
 		try {
 			// Гиддин маалыматын алуу
 			if (!cache.users[tour.guide_id]) {
@@ -50,21 +54,27 @@ const TourCard = ({ tour, onUnlike }) => {
 			}
 			setComments(cache.comments[tour.id])
 		} catch (error) {
-			if (error.status !== 404) {
-				console.error('Error fetching liked status:', error)
+			console.error('Error fetching data:', error)
+			if (error.status === 429) {
+				showErrorToast(
+					'Слишком много запросов. Пожалуйста, подождите немного и попробуйте снова.'
+				)
+			} else {
+				showErrorToast(`Не удалось загрузить данные: ${error.message}`)
 			}
 		}
-	}, [tour.id, user?.userId])
+	}, [tour.id, tour.guide_id, user?.userId])
 
 	useEffect(() => {
-		fetchLikedStatus()
-	}, [fetchLikedStatus])
+		fetchData()
+	}, [fetchData])
 
 	const toggleLike = async () => {
 		if (!user?.userId) {
 			return showErrorToast('You need to log in to like a tour')
 		}
-		setIsLiked(!isLiked)
+
+		setIsLiked((prevIsLiked) => !prevIsLiked)
 		try {
 			if (isLiked) {
 				const record = await pb
@@ -73,6 +83,7 @@ const TourCard = ({ tour, onUnlike }) => {
 						`user_id = "${user.userId}" && tour_id = "${tour.id}"`
 					)
 				await pb.collection('liked_tours').delete(record?.id)
+				cache.likes[tour.id] = false
 				setIsLiked(false)
 				onUnlike && onUnlike(tour.id)
 			} else {
@@ -80,10 +91,8 @@ const TourCard = ({ tour, onUnlike }) => {
 					user_id: user.userId,
 					tour_id: tour.id,
 				})
+				cache.likes[tour.id] = true
 				setIsLiked(true)
-				console.log(
-					`Tour ${tour.id} added to liked tours for user ${user.userId}`
-				)
 			}
 		} catch (error) {
 			console.error('Error toggling like:', error)
@@ -107,8 +116,18 @@ const TourCard = ({ tour, onUnlike }) => {
 			<div className='regions_block__content'>
 				<div>
 					<h3 className=''>{tour.title}</h3>
-					<p className=''>Цена: {tour.price} сом</p>
+					<p className=''>
+						<span>
+							<GiPriceTag />
+						</span>{' '}
+						: {tour.price} сом
+					</p>
+					<p>
+						<BsFillPersonFill style={{ color: '#2575FC', fontSize: '20px' }} />{' '}
+						: {guideUser?.username || 'Загрузка...'}
+					</p>
 				</div>
+
 				<div className='like_block'>
 					<span
 						onClick={toggleLike}
