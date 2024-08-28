@@ -26,6 +26,7 @@ const TourCard = ({ tour, onUnlike }) => {
 		if (!user?.userId || !tour.id || !tour.guide_id) return
 
 		try {
+			// Гиддин маалыматын алуу
 			if (!cache.users[tour.guide_id]) {
 				const userRecord = await pb.collection('users').getOne(tour.guide_id)
 				cache.users[tour.guide_id] = userRecord
@@ -138,7 +139,7 @@ const TourCard = ({ tour, onUnlike }) => {
 						<FaHeart />
 					</span>
 					<Link className='commentsLink' to={`/comments/${tour.id}`}>
-						<TfiComment /> : {comments.length}
+						<TfiComment /> : <p> {comments.length}</p>
 					</Link>
 					<p className='comment__stars'>
 						<IoStar /> :{' '}
