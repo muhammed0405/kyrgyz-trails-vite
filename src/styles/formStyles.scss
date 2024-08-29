@@ -4,8 +4,6 @@ $light-blue: #0671e2;
 .authContainer {
 	display: flex;
 	justify-content: center;
-	min-height: 100vh;
-	background-color: rgb(250, 249, 245);
 	padding: 20px;
 }
 
@@ -75,12 +73,18 @@ input {
 		transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 	}
 }
+
+.formGroup {
+	label {
+		color: black;
+	}
+}
 .label_role {
 	position: absolute;
 	top: -25px;
 	left: 5px;
 	font-size: 1rem;
-	color: #fff;
+	color: black;
 	pointer-events: none;
 	transition: 0.2s ease all;
 }

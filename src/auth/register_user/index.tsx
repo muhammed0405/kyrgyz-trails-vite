@@ -93,7 +93,7 @@ export default function RegisterPages() {
 		}
 
 		if (formData.password !== formData.passwordConfirm) {
-			errors.passwordConfirm = "Passwords do not match"
+			errors.passwordConfirm = "Пароль не совпадает"
 		}
 
 		setFormErrors(errors)
@@ -121,7 +121,7 @@ export default function RegisterPages() {
 	return (
 		<div className={"authContainer"}>
 			<form className={"authForm"} onSubmit={handleSubmit}>
-				<h1 className={"authTitle"}>Регистрация Sawerty2005/@</h1>
+				<h1 className={"authTitle"}>Регистрация </h1>
 
 				{error && <p className={"errorMessage"}>{error}</p>}
 

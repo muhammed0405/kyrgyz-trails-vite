@@ -1,7 +1,7 @@
 /** @format */
 
 // src/pages/LoginPages.tsx
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { UseTypedDispatch } from "../../Redux/customHooks/useTypedDispatch"
 import "@/styles/formStyles.scss"
@@ -68,6 +68,20 @@ export default function LoginPages() {
 		}
 	}
 
+	useEffect(() => {
+		const labels = document.querySelectorAll(`.${"label"}`)
+		labels.forEach(label => {
+			const text = (label as HTMLElement).innerText
+			label.innerHTML = text
+				.split("")
+				.map(
+					(letter: string, idx: number) =>
+						`<span style="transition-delay:${idx * 50}ms">${letter}</span>`
+				)
+				.join("")
+		})
+	}, [])
+
 	return (
 		<div className={"loginContainer"}>
 			<div className={"authContainer"}>
@@ -80,8 +94,7 @@ export default function LoginPages() {
 					>
 						{error && <p className={"errorMessage"}>{error}</p>}
 					</p>
-					<div className={"formGroup"}>
-						<label htmlFor="email">Почта:</label>
+					<div className={"inputGroup"}>
 						<input
 							className={"formInput"}
 							type="email"
@@ -93,10 +106,12 @@ export default function LoginPages() {
 							aria-required="true"
 							aria-invalid={error && error.includes("email") ? "true" : "false"}
 						/>
+						<label htmlFor="email" className={"label"}>
+							Почта:
+						</label>
 					</div>
 
-					<div className={"formGroup"}>
-						<label htmlFor="password">Пароль:</label>
+					<div className={"inputGroup"}>
 						<input
 							type="password"
 							id="password"
@@ -109,6 +124,9 @@ export default function LoginPages() {
 								error && error.includes("password") ? "true" : "false"
 							}
 						/>
+						<label htmlFor="password" className={"label"}>
+							Пароль:
+						</label>
 					</div>
 
 					<Link className={"forgotPassword"} to={"/request-password"}>

@@ -12,12 +12,36 @@ import { useTypedSelectorHook } from "@/Redux/customHooks/useTypedSelectorHook"
 export default function AllComments() {
 	const comments = useTypedSelectorHook(state => state.tours.comments)
 	const params = useParams()
+	const [isLoading, setIsLoading] = useState(false)
 
 	const { fetchComments } = UseTypedDispatch()
 
 	useEffect(() => {
-		fetchComments(params.id)
+		const fetchData = async () => {
+			setIsLoading(true)
+			try {
+				await fetchComments(params.id)
+			} catch (error) {
+				console.log(error)
+				showErrorToast("Failed to load comments")
+			} finally {
+				setIsLoading(false)
+			}
+		}
+
+		fetchData()
 	}, [])
+
+	if (isLoading) {
+		return (
+			<div className="bouncer">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		)
+	}
 
 	if (comments.length === 0) {
 		return (
@@ -33,32 +57,28 @@ export default function AllComments() {
 		)
 	}
 
-	console.log("comments", comments)
-
 	return (
 		<div className="comments-container">
-			<h1>
-				<div className="comments-summary">
-					<p>Всего комментариев: {comments.length}</p>
-					<p>
-						Средний оценок:{" "}
-						{(
-							comments.reduce((a, b) => a + b.star, 0) / comments.length
-						).toFixed(1)}
-					</p>
-				</div>
-				<div className="comments-grid">
-					{comments.map((comment: IComments) => (
-						<div className="comment-card" key={comment.id}>
-							<p>
-								<span className="comment-label">текст коментов:</span>{" "}
-								{comment.comment}
-							</p>
-							<p>Оценка: {comment.star}</p>
-						</div>
-					))}
-				</div>
-			</h1>
+			<div className="comments-summary">
+				<p>Всего комментариев: {comments.length}</p>
+				<p>
+					Средний оценок:{" "}
+					{(comments.reduce((a, b) => a + b.star, 0) / comments.length).toFixed(
+						1
+					)}
+				</p>
+			</div>
+			<div className="comments-grid">
+				{comments.map((comment: IComments) => (
+					<div className="comment-card" key={comment.id}>
+						<p>
+							<span className="comment-label">текст коментов:</span>{" "}
+							{comment.comment}
+						</p>
+						<p>Оценка: {comment.star}</p>
+					</div>
+				))}
+			</div>
 		</div>
 	)
 }
